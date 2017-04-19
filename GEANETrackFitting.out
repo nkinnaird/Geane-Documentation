@@ -1,0 +1,12 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Other physics}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{In the gm2 Framework}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Branches}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{fcl Files, Geometry, and Material}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{GEANE TrackFitting}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.4}{Code details}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.5}{Code peculiarities / notes}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 9
+\BOOKMARK [1][-]{section.4}{notes and other}{}% 10
+\BOOKMARK [1][-]{section.5}{Mathematics - Appendix maybe? - all of these should be cited but maybe organized better in someway}{}% 11
+\BOOKMARK [1][-]{section.6}{Plots}{}% 12

@@ -30,6 +30,7 @@
 \end{abstract}
 
 
+
 \section{Introduction}
 
   Neccessity for tracking?
@@ -307,7 +308,68 @@ Add many plots and pictures of things - pulls, single events, tracks, etc etc.
   initial errors into tracing/error propagation?
 
 
-\section{Mathematics - Appendix maybe? - all of these should be cited but maybe organized better in someway}
+\section{Formalism - Appendix? }
+
+% $$ on both sides to separate into single line equations, $ on each side for in-text
+
+The purpose of this section is to give a full account of the GEANE formalism used in the tracking code in one place, in a way that makes the most sense to me, as well as it's unique adaptations. For the original source of this material see first the GEANE manual (cite here) and then the Innocente paper (cite), Strandlie paper (cite), and Lavezzi thesis GEANE section (cite). 
+
+It is also important to note that there is a sort of linquistic defficiency in that GEANE refers to both the error propagation code (Geant4 source routines), as well as the general $\chi^{2}$ minimization algorithm, depending on the reference. Locally, I will try and distinguish clearly between the two.
+
+
+\subsection{Coordinate Systems}
+
+The only material not covered here in full detail is the mathematical explanation of reference frames, for which one should see the reference papers. It suffices to summarize as follows: GEANE objects (matrices and parameter vectors) are defined and calculated in the Geant4 source code in the free particle system as always. Then there is an intermediate surface system defined in XYZ, as the Geant4 surface trajectory system must be defined in an orthogonal coordinate system, before which parameter objects are converted to the most natural detector system of XUV. (Important note - be very careful with coordinate system variables, letters are reused between different papers and code bases with different configurations and meanings constantly.)
+
+$1/p, \lambda, \phi, y_{\perp}, z_{\perp}$, free system
+
+$1/p, py/px, pz/px, y, z$, surface system
+
+$
+\begin{pmatrix}
+u \\
+v \\
+\end{pmatrix} =
+\begin{pmatrix}
+-\sin{\theta} & -\cos{\theta} \\
+\sin{\theta} & -\cos{\theta}\\
+\end{pmatrix}
+\begin{pmatrix}
+y \\
+z \\
+\end{pmatrix}
+$, yz to uv matrix, the 5x5 transformation is just a 1 in the top left corner, and then this matrix in the remaining 2 diagonal blocks
+
+$1/p, pu/px, pv/px, u, v$, uv system
+
+
+\subsection{Matrix Stuff}
+
+
+$\chi^2 = \sum_{i=1}^{N} [(p_{i}(p_{0})-x_{i})^{T}(\sigma_{i})^{-1}(p_{i}(p_{0})-x_{i})]$, $p_{i}$ the average predicted from some starting $p_{0}$, only diagonals of $\sigma_{i}$ non-zero, measurement error plus material error
+
+$\sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(p_{i}(p_{0})-x_{i}) = 0$
+
+$p_{0}' = p_{0} + \Delta p_{0}$, $p_{0}'$ the improved starting parameters for the next iteration
+
+$\Delta p_{0} = \sigma_{p_{0}} \sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(x_{i} - p_{i}(p_{0}))$
+
+$\sigma_{p_{0}} = [\sum_{i=1}^{N} T^{T}_{i0} (\sigma_{i})^{-1}) T_{i0} ]^{-1}$, $\sigma_{p_{0}}$ the 5x5 covariance matrix of parameters on plane 0
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+$\chi^2 = (\vec{p}-\vec{x})^{T} (\sigma)^{-1} (\vec{p}-\vec{x})$, $\sigma$ the full error matrix with material correlations included
+
+$\Delta \vec{p}_{0} = \sigma_{p_{0}} \tau^{T}(\sigma)^{-1}(\vec{p}-\vec{x})$
+
+$\sigma_{p_{0}} = [\tau^{T} (\sigma)^{-1}) \tau ]^{-1}$, $\tau$ the combined transport matrices
+
+
+
+
+
+
+\section{references}
 
   I need to summarize things locally a la geane manual - except with my own changes and explanations.
 

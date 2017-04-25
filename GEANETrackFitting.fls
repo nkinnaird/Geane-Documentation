@@ -24,6 +24,8 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/amsmath/amsopn.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/was/gensymb.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/was/gensymb.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
@@ -133,12 +135,9 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
@@ -147,6 +146,18 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
@@ -164,5 +175,6 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb

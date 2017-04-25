@@ -1,9 +1,9 @@
 \documentclass{article}
 
-\usepackage{amssymb,amsmath,longtable}
+\usepackage{amssymb,amsmath,longtable, gensymb}
 
 \usepackage[pdftex]{graphicx}
-\graphicspath{ {Images/} {Images/eLoss/} }
+\graphicspath{ {Images/} {Images/eLoss/} {Images/CoordSys/} }
 
 \usepackage[margin=1in]{geometry}
 
@@ -117,6 +117,8 @@
       The main analyzer/plotting module which runs on the output GEANEArtRecords produced upstream. This creates many plots including chi2 distributions, p value distributions, number of iterations, track parameter, residuals, pulls, etc. Truth information for these plots is currently necessary as written, but can be take out in the future for real data. There are some fcl paramters to make cuts on different parameters. There are also some other plotter modules which are similar but much reduced in scope.
 
       \item{\bf{GEANESingleEventViewer\_module.cc}} \\
+
+      \item{\bf{GEANEProcessSelection\_module.cc}} \\
 
       \item{\bf{GeaneFailedPlots\_module.cc}} \\
 
@@ -262,6 +264,31 @@ JacobianToUV stuff - or combine with other coordinate transform stuff
 Matrix accumulation/reduction
 Notes on loop indices, start points and such
 
+\subsection{Angular correction}
+
+Because our straws don't in fact measure U and V coordinates directly, but instead distance of closest approach radii deriving from measured hit times, in order to utilize the minimization procedure on measured track parameters these radii must first be converted to U and V parameters. (And similarly for the U and V errors.) (Note that the future Kalman filter will not be subject to this disadvantage.) This is done in the angularCorrection method at the bottom of the GeaneReco module. The wires that are hit as well as the initial raw measured errors are stored indefinitely, and it is upon these objects that corrections are made. These corrections will be dependent on the angle of the track, so it's imporant to note that during each successive iteration, the ``measured'' parameters are adjusted by the latest ``predicted'' momenta. It was found that for the error correction, a simple straight line correction was sufficient for ideal results. For the position correction, it was found that a constant field correction for curved tracks was sufficient.
+
+To calculate these corrections, first the momentum perpendicular to the straw measurement axis can be ignored. Because the positron tracks curve in only one direction through the tracker, one needs to calculate the correction depending on whether the track went to the left or right side of the wire. See Figure \ref{fig:angularCorrection} for a pictorial representation of the problem. The calculation of the right side correction follows, with the left side correction being calculated in a similar manner.
+
+\begin{figure}[h]
+\caption{Shown here is a positron passing through a straw. The desire is to convert the measured parameter d into a U or V position, which can be done by approximating the particle trajectory as a circle in a constant magnetic field over the course of the straw and using trigonometry. Sizes and angles are exaggerated.}
+\centering
+\includegraphics[width=1.0\textwidth]{angularCorrection}
+\label{fig:angularCorrection}
+\end{figure}
+
+An equation with the single unknown parameter being of interest can by approximated by
+$$(r+d)^{2} = r^{2}+u^{2}-2ru\cos(90+\theta),$$ where the 90 degrees is approximate for large curvature of tracks , and we want to solve for u. The angle $\theta$ can be determined from 
+$$\hat{z_{\parallel}} \cdot \hat{p_{\parallel}} = \cos{\theta}, \theta = \cos^{-1}{\frac{p_{\parallel}}{p}},$$ where p parallel is the momentum parallel to the z parallel axis at the wire plane and can be determined within the code. Using a trig identity and solving for u gives
+$$u = -r\sqrt{1-(\frac{p_{\parallel}}{p})^{2}} + \sqrt{d^{2} + 2dr + r^{2}(1-(\frac{p_{\parallel}}{p})^{2})},$$ for the right side correction, and 
+$$u = +r\sqrt{1-(\frac{p_{\parallel}}{p})^{2}} - \sqrt{d^{2} + 2dr + r^{2}(1-(\frac{p_{\parallel}}{p})^{2})},$$ for the left side correction. (Corrections to v are identical.) The radius of the particle circle can be calculated from the circular momentum and magnetic field at the predicted hit position. The straightline correction is done simply using the Pythagorean theorem in a simpler manner, with the correction to the errors then being
+$$\sigma_{uv}' = \frac{\sigma_{uv}}{\sqrt{1-(\frac{p_{\parallel}}{p})^{2}}}$$.
+
+
+
+
+
+
 \subsection{Code peculiarities / notes}
 
 Where to structure this in the file?
@@ -287,15 +314,17 @@ Should I go more in depth about the error\_propagation/gm2Geane source code? Pro
 Add many plots and pictures of things - pulls, single events, tracks, etc etc.
 
 \begin{figure}[h]
-\caption{caption - landau tail, from ionizations, brems, blah blah}
+\caption{Shown here is the energy loss between the first and last hit in the tracker from simulation. (Momentum magnitude difference.) Sources of energy loss come from ionization and bremsstrahlung processes, which account for the long Landau tail running off to infinity. The distribution has a mean of approximately 220 keV and and peak centered at about 150 keV, which is reasonable for the material composition of our trackers and tracker gas. More than 50\% of the energy loss comes from the mylar walls of the straws as seen in the simulation.}
 \centering
 \includegraphics[width=1.0\textwidth]{eLoss}
+\label{fig:eLoss}
 \end{figure}
 
 \begin{figure}[h]
-\caption{caption - brems were adding too much energy back in - fixed event, blah blah, notice scale change}
+\caption{It was noticed during the course of debugging that the Geant4 error\_propagation routines were consistently removing too much energy on average from all tracks as they passed through the tracker during reconstruction. It was discovered that the Geant4 tables were taking out too much energy due to bremsstrahlung processes and it was decided to remove this effect. The left plot shows in a red the true particle momentum as a function of X distance through the tracker, and in black the reconstructed momentum before bremsstrahlung was taken out of the reconstruction for a single event. The differing slopes signify the problem. The right plot shows the same event but with bremsstrahlung taken out. Notice scale change, and that the reconstructed momentum aligns much more readily with the truth.}
 \centering
 \includegraphics[width=1.0\textwidth]{bremComparison}
+\label{fig:bremComparison}
 \end{figure}
 
 
@@ -308,7 +337,7 @@ Add many plots and pictures of things - pulls, single events, tracks, etc etc.
   initial errors into tracing/error propagation?
 
 
-\section{Formalism - Appendix? }
+\section{Formalism - Appendix? Or near intro?}
 
 % $$ on both sides to separate into single line equations, $ on each side for in-text
 
@@ -319,7 +348,23 @@ It is also important to note that there is a sort of linquistic defficiency in t
 
 \subsection{Coordinate Systems}
 
-The only material not covered here in full detail is the mathematical explanation of reference frames, for which one should see the reference papers. It suffices to summarize as follows: GEANE objects (matrices and parameter vectors) are defined and calculated in the Geant4 source code in the free particle system as always. Then there is an intermediate surface system defined in XYZ, as the Geant4 surface trajectory system must be defined in an orthogonal coordinate system, before which parameter objects are converted to the most natural detector system of XUV. (Important note - be very careful with coordinate system variables, letters are reused between different papers and code bases with different configurations and meanings constantly.)
+The only material not covered here in full detail is the mathematical explanation of reference frames, for which one should see the reference papers. It suffices to summarize as follows: GEANE objects (matrices and parameter vectors) are defined and calculated in the Geant4 source code in the free particle system. Then there is an intermediate surface system defined in XYZ, as the Geant4 surface trajectory system must be defined in an orthogonal coordinate system, before which parameter objects are converted to the most natural detector system of XUV. (Important note - be very careful with coordinate system variables, letters are reused between different papers and code bases with different configurations and meanings constantly.)
+
+
+\begin{figure}[h]
+\caption{Shown here is a picture of the 3 trackers in the world geometry in their approximate positions. First note the world coordinate system shown in the bottom left of the plot, where the origin lives at the center of the ring. Tracks are then generated and read out from the trackers in their three world positions in red. Due to the reconstruction bug where tracks improperly reconstruct if their momenta is too aligned with the globabl Z axis, the reconstruction rotates the entire arc including tracker 0 to the blue position, where planes are parallel in X, and this problem is avoided. Track parameters from the 3 positions are then rotated to this reference frame by the amounts shown on the plots for the reconstruction stage, and at the end are rotated back.}
+\centering
+\includegraphics[width=1.0\textwidth]{WorldCoordSys}
+\label{fig:WorldCoordSys}
+\end{figure}
+
+\begin{figure}[h]
+\caption{This picture shows the coordinate system in which the the Geane track reconstruction is performed, in relation to the world coordinate system. The origin remains at the center of the ring, with the tracking planes parallel in X in the reconstruction, going forward in number. Y is vertically up, and Z is horizontally to the right. U and V are defined such that they have greater values with higher radii and increasing straw number.}
+\centering
+\includegraphics[width=0.6\textwidth]{GeaneCoordSys}
+\label{fig:GeaneCoordSys}
+\end{figure}
+
 
 $1/p, \lambda, \phi, y_{\perp}, z_{\perp}$, free system
 
@@ -338,7 +383,7 @@ v \\
 y \\
 z \\
 \end{pmatrix}
-$, yz to uv matrix, the 5x5 transformation is just a 1 in the top left corner, and then this matrix in the remaining 2 diagonal blocks
+$, yz to uv matrix, where $\theta$ is $7.5\degree$, the 5x5 transformation is just a 1 in the top left corner, and then this matrix in the remaining 2 diagonal blocks
 
 $1/p, pu/px, pv/px, u, v$, uv system
 

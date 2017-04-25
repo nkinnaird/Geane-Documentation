@@ -5,9 +5,12 @@
 \BOOKMARK [2][-]{subsection.2.2}{fcl Files, Geometry, and Material}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.3}{GEANE TrackFitting}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.4}{Code details}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.5}{Code peculiarities / notes}{section.2}% 8
-\BOOKMARK [1][-]{section.3}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 9
-\BOOKMARK [1][-]{section.4}{notes and other}{}% 10
-\BOOKMARK [1][-]{section.5}{Formalism - Appendix? }{}% 11
-\BOOKMARK [1][-]{section.6}{references}{}% 12
-\BOOKMARK [1][-]{section.7}{Plots}{}% 13
+\BOOKMARK [2][-]{subsection.2.5}{Angular correction}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.6}{Code peculiarities / notes}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 10
+\BOOKMARK [1][-]{section.4}{notes and other}{}% 11
+\BOOKMARK [1][-]{section.5}{Formalism - Appendix? Or near intro?}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Coordinate Systems}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Matrix Stuff}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{references}{}% 15
+\BOOKMARK [1][-]{section.7}{Plots}{}% 16

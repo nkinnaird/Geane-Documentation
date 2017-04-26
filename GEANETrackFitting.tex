@@ -336,6 +336,8 @@ Add many plots and pictures of things - pulls, single events, tracks, etc etc.
 
   initial errors into tracing/error propagation?
 
+  mention that it's possible to make a Kalman filter which uses the geane matrix objects? and that I didn't do so because we wanted two separate methods for the tracking originally and someone else was working on the kalman filter? (and the chi2 minimization was used in the last experiment)
+
 
 \section{Formalism - Appendix? Or near intro?}
 
@@ -388,7 +390,11 @@ $, yz to uv matrix, where $\theta$ is $7.5\degree$, the 5x5 transformation is ju
 $1/p, pu/px, pv/px, u, v$, uv system
 
 
-\subsection{Matrix Stuff}
+\subsection{Matrix Stuff (Basically Geane manual summary - don't plagiarize!)}
+
+By using the Geant4 error\_propagation routines to propagate track parameters from some initial or previous guesses and calculate parameter error matrices, one can define a $\chi^{2}$ for a track. By minimizing that $\chi^{2}$ one can then improve the track, and thus fit it. The Geant4 routines propagate particles along their average trajectories neglecting the effects of discrete process, using a helix equation along small enough steps where the change in the magnetic field is small. In tandem, error matrices describing the expected distribution in true parameters about those predicted parameters due to said discrete process are also calculated:
+
+$$p_{l} = F$$ - go into parameters, as a function of path lenght, error matrices, transport matrices, do derivation of minimization of chi2, then explain how I do stuff in the code 
 
 
 $\chi^2 = \sum_{i=1}^{N} [(p_{i}(p_{0})-x_{i})^{T}(\sigma_{i})^{-1}(p_{i}(p_{0})-x_{i})]$, $p_{i}$ the average predicted from some starting $p_{0}$, only diagonals of $\sigma_{i}$ non-zero, measurement error plus material error
@@ -428,9 +434,15 @@ $\sigma_{p_{0}} = [\tau^{T} (\sigma)^{-1}) \tau ]^{-1}$, $\tau$ the combined tra
 
   \href{http://www.sciencedirect.com/science/article/pii/0168900295003444}{Energy loss in thin layers in GEANT}
 
+\section{Acknowledgements}
+
+Should I put an acknowledments section in? (Rob, Rob, James, Joe)
+From a technical document perspective maybe not?
 
 \section{Plots}
 
 It'd probably be good to make one big set of plots to toss into the back for people to look at/reference. All sorts of pulls, parameter plots, residuals, etc. Sort of like Renee's verification pdf or whatever.
+
+
 
 \end{document}

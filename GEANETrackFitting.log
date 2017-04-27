@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  26 APR 2017 13:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 APR 2017 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -457,7 +457,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: Images/CoordSys/WorldCoordSys.png Graphic file (type png)
 <use Images/CoordSys/WorldCoordSys.png>
 Package pdftex.def Info: Images/CoordSys/WorldCoordSys.png used on input line 3
-59.
+61.
 (pdftex.def)             Requested size: 469.75502pt x 259.34529pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -466,7 +466,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 File: Images/CoordSys/GeaneCoordSys.png Graphic file (type png)
 <use Images/CoordSys/GeaneCoordSys.png>
 Package pdftex.def Info: Images/CoordSys/GeaneCoordSys.png used on input line 3
-66.
+68.
 (pdftex.def)             Requested size: 281.85587pt x 185.55559pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -474,30 +474,30 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 [8 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
 ion/newGEANEDoc/Images/eLoss/eLoss.png>] [9 </Users/NickPC/Documents/Fermilab/S
 imulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremCompa
-rison.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 448.
-[10 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumenta
-tion/newGEANEDoc/Images/CoordSys/WorldCoordSys.png>] [11 </Users/NickPC/Documen
-ts/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Co
-ordSys/GeaneCoordSys.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 448.
+rison.png>] [10 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2Ge
+aneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png>] [11 </Users/Ni
+ckPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANED
+oc/Images/CoordSys/GeaneCoordSys.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 483.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 483.
 
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/GEANETrackFitting.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 448.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 448.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 483.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 483.
 Package rerunfilecheck Info: File `GEANETrackFitting.out' has not changed.
-(rerunfilecheck)             Checksum: 0AE740BA08D739EDF6A54984968B199A;1114.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 448.
+(rerunfilecheck)             Checksum: 468255B0EB529E92C8FCAEC9A5BF5E15;1175.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 483.
  ) 
 Here is how much of TeX's memory you used:
- 6678 strings out of 493089
- 97808 string characters out of 6134842
+ 6679 strings out of 493089
+ 97815 string characters out of 6134842
  206072 words of memory out of 5000000
  10027 multiletter control sequences out of 15000+600000
  12815 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,8n,32p,1179b,475s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,8n,32p,1582b,475s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
@@ -516,11 +516,11 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
 5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 Output written on "/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2
-GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf" (11 pages, 619874 bytes).
+GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf" (12 pages, 625458 bytes).
 
 PDF statistics:
- 236 PDF objects out of 1000 (max. 8388607)
- 194 compressed objects within 2 object streams
- 43 named destinations out of 1000 (max. 500000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 197 compressed objects within 2 object streams
+ 44 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 

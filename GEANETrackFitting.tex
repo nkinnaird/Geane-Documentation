@@ -338,6 +338,8 @@ Add many plots and pictures of things - pulls, single events, tracks, etc etc.
 
   mention that it's possible to make a Kalman filter which uses the geane matrix objects? and that I didn't do so because we wanted two separate methods for the tracking originally and someone else was working on the kalman filter? (and the chi2 minimization was used in the last experiment)
 
+  make a subsection on the left-right ambiguity work 
+
 
 \section{Formalism - Appendix? Or near intro?}
 
@@ -389,15 +391,36 @@ $, yz to uv matrix, where $\theta$ is $7.5\degree$, the 5x5 transformation is ju
 
 $1/p, pu/px, pv/px, u, v$, uv system
 
+% /////////////////////////////////////////////////////////////////////////////////////
+\subsection{Matrix Stuff (Basically Geane manual summary - don't plagiarize! - but maybe reference that they should read the paper first?)}
 
-\subsection{Matrix Stuff (Basically Geane manual summary - don't plagiarize!)}
+One can define a $\chi^{2}$ for a track in the normal way by dividing the residuals of measured and predicted track parameters by their errors:
 
-By using the Geant4 error\_propagation routines to propagate track parameters from some initial or previous guesses and calculate parameter error matrices, one can define a $\chi^{2}$ for a track. By minimizing that $\chi^{2}$ one can then improve the track, and thus fit it. The Geant4 routines propagate particles along their average trajectories neglecting the effects of discrete process, using a helix equation along small enough steps where the change in the magnetic field is small. In tandem, error matrices describing the expected distribution in true parameters about those predicted parameters due to said discrete process are also calculated:
+$$\chi^2 = (\vec{p}-\vec{x})^{T} (\sigma)^{-1} (\vec{p}-\vec{x})$$
 
-$$p_{l} = F$$ - go into parameters, as a function of path lenght, error matrices, transport matrices, do derivation of minimization of chi2, then explain how I do stuff in the code 
+The Geant4 error\_propagation routines can be used to determine these predicted parameters and error matrices by propagating track parameters from some initial guesses. By minimizing this $\chi^{2}$ one can then improve the track, and thus fit it. The Geant4 routines propagate particles along their average trajectories neglecting the effects of discrete process, using a helix equation along small enough steps where the change in the magnetic field is small. The parameters are then a function of path length, 
+
+$$p_{l} = F_{l,l_{0}}(p_{0}),$$
+
+where the coordinate system transforms described above can be used to determine parameters at specific X values, or detector planes. (From here on the dependence on path length or X position will be neglected, in favor of using plane indices.) In tandem, error matrices describing the expected distribution in true parameters about those predicted parameters due to said discrete process are also calculated:
+
+$$\sigma^{ij} = <p^{i}p^{j}> - <p^{i}> \cdot <p^{j}>.$$ 
+
+The propagation of these parameters and error matrices are done using transport matrices, which express the infinitesimal changes in parameters at some plane (or path length) with respect to the parameters at some previous plane (or previous path length):
+
+$$\delta p_{N} = T_{N,N-1} \delta p_{N-1},$$
+$$\sigma_{N} = T_{N,N-1} \sigma_{N-1} T_{N,N-1}^{T}.$$
+ 
+Said transport and error matrices are 5x5 objects since the parameter vectors are 5x1 objects as described above. With parameters defined on such planes, one can define the $\chi^{2}$ as: 
+
+$$\chi^2 = \sum_{i=1}^{N} [(p_{i}(p_{0})-x_{i})^{T}(\sigma_{i})^{-1}(p_{i}(p_{0})-x_{i})]$$, where $p_{i}$ are the average predicted parameters from some starting $p_{0}$. At first order one can only include the measurement error on parameters, which fill in the diagonals of $\sigma_{i}$, if random processes can be neglected. It is important to note that unmeasured parameters should have measurement errors of ininity (or some large value) along the diagonals in the code, which save the fact that residuals for unmeasured parameters do not exist. When multiplied together they will then fall out of the $\chi^{2}$.
+
+The minimization of this $\chi^{2}$ can be derived by
+
+do derivation of minimization of chi2 here
 
 
-$\chi^2 = \sum_{i=1}^{N} [(p_{i}(p_{0})-x_{i})^{T}(\sigma_{i})^{-1}(p_{i}(p_{0})-x_{i})]$, $p_{i}$ the average predicted from some starting $p_{0}$, only diagonals of $\sigma_{i}$ non-zero, measurement error plus material error
+
 
 $\sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(p_{i}(p_{0})-x_{i}) = 0$
 
@@ -409,14 +432,26 @@ $\sigma_{p_{0}} = [\sum_{i=1}^{N} T^{T}_{i0} (\sigma_{i})^{-1}) T_{i0} ]^{-1}$, 
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-$\chi^2 = (\vec{p}-\vec{x})^{T} (\sigma)^{-1} (\vec{p}-\vec{x})$, $\sigma$ the full error matrix with material correlations included
 
-$\Delta \vec{p}_{0} = \sigma_{p_{0}} \tau^{T}(\sigma)^{-1}(\vec{p}-\vec{x})$
+However, since random processes should not be neglected for optimal tracking results, it makes more sense to return to the original $\chi^2$ in equation blah, only now the included matrix and vector objects are combined into one large linear algebra equation. (Instead of a sum over N 5x1 objects multiplying 5x5 error matrices, the vectors are combined into a single 5Nx1 vector multiplying a single 5Nx5N matrix.) The 5x5 diagonals of this large error matrix should now include the effects due to material processes as calculated in Geant from equation blah. Similarly, the correlations between planes are then included by inserting into the off-diagonal 5x5 blocks from:
 
-$\sigma_{p_{0}} = [\tau^{T} (\sigma)^{-1}) \tau ]^{-1}$, $\tau$ the combined transport matrices
+$$\sigma_{MN} = T_{MN} \sigma_{N},$$ (top diagonals),
+$$\sigma_{MN} = \sigma_{N} T_{MN}^{T},$$ (bottom diagonals),
+
+where M and N are two separate planes within the detector. You can then minimize the $\chi^{2}$ in the same way, only again with the matrix objects being aggregates of the per plane objects:
+
+$$\Delta \vec{p}_{0} = \sigma_{p_{0}} \tau^{T}(\sigma)^{-1}(\vec{p}-\vec{x}),$$
+
+$$\sigma_{p_{0}} = [\tau^{T} (\sigma)^{-1}) \tau ]^{-1}$$, 
+
+($\tau$ the combined transport matrices from the individual 5x5 matrices).
+
+The unmeasured parameter errors of infinity still come into play in the final calculation in the same was as before. Because however these matrix objects are very large, and the tracking must have a certain amount of speed in order to keep up with data, it is useful to reduce the size of these matrices. (It also makes things easier programming wise. Note that there are other some other ways to speed things up, specifically the banded inversion method as detailed in reference blah. This method was not used in favor of getting the code working in the simpler form in the first place, but it is a possiblity in the future to use this technique to speed things up even more.) It suffices to simply remove all rows and columns where said infinity values exist in the error matrix. This is mathematically equivalent to inverting the error matrix with the infinities included, which make all rows and columns where they exist go to zero. The associated unmeasured parameter rows in the residual vector and transport matrices must similarly be removed. This results in an Nx1 residual vector, NxN error matrix, 5xN combined transport matrix transpose, which multiply against the 5x5 covariance out front to still result in a 5x1 fix to the starting parameters, and a scalar $\chi^2$ value. (Note that these element removals should be done just before the final calculation, and not higher up in the algrebra, otherwise plane correlations are not properly calculated.)
 
 
+ 
 
+- now explain how I do stuff in the code if I've left anything out
 
 
 

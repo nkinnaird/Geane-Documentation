@@ -71,6 +71,34 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hpdftex.def
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex2.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex2.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-dm.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-compat.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
 OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
@@ -98,6 +126,10 @@ OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocument
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
 OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bcf
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bbl
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bbl
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bbl
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
@@ -126,6 +158,20 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/Tracker.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/Tracker.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/Tracker.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/trackerStation.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/trackerStation.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/trackerStation.png
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
@@ -138,14 +184,6 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
@@ -161,12 +199,15 @@ INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumenta
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.run.xml
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.run.xml
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb

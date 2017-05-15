@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  27 APR 2017 17:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  15 MAY 2017 16:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -255,49 +255,249 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip50
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 14.
+Package hyperref Info: Option `colorlinks' set `true' on input line 16.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2015/04/19 v3.0 programmable bibliographies (PK/JW/AB)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex2.sty
+Package: biblatex2 2015/04/19 v3.0 programmable bibliographies (biber) (PK/JW/A
+B)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count118
+) (/usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count119
+(/usr/local/texlive/2015/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+)) (/usr/local/texlive/2015/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@tabx@nest=\count120
+\c@listtotal=\count121
+\c@listcount=\count122
+\c@liststart=\count123
+\c@liststop=\count124
+\c@citecount=\count125
+\c@citetotal=\count126
+\c@multicitecount=\count127
+\c@multicitetotal=\count128
+\c@instcount=\count129
+\c@maxnames=\count130
+\c@minnames=\count131
+\c@maxitems=\count132
+\c@minitems=\count133
+\c@citecounter=\count134
+\c@savedcitecounter=\count135
+\c@uniquelist=\count136
+\c@uniquename=\count137
+\c@refsection=\count138
+\c@refsegment=\count139
+\c@maxextratitle=\count140
+\c@maxextratitleyear=\count141
+\c@maxextrayear=\count142
+\c@maxextraalpha=\count143
+\c@abbrvpenalty=\count144
+\c@highnamepenalty=\count145
+\c@lownamepenalty=\count146
+\c@maxparens=\count147
+\c@parenlevel=\count148
+\blx@tempcnta=\count149
+\blx@tempcntb=\count150
+\blx@tempcntc=\count151
+\blx@maxsection=\count152
+\blx@maxsegment@0=\count153
+\blx@notetype=\count154
+\blx@parenlevel@text=\count155
+\blx@parenlevel@foot=\count156
+\blx@sectionciteorder@0=\count157
+\labelnumberwidth=\skip51
+\labelalphawidth=\skip52
+\biblabelsep=\skip53
+\bibitemsep=\skip54
+\bibnamesep=\skip55
+\bibinitsep=\skip56
+\bibparsep=\skip57
+\bibhang=\skip58
+\blx@bcfin=\read1
+\blx@bcfout=\write3
+\c@mincomprange=\count158
+\c@maxcomprange=\count159
+\c@mincompwidth=\count160
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-dm.def)
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count161
+\c@savedafterword=\count162
+\c@annotator=\count163
+\c@savedannotator=\count164
+\c@author=\count165
+\c@savedauthor=\count166
+\c@bookauthor=\count167
+\c@savedbookauthor=\count168
+\c@commentator=\count169
+\c@savedcommentator=\count170
+\c@editor=\count171
+\c@savededitor=\count172
+\c@editora=\count173
+\c@savededitora=\count174
+\c@editorb=\count175
+\c@savededitorb=\count176
+\c@editorc=\count177
+\c@savededitorc=\count178
+\c@foreword=\count179
+\c@savedforeword=\count180
+\c@holder=\count181
+\c@savedholder=\count182
+\c@introduction=\count183
+\c@savedintroduction=\count184
+\c@namea=\count185
+\c@savednamea=\count186
+\c@nameb=\count187
+\c@savednameb=\count188
+\c@namec=\count189
+\c@savednamec=\count190
+\c@translator=\count191
+\c@savedtranslator=\count192
+\c@shortauthor=\count193
+\c@savedshortauthor=\count194
+\c@shorteditor=\count195
+\c@savedshorteditor=\count196
+\c@labelname=\count197
+\c@savedlabelname=\count198
+\c@institution=\count199
+\c@savedinstitution=\count200
+\c@lista=\count201
+\c@savedlista=\count202
+\c@listb=\count203
+\c@savedlistb=\count204
+\c@listc=\count205
+\c@savedlistc=\count206
+\c@listd=\count207
+\c@savedlistd=\count208
+\c@liste=\count209
+\c@savedliste=\count210
+\c@listf=\count211
+\c@savedlistf=\count212
+\c@location=\count213
+\c@savedlocation=\count214
+\c@organization=\count215
+\c@savedorganization=\count216
+\c@origlocation=\count217
+\c@savedoriglocation=\count218
+\c@origpublisher=\count219
+\c@savedorigpublisher=\count220
+\c@publisher=\count221
+\c@savedpublisher=\count222
+\c@language=\count223
+\c@savedlanguage=\count224
+\c@pageref=\count225
+\c@savedpageref=\count226
+\shorthandwidth=\skip59
+\shortjournalwidth=\skip60
+\shortserieswidth=\skip61
+\shorttitlewidth=\skip62
+\shortauthorwidth=\skip63
+\shorteditorwidth=\skip64
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2015/04/19 v3.0 biblatex compatibility (PK/JW/AB)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 
+\c@textcitecount=\count227
+\c@textcitetotal=\count228
+\c@textcitemaxnames=\count229
+\c@biburlnumpenalty=\count230
+\c@biburlucpenalty=\count231
+\c@biburllcpenalty=\count232
+\c@smartand=\count233
+)
+Package biblatex Info: Trying to load bibliography style 'numeric'...
+Package biblatex Info: ... file 'numeric.bbx' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
+File: numeric.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
+Package biblatex Info: Trying to load bibliography style 'standard'...
+Package biblatex Info: ... file 'standard.bbx' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
+File: standard.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
+\c@bbx:relatedcount=\count266
+\c@bbx:relatedtotal=\count267
+))
+Package biblatex Info: Trying to load citation style 'numeric'...
+Package biblatex Info: ... file 'numeric.cbx' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
+File: numeric.cbx 2015/04/19 v3.0 biblatex citation style (PK/JW/AB)
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+)
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)))
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+(/usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2015/04/19 v3.0 biblatex localization (PK/JW/AB)
+)
+\@quotelevel=\count268
+\@quotereset=\count269
 
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/GEANETrackFitting.aux)
 \openout1 = `GEANETrackFitting.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Info: Redefining \celsius on input line 18.
-Package gensymb Info: Faking symbols for \degree and \celsius on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Info: Redefining \celsius on input line 23.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 23.
 
 
 Package gensymb Warning: Not defining \perthousand.
 
-LaTeX Info: Redefining \ohm on input line 18.
-Package gensymb Info: Using \Omega for \ohm on input line 18.
+LaTeX Info: Redefining \ohm on input line 23.
+Package gensymb Info: Using \Omega for \ohm on input line 23.
 
 Package gensymb Warning: Not defining \micro.
 
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count118
+\scratchcounter=\count270
 \scratchdimen=\dimen127
 \scratchbox=\box32
-\nofMPsegments=\count119
-\nofMParguments=\count120
+\nofMPsegments=\count271
+\nofMParguments=\count272
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count121
+\MPscratchCnt=\count273
 \MPscratchDim=\dimen128
-\MPnumerator=\count122
-\makeMPintoPDFobject=\count123
+\MPnumerator=\count274
+\makeMPintoPDFobject=\count275
 \everyMPtoPDFconversion=\toks24
 ) (/usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -354,173 +554,210 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 142.
 )
-Package hyperref Info: Link coloring ON on input line 18.
+Package hyperref Info: Link coloring ON on input line 23.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count124
+\c@section@level=\count276
 )
-LaTeX Info: Redefining \ref on input line 18.
-LaTeX Info: Redefining \pageref on input line 18.
-LaTeX Info: Redefining \nameref on input line 18.
+LaTeX Info: Redefining \ref on input line 23.
+LaTeX Info: Redefining \pageref on input line 23.
+LaTeX Info: Redefining \nameref on input line 23.
 
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/GEANETrackFitting.out)
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/GEANETrackFitting.out)
-\@outlinefile=\write3
-\openout3 = `GEANETrackFitting.out'.
+\@outlinefile=\write4
+\openout4 = `GEANETrackFitting.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
+Package biblatex Info: No input encoding detected.
+(biblatex)             Assuming 'ascii'.
+Package biblatex Info: Automatic encoding selection.
+(biblatex)             Assuming data encoding 'ascii'.
+\openout3 = `GEANETrackFitting.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'GEANETrackFitting.bbl' found.
+
+(/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
+/newGEANEDoc/GEANETrackFitting.bbl)
+Package biblatex Info: Reference section=0 on input line 23.
+Package biblatex Info: Reference segment=0 on input line 23.
+LaTeX Font Info:    Try loading font information for U+msa on input line 29.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 29.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+) <Images/TrackerPics/Tracker.png, id=70, 373.8768pt x 189.8292pt>
+File: Images/TrackerPics/Tracker.png Graphic file (type png)
+<use Images/TrackerPics/Tracker.png>
+Package pdftex.def Info: Images/TrackerPics/Tracker.png used on input line 48.
+(pdftex.def)             Requested size: 469.75502pt x 238.50824pt.
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 77.
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Images/TrackerPics/trackerStation.png, id=72, 302.0886pt x 175.857pt>
+File: Images/TrackerPics/trackerStation.png Graphic file (type png)
+<use Images/TrackerPics/trackerStation.png>
+Package pdftex.def Info: Images/TrackerPics/trackerStation.png used on input li
+ne 55.
+(pdftex.def)             Requested size: 469.75502pt x 273.4825pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[1
+
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 </Us
+ers/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/new
+GEANEDoc/Images/TrackerPics/Tracker.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 93.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 77.
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 93.
+[3 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
+ion/newGEANEDoc/Images/TrackerPics/trackerStation.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
+Underfull \hbox (badness 10000) in paragraph at lines 137--138
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--128
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
 
-Overfull \hbox (12.8042pt too wide) in paragraph at lines 132--133
+Overfull \hbox (12.8042pt too wide) in paragraph at lines 148--149
 []\OT1/cmr/m/n/10 Quick sum-mary of the track re-con-struc-tion method flow: Th
 e main file Straw-Track-Left-Right-GEANE[]module
  []
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 146.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 162.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 146.
-[3] [4] [5] <Images/CoordSys/angularCorrection.png, id=115, 780.9175pt x 526.96
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 162.
+[4] [5] [6] <Images/CoordSys/angularCorrection.png, id=125, 780.9175pt x 526.96
 875pt>
 File: Images/CoordSys/angularCorrection.png Graphic file (type png)
 <use Images/CoordSys/angularCorrection.png>
 Package pdftex.def Info: Images/CoordSys/angularCorrection.png used on input li
-ne 276.
+ne 292.
 (pdftex.def)             Requested size: 469.75502pt x 316.9958pt.
-[6 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
+[7 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
 ion/newGEANEDoc/Images/CoordSys/angularCorrection.png>] <Images/eLoss/eLoss.png
-, id=126, 918.43124pt x 539.01375pt>
+, id=136, 918.43124pt x 539.01375pt>
 File: Images/eLoss/eLoss.png Graphic file (type png)
 <use Images/eLoss/eLoss.png>
-Package pdftex.def Info: Images/eLoss/eLoss.png used on input line 319.
+Package pdftex.def Info: Images/eLoss/eLoss.png used on input line 335.
 (pdftex.def)             Requested size: 469.75502pt x 275.69116pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/eLoss/bremComparison.png, id=127, 1350.04375pt x 384.43625pt>
+<Images/eLoss/bremComparison.png, id=137, 1350.04375pt x 384.43625pt>
 File: Images/eLoss/bremComparison.png Graphic file (type png)
 <use Images/eLoss/bremComparison.png>
-Package pdftex.def Info: Images/eLoss/bremComparison.png used on input line 326
+Package pdftex.def Info: Images/eLoss/bremComparison.png used on input line 342
 .
 (pdftex.def)             Requested size: 469.75502pt x 133.76279pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7] <Images/CoordSys/WorldCoordSys.png, id=135, 1358.07375pt x 749.80125pt>
+[8] <Images/CoordSys/WorldCoordSys.png, id=143, 1358.07375pt x 749.80125pt>
 File: Images/CoordSys/WorldCoordSys.png Graphic file (type png)
 <use Images/CoordSys/WorldCoordSys.png>
 Package pdftex.def Info: Images/CoordSys/WorldCoordSys.png used on input line 3
-61.
+77.
 (pdftex.def)             Requested size: 469.75502pt x 259.34529pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/CoordSys/GeaneCoordSys.png, id=136, 440.64626pt x 290.08376pt>
+<Images/CoordSys/GeaneCoordSys.png, id=144, 440.64626pt x 290.08376pt>
 File: Images/CoordSys/GeaneCoordSys.png Graphic file (type png)
 <use Images/CoordSys/GeaneCoordSys.png>
 Package pdftex.def Info: Images/CoordSys/GeaneCoordSys.png used on input line 3
-68.
+84.
 (pdftex.def)             Requested size: 281.85587pt x 185.55559pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[8 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
-ion/newGEANEDoc/Images/eLoss/eLoss.png>] [9 </Users/NickPC/Documents/Fermilab/S
-imulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremCompa
-rison.png>] [10 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2Ge
-aneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png>] [11 </Users/Ni
-ckPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANED
-oc/Images/CoordSys/GeaneCoordSys.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 483.
-[12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 483.
+[9 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
+ion/newGEANEDoc/Images/eLoss/eLoss.png>] [10 </Users/NickPC/Documents/Fermilab/
+Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComp
+arison.png>] [11 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2G
+eaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png>] [12 </Users/N
+ickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANE
+Doc/Images/CoordSys/GeaneCoordSys.png>] [13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 542.
+[14]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 542.
 
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/GEANETrackFitting.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 483.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 483.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 542.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 542.
 Package rerunfilecheck Info: File `GEANETrackFitting.out' has not changed.
-(rerunfilecheck)             Checksum: 468255B0EB529E92C8FCAEC9A5BF5E15;1175.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 483.
+(rerunfilecheck)             Checksum: D93E53B1FAD80A7C72A6ADEDE5BD33CA;1129.
+Package logreq Info: Writing requests to 'GEANETrackFitting.run.xml'.
+\openout1 = `GEANETrackFitting.run.xml'.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 542.
  ) 
 Here is how much of TeX's memory you used:
- 6679 strings out of 493089
- 97815 string characters out of 6134842
- 206072 words of memory out of 5000000
- 10027 multiletter control sequences out of 15000+600000
+ 12107 strings out of 493089
+ 195259 string characters out of 6134842
+ 655565 words of memory out of 5000000
+ 15372 multiletter control sequences out of 15000+600000
  12815 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,8n,32p,1582b,475s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,10n,48p,1582b,953s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
 usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
 usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/te
-xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
-ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
-015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/201
-5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr
+/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
+al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/t
+exlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texl
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/20
+15/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 Output written on "/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2
-GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf" (12 pages, 625458 bytes).
-
+GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf" (14 pages, 1323263 bytes)
+.
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 197 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 243 compressed objects within 3 object streams
+ 70 named destinations out of 1000 (max. 500000)
+ 164 words of extra memory for PDF output out of 10000 (max. 10000000)
 

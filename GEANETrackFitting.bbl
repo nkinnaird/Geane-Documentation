@@ -1,0 +1,114 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.5 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{none}{none}
+    \entry{geanemanual}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=059aef9d512f25104870cfa03f644122}{V.\bibnamedelimi Innocente}{V\bibinitperiod\bibinitdelim I\bibinitperiod}{E.\bibnamedelimi Nagy}{E\bibinitperiod\bibinitdelim N\bibinitperiod}{}{}{M.\bibnamedelimi Maire}{M\bibinitperiod\bibinitdelim M\bibinitperiod}}%
+      }
+      \strng{namehash}{059aef9d512f25104870cfa03f644122}
+      \strng{fullhash}{059aef9d512f25104870cfa03f644122}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{\href{http://innocentonnice.web.cern.ch/innocentonnice/napoli99/geane_manual.ps}{GEANE: Average Tracking and Error Propagation Package}}
+      \field{year}{January 13, 1994.}
+    \endentry
+    \entry{trajfit}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c7490ff37ed3c3ece9af5b27f70bc45a}{V.\bibnamedelimi Innocente}{V\bibinitperiod\bibinitdelim I\bibinitperiod}{E.\bibnamedelimi Nagy}{E\bibinitperiod\bibinitdelim N\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{c7490ff37ed3c3ece9af5b27f70bc45a}
+      \strng{fullhash}{c7490ff37ed3c3ece9af5b27f70bc45a}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods In Physics Research}
+      \field{month}{08}
+      \field{number}{324}
+      \field{title}{\href{http://www.sciencedirect.com/science/article/pii/016890029390992Q}{Trajectory fit in presence of dense materials}}
+      \field{volume}{A}
+      \field{year}{1993}
+      \field{pages}{297\bibrangedash 306}
+      \range{pages}{10}
+    \endentry
+    \entry{Lavezzi}{thesis}{}
+      \name{author}{1}{}{%
+        {{hash=20d25c7d2d483d0732aed958c730205d}{Lavezzi}{L\bibinitperiod}{Lia}{L\bibinitperiod}{}{}{}{}}%
+      }
+      \list{institution}{1}{%
+        {University of Pavia}%
+      }
+      \strng{namehash}{20d25c7d2d483d0732aed958c730205d}
+      \strng{fullhash}{20d25c7d2d483d0732aed958c730205d}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{11}
+      \field{note}{pp. 57-86}
+      \field{title}{\href{http://bamboo.pv.infn.it/doc/L_Lavezzi.pdf}{The fit of nuclear tracks in high precision spectroscopy experiments}}
+      \field{type}{phdthesis}
+      \field{year}{2007}
+    \endentry
+    \entry{jacob}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6bc32cace42dafa1586050d9e240cae8}{A.\bibnamedelimi Strandlie}{A\bibinitperiod\bibinitdelim S\bibinitperiod}{W.\bibnamedelimi Wittek}{W\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{6bc32cace42dafa1586050d9e240cae8}
+      \strng{fullhash}{6bc32cace42dafa1586050d9e240cae8}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods In Physics Research}
+      \field{month}{07}
+      \field{number}{566}
+      \field{title}{\href{http://www.sciencedirect.com/science/article/pii/S0168900206013143}{Derivation of Jacobians for the propagation of covariance matrices of track parameters in homogeneous magnetic fields}}
+      \field{volume}{A}
+      \field{year}{2006}
+      \field{pages}{687\bibrangedash 698}
+      \range{pages}{12}
+    \endentry
+    \entry{energyloss}{article}{}
+      \name{author}{1}{}{%
+        {{hash=40cbadedf045f512c80ab36a53c2ef0d}{Kati\bibnamedelima Lassila-Perini}{K\bibinitperiod\bibinitdelim L\bibinithyphendelim P\bibinitperiod}{L\'{a}szl\'{o}\bibnamedelima Urb\'{a}n}{L\bibinitperiod\bibinitdelim U\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{40cbadedf045f512c80ab36a53c2ef0d}
+      \strng{fullhash}{40cbadedf045f512c80ab36a53c2ef0d}
+      \field{sortinit}{0}
+      \field{sortinithash}{990108227b3316c02842d895999a0165}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nuclear Instruments and Methods In Physics Research}
+      \field{month}{12}
+      \field{number}{362}
+      \field{title}{\href{http://www.sciencedirect.com/science/article/pii/0168900295003444}{Energy loss in thin layers in GEANT}}
+      \field{volume}{A}
+      \field{year}{1994}
+      \field{pages}{416\bibrangedash 422}
+      \range{pages}{7}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

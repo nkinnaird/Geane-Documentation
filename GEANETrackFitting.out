@@ -1,16 +1,16 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Other physics}{section.1}% 2
-\BOOKMARK [1][-]{section.2}{In the gm2 Framework}{}% 3
-\BOOKMARK [2][-]{subsection.2.1}{Branches}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.2}{fcl Files, Geometry, and Material}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.3}{GEANE TrackFitting}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.4}{Code details}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.5}{Angular correction}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.6}{Code peculiarities / notes}{section.2}% 9
-\BOOKMARK [1][-]{section.3}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 10
-\BOOKMARK [1][-]{section.4}{notes and other}{}% 11
-\BOOKMARK [1][-]{section.5}{Formalism - Appendix? Or near intro?}{}% 12
-\BOOKMARK [2][-]{subsection.5.1}{Coordinate Systems}{section.5}% 13
-\BOOKMARK [2][-]{subsection.5.2}{Matrix Stuff \(Basically Geane manual summary - don't plagiarize! - but maybe reference that they should read the paper first?\)}{section.5}% 14
-\BOOKMARK [1][-]{section.6}{Acknowledgements}{}% 15
-\BOOKMARK [1][-]{section.7}{Plots}{}% 16
+\BOOKMARK [1][-]{section.2}{Formalism}{}% 2
+\BOOKMARK [1][-]{section.3}{In the gm2 Framework}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Event Generation, Geometry, and Material}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Reconstruction Flow}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{fcl File Specifics}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{GEANE TrackFitting - change this title}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{Code details}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.6}{Angular correction}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.7}{Code peculiarities / notes}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 11
+\BOOKMARK [1][-]{section.5}{Coordinate Systems}{}% 12
+\BOOKMARK [1][-]{section.6}{notes and other}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Kalman Filter}{section.6}% 14
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 15
+\BOOKMARK [1][-]{section.8}{Plots}{}% 16

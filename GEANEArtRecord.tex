@@ -1,0 +1,134 @@
+\begin{longtable}{|p{16cm}|}
+% \scriptsize
+\caption{GEANEArtRecord.hh active variables. This is subject to change. GEANEArtRecord contains vectors of variables on planes, as well as larger objects containing information about the whole track. Note that Eigen matrix objects cannot be stored into art data products. For this reason, and for minimal code changes, it was decided to add a data object for each Eigen member, made up of vectors with the word ``Data'' tagged at the end. The data objects are saved when creating GEANEArtRecords using a utils file. In analyzers accessing the GEANEArtRecords, these data objects are then swapped into the Eigen objects using the same utils file.}
+ 
+\label{tab:artRecord}
+
+% \begin{tabular}{|p{16cm}|}
+
+  \\ \hline
+% Variable \\
+%   \hline
+
+art::Ptr \textless{} gm2strawtracker::TrackCandidateArtRecord \textgreater{} candidate \\
+\textit{One track corresponding to one candidate corresponding to one GEANEArtRecord for the whole track.} \\ \hline
+
+std::vector\textless{} art::Ptr\textless{} gm2truth::GhostDetectorArtRecord \textgreater{} \textgreater{} dummyPlaneHits \\
+\textit{Associated dummy plane hits on planes aligned with straw wires, vector consists of hit dummy planes corresponding to hit wire planes (if a straw plane was skipped but that dummy plane was hit, it is not included in this vector. Vector has size N = num hits in straws that form the track +1 for the 0 plane.)} \\ \hline
+
+int failureMode \\ 
+\textit{Different failure modes for failed track reconstruction, 0 means it passed.} \\ \hline
+
+double chi2 \\ 
+\textit{Chi2 for whole track.} \\ \hline
+
+std::vector\textless{}double\textgreater{} chi2Iterations \\
+\textit{Chi2s for whole track for different iterations.} \\ \hline
+
+std::vector\textless{}double\textgreater{} chi2Planes \\
+\textit{Individual chi2s on each plane which add up to total chi2, vector consists of hit planes with size N.} \\ \hline
+
+int numIterations \\
+\textit{Number of iterations to converge.} \\ \hline
+
+unsigned int dof \\
+\textit{DoF of track = number of hit planes - 5 track parameters.} \\ \hline
+
+double chi2DoF \\
+\textit{chi2/dof} \\ \hline
+
+double pValue \\
+\textit{Fit pValue for whole track.} \\ \hline
+
+double energyDiff \\
+\textit{energy loss between first and last hit in track - from truth, for material characterizing} \\ \hline
+
+std::vector\textless{}double\textgreater{} startingTrackParameters \\
+\textit{Starting parameters for track: size 6, 3 position then 3 momentum, x y z px py pz, best starting parameters updated after each iteration, starting parameters x position defined before first hit.} \\ \hline
+
+std::vector\textless{}double\textgreater{} startingTrackGuessOffsets \\
+\textit{Size 10, x y z px py pz p 1/p pu/px pv/px offsets in different starting track parameters for plotting purposes.} \\ \hline
+
+int trackNumPlanesHit \\ 
+\textit{Total number of planes hit.} \\ \hline
+
+int trackFirstPlaneHit \\ \hline
+
+int trackLastPlaneHit \\ \hline
+
+std::vector\textless{}int\textgreater{} trackPlanesHitList \\
+\textit{List of hit planes, with missed planes excluded from the vector. Ex. 1 2 4 5 8 9} \\ \hline
+
+\textit{Sequence information excluded from this table for now.} \\ \hline
+        % int trueUSequencePosition; ignore sequence information for now
+        % int pseudomeasuredUSequencePosition; ignore sequence information for now
+        % int trueVSequencePosition; ignore sequence information for now
+        % int pseudomeasuredVSequencePosition; ignore sequence information for now
+        % int trueFullSequencePosition; ignore sequence information for now
+        % int pseudoMeasuredFullSequencePosition; ignore sequence information for now
+        % double trueChi2Difference;
+        % double pseudoMeasuredChi2Difference;
+
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} wireUVPositions \\
+\textit{Wire center U and V postions, first vector is track param vector size 5 (0 1 2 unfilled, 3 is U, 4 is V), second vector is planenumber from 0 - 32  (formatted this way to align with other similar vectors - can probably be reduced.)} \\ \hline
+
+std::vector\textless{}double\textgreater{} measuredDCAs \\
+\textit{Vector of measured DCAs for hit planes, with size 33. Mainly to hold on to smearing values for now.} \\ \hline
+
+std::vector\textless{}double\textgreater{} UVerrors \\
+\textit{Vector of UV measurement errors for planes 0-32. Built in order to accomadate varying errors in the future.} \\ \hline
+
+std::vector\textless{}double\textgreater{} planeXPositions \\
+\textit{Vector of X postions of hit wire planes with size 33 (0 - 32), 0 plane being in front of the first module that was hit.} \\ \hline
+
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geaneMeasuredParameters \\
+\textit{Measured GEANE parameters, first vector is param num 0 - 4, second vector is plane number 0 - 32, units are MeV mm. 1/P, Pu/Pz, Pv/Pz, U, V - only U or V is filled at the start of the GEANE fitting module.} \\ \hline
+
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geanePredictedParameters \\ 
+\textit{Predicted GEANE parameters, first vector is param num 0 - 4, second vector is plane number 0 - 32, units are MeV mm. 1/P, Py/Px, Pz/Px, Y, Z - all params filled in tracing stage of GEANE fitting module - coord system has to be orthogonal - converted to UV locally in the fitting module.} \\ \hline
+
+
+
+
+std::vector\textless{}Eigen::MatrixXd\textgreater{} geaneTransportMatrices \\
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geaneTransportMatricesData \\ 
+\textit{Units of GeV cm - transport matrices between planes tracked to in GEANE fitting module, 5x5 objects. Vector has size 33.} \\ \hline
+
+std::vector\textless{}Eigen::MatrixXd\textgreater{} geaneErrorMatrices \\ 
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geaneErrorMatricesData \\ 
+\textit{Error matrices on tracked to planes, units GeV cm, size 33.} \\ \hline
+
+Eigen::MatrixXd covarianceTotalInverse \\
+std::vector\textless{}double\textgreater{} covarianceTotalInverseData \\
+\textit{5x5 inverse of total covariance matrix for track. Diagonals represent errors in 5 track paramaters on plane 0.} \\ \hline
+
+std::vector\textless{}Eigen::VectorXd\textgreater{} paramPredictedInUVEigen \\ 
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} paramPredictedInUVEigenData \\ 
+\textit{Predicted parameters in UV space as an eigen object (converted from geanePredictedParameters above) for calculation convenience and some LR information storage. Order of vectors is switched here, first is planenum, second is paramnum, units are MeV mm.} \\ \hline
+
+\textit{Objects below here are full track objects with larger sizes, held on to for fast sequence checking. Units GeV cm.} \\ \hline
+
+std::vector\textless{}Eigen::MatrixXd\textgreater{} extendedTransportMatrixBegToEnd \\
+std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} extendedTransportMatrixBegToEndData \\ 
+\textit{Accumulated/combined transport matrices from starting plane to all following planes.} \\ \hline
+
+Eigen::MatrixXd extendedCombinedTransportMatricesTranspose \\
+std::vector\textless{}double\textgreater{} extendedCombinedTransportMatricesTransposeData \\
+\textit{Transpose of larger eigen object composed of above begtoend transport matrices.} \\ \hline
+
+Eigen::MatrixXd extendedReducedMatrix \\
+std::vector\textless{}double\textgreater{} extendedReducedMatrixData \\ 
+\textit{Total error correlation matrix, reduced to size NxN (N = num planes hit).} \\ \hline
+
+Eigen::MatrixXd extendedReducedMatrixInverse \\ 
+std::vector\textless{}double\textgreater{} extendedReducedMatrixInverseData \\
+\textit{Inverse of above saved once for LR checking.} \\ \hline
+
+Eigen::MatrixXd extendedModifiedReducedMatrix \\ 
+std::vector\textless{}double\textgreater{} extendedModifiedReducedMatrixData \\
+\textit{Reduced matrix from above that's going to be modified into a hybrid error matrix separately for U and V fits but that needs to be held onto for all sequences.} \\ \hline
+
+  \hline
+
+% \end{tabular}
+\end{longtable}

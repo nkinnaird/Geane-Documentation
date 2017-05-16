@@ -3,7 +3,7 @@
 \usepackage{amssymb,amsmath,longtable, gensymb}
 
 \usepackage[pdftex]{graphicx}
-\graphicspath{ {Images/} {Images/eLoss/} {Images/CoordSys/} {Images/TrackerPics/}}
+\graphicspath{ {Images/} {Images/eLoss/} {Images/CoordSys/} {Images/TrackerPics/} {Images/Field/} {Images/TrackingFlow/}}
 
 \usepackage[margin=1in]{geometry}
 
@@ -38,55 +38,115 @@
 
 \section{Introduction}
 
-  The Muon g-2 Experiment at Fermilab will use tracking detectors in order to measure positron trajectories for the purpose of determining the beam distribution and its characteristics, both for the final $\omega_{a}$ result and for general experiment diagnostics. Each tracker module consists of 4 layers of straws with a stereo angle of 7.5 degrees, the first two ``U'' layers oriented with the tops of the straws at a greater radial position, and the second two ``V'' layers oriented with the bottoms of the straws at a greater radial position. A tracking module is shown in figure \ref{fig:tracker}. There are 3 tracker stations located at the 0, 12th, and 18th sections of the ring, counting clockwise from the top most point of the ring where the inflector resides. Each station consists of 8 tracking modules arranged in a staircase pattern that follows the curvature of the ring as seen in figure \ref{fig:staircase}. The upstream and downstream trackers reside just after and before vacuum chamber walls respectively. 
+  The Muon g-2 Experiment at Fermilab will use tracking detectors in order to measure positron trajectories for the purpose of determining the beam distribution and its characteristics, both for the final $\omega_{a}$ result and for general beam diagnostics. A fraction of positrons originating from decaying muons will pass through the trackers. By fitting these tracks and extrapolating back to the average decay point, the beam can be characerized in a non-destructive fashion. The tracking can be done independently from the calorimeters in order to cross-check, or combined with them in order to provide the muon distribution that the calorimeters see for the direct $\omega_{a}$ calculation. It is arguable that this is the most important duty of the trackers. (Note that the integration of the two detector systems in the code has not been initiated.) It is also worth noting that there is a large percentage of tracks that hit the calorimeters hit zero or a small number of tracking modules, which this fitting code is not capable of handling.
 
-  Link pictures to trackers here for posterity - pictures of trackers in ring, individual module, etc. 
+  Each tracker module consists of 4 layers of 32 straws with a stereo angle of 7.5 degrees, the first two ``U'' layers oriented with the tops of the straws at a greater radial position, and the second two ``V'' layers oriented with the bottoms of the straws at a greater radial position. A tracking module is shown in Figure \ref{fig:tracker}. There are 3 tracker stations located at the 0, 12th, and 18th sections of the ring, counting clockwise from the top most point of the ring where the inflector resides. (Station 18 has been installed at time of writing, with station 0 planned for the fall. Station 12 is slated for the future sometime.) Each station consists of 8 tracking modules arranged in a staircase pattern that follows the curvature of the ring as seen in Figure \ref{fig:staircase}. Further hardware and electronics information regarding the trackers will be omitted in this document.
 
-\begin{figure}[h]
-\caption{Shown is a picture of one of the many tracking modules used in the Muon g-2 experiment. The first layer of straws with a stereo angle of 7.5 degrees can be seen, with the other 3 straw layers hiding behind it. }
+\begin{figure}[]
+\caption{Shown is a picture of one of the many tracking modules used in the Muon g-2 experiment. The first layer of straws with a stereo angle of 7.5 degrees can be seen, with the other 3 straw layers hiding behind it. The beam direction is roughly into the page in this picture, and this view is what the decay positrons will see. Picture provided by James.}
 \centering
-\includegraphics[width=1.0\textwidth]{Tracker}
+\includegraphics[width=0.9\textwidth]{Tracker}
 \label{fig:tracker}
 \end{figure}
 
-\begin{figure}[h]
-\caption{Tracker modules are arranged in the shown staircase pattern. In green and dark blue is the edge of the vacuum chamber (where the dark blue identifies the modification that was made to the old vacuum chamberss), and it can be seen that vacuum chamber walls lie at the ends of the outside tracking modules. The position of a calorimeter can be seen in teal.}
+\begin{figure}[]
+\caption{Tracker modules are arranged in the shown staircase pattern. In green and dark blue is the edge of the vacuum chamber (where the dark blue identifies the modification that was made to the old vacuum chambers), and it can be seen that vacuum chamber walls lie at the ends of the outside tracking modules. The position of a calorimeter can be seen in teal at the right. The dark red spots are the locations of the pole tips.}
 \centering
-\includegraphics[width=1.0\textwidth]{trackerStation}
+\includegraphics[width=0.9\textwidth]{trackerStation}
 \label{fig:staircase}
 \end{figure}
 
- \subsection{Other physics}
 
- Physics notes here/elsewhere? 
- Due to the CBO of the beam, 1 tracker accounts for ~90\% of the physics, and a second tracker accounts for much of the remaining. (Find/learn sources for this to explain a bit better..)
- A large percentage of tracks don't hit much of the trackers as the curve in tightly close to the calorimeter.
- ...
+  Because of the proximity of the trackers to the muon beam, they will lie within a region of varying field. The radial field of the trackers rises from 0 Tesla at the outer ends to roughly .3 Tesla at the inner top and bottom ends, and the vertical field drops approximately 50\% from the storage dipole field of 1.451 Tesla. Shown in Figures \ref{fig:operaBy} and \ref{fig:operaBx} is the location of the tracker with respect to the horizontal and vertical fields respectively. If one thing can be said to be special to g-2 when it comes to tracking it is these large field gradients over the tracking detector region and several meter long extrapolation distance back to the muon decay point. This is one of the main motivations for using the Geane (Geometry and Error Propagation) fitting algorithm and routines, which has direct access to the field. 
+
+
+\begin{figure}[]
+\caption{Shown is the vertical field of the g-2 magnet in and around the storage region as calculated in Opera 2D. The center of the storage region lies at 7.112 m along the x axis. The black box shows the rough location of the tracker with respect to the field (size exaggerated slightly). It can be seen that there is a large inhomogeneity within the tracker space, goring from left to right.}
+\centering
+\includegraphics[width=0.9\textwidth]{operaBy}
+\label{fig:operaBy}
+\end{figure}
+
+\begin{figure}[]
+\caption{Shown is the radial field of the g-2 magnet in and around the storage region as calculated in Opera 2D. The center of the storage region lies at 7.112 m along the x axis. The black box shows the rough location of the tracker with respect to the field (size exaggerated slightly). It can be seen that there is a large homogeneity at the inner upper and lower ends compared to the right center. The shape of the pole pieces and tips can readily be seen.}
+\centering
+\includegraphics[width=0.9\textwidth]{operaBx}
+\label{fig:operaBx}
+\end{figure}
+
+  The Geane fitting routines originated in Fortran with the EMC collaboration, and was used in the precursor E821 experiment as well as the PANDA experiment with some success. (cite stuff here?) (There might be some other instances of its use as well.) The core error propagation routines were at some point added to Geant4 under the error\_propagation directory which is included in all default installs. The tracking code strengths lie with its direct implementation and access to the Geant4 geometry and field, and its ability to handle the field inhomogeneties. The Geane algorithm code which makes use of the Geant4 error\_propagation routines follows the structure of \cite{geanemanual} and is detailed in the Formalism section in this paper. It is a relatively straight forward least squares global $\chi^{2}$ minimization algorithm. 
+
+
+
+\input{Formalism.tex} % Math stuff
+
 
 \section{In the gm2 Framework}
 
-  \subsection{Branches}
+  \subsection{Event Generation, Geometry, and Material}
 
-    The GEANE track fitting code is in the main develop branches, except possibly some updates within the feature/trackDevelop branch of gm2tracker. 
+    While not a direct part of the reconstruction and fitting code, there is relevant information with respect to event generation in the simulation upon which the reconstruction acts. Event generation before fitting is done using the mdc fcl files in gm2ringsim using the main simulation, where one should also include the tracker dummy plane geometry for truth comparison. These are built in the TrackerDummyPlane\_service and associated geometry files. At time of writing there are some modified mdc\#-geane fcl files which can readily be used. Only the necessary straw geometry and associated mother volumes, as well as the parallel world dummy planes are necessary to fit tracks, though including other geometry can of course change particle behaviour. All 3 main trackers are included in their original positions, except possibly for the upcoming June commissioning run where only the 18th tracker should be included. 
 
-  \subsection{fcl Files, Geometry, and Material}
+    Fcl parameters exist for the StrawTrackerCadMesh\_service and Straws\_service in order to turn material on or off at will, ``materialTracker'' and ``strawMaterial'' respectively. The rest of the geometry has to be manually changed and rebuilt in order to remove material in case one wants to turn off more material. These include VacuumChamberCadMesh and the World, as well as the ``buildSupportPost'' option in strawtracker.fcl and strawtracker\_standAlone-staggered.fcl, ``buildTrolly'' in vac.fcl (where the associated material is hardcoded in), and ``trolleySupportMaterial'' also in vac.fcl. One should make sure to perform reconstruction with the same fcl parameters as were used in the event generation for proper results. (These options are purely for debugging the tracking. Close to perfect results have been shown for tracking within a vacuum world, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4876}{DocDB 4876} and \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4894}{DocDB 4894}.)
 
-    Event generation before fitting is done using the mdc fcl files in gm2ringsim using the main simulation, where one should also include the tracker dummy plane geometry for truth comparison. At time of writing there are some modified mdc\#-geane fcl files which can readily be used. Only the necessary straw geometry and associated mother volumes, as well as the parallel world dummy planes are necessary to fit tracks, though including other geometry will of course change particle behaviour. All 3 main trackers are included in their original positions. There is a fcl parameter useSD to turn on and off the straw sensitive detectors so that in the reconstruction phase hits are not regenerated.
 
-    Reconstruction is performed using RunGeane.fcl in gm2tracker on the output from the above. Parameter useSD for the straws should be turned off. The fcl file loads all 3 trackers necessary for symbol and name definitions, but such that tracker 0 is rotated such that the tracking planes are parallel to the global geant X axis (using the rotateArcTracker fcl parameter for the ArcService). This is done to avoid the issue of error propagation instability close to the Z axis, as detailed in \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567} while at the same time still observing the correct azimuthally symmetric 2D field for the tracks. Track hits are rotated from their separate trackers to this one tracker frame with the geaneWorld0, geaneWorld12, and geaneWorld18 transforms defined at the bottom of StrawTrackerService.cc (or the cadmesh version). In the future, if fields or geometries are not identical between trackers, the details here will have to be improved.
+    \subsection{Reconstruction Flow}
 
-    Fcl parameters exist for the StrawTrackerService and StrawsService in order to turn material on or off at will, ``materialTracker'' and ``material'' respectively. The rest of the geometry has to be manually changed and rebuilt in order to remove material. These include VacuumChamberCadMesh and the World, as well as the ``buildSupportPost'' option in strawtracker.fcl and strawtracker\_standAlone-staggered.fcl, ``buildTrolly'' in vac.fcl (where the associated material is hardcoded in), and ``trolleySupportMaterial'' also in vac.fcl. Make sure to have the same material settings for the reconstruction as how the events were generated.. This is purely for debugging the tracking.
+    The overall tracking infrastructure and reconstruction flow can be seen in Figure \ref{fig:Infrastructure}. Data comes from simulation or the real experiment, are turned into art objects upon which the gm2 framework acts, and are grouped based on their positions in space and time spread. The RunGeane.fcl file (detailed more below) performs the entire chain within the blue box in Figure \ref{fig:Infrastructure}, excepting the track extrapolation stage. Within the reconstruction flow objects called Track Candidates are produced, which are the input to the Geane fitting code. The Geane fitting specific flow can be seen in Figure \ref{fig:GeaneFlow}. 
 
-    The reconstruction code links to geaneFitParams.fcl in gm2tracker which has many variables for changing momentum spreads, straw measurement errors, random seeds, toggling truth info, etc. Things get more complicated here so ask me before trying to play with this stuff.
 
-  \subsection{GEANE TrackFitting}
+\begin{figure}[]
+\caption{Shown is the infrastructure flow for the entire track reconstruction chain. In the green blocks are the sources of track data to fit, either from simulation from Geant, or real data from Midas. In blue is the offline reconstruction block. Straw digits are formed in the digitalization step, those are then calibrated and grouped into time islands, clusters, and seeds which then combine to form track candidates. It is these track candidates which are the input into the Geane fitting code (and other future fitting code). The fitting code then outputs tracks which the track extrapolation stage will run over. This document focuses on the Track Fitting stage and will not go into detail on the other parts of the chain. This picture is taken from one of Tammy's talks. Note that there is some iteration here that is not shown.}
+\centering
+\includegraphics[width=0.9\textwidth]{TrackInfrastructure}
+\label{fig:Infrastructure}
+\end{figure}
 
-    The GEANE track fitting routines consists of a couple of main files within gm2tracker. Track candidates from upstream in the reconstruction chain are the input to this code. A single GEANEArtRecord is produced for each event or track, and is passed from one method to another, constantly being updated as the track fitting iterates along. See below for a quick summary of the method flow, and a table for the data objects within GEANEArtRecord. 
+\begin{figure}[]
+\caption{Shown is the Geane fitting code flow. See the text for a thorough explanation of this flow, and the specifics of each box.}
+\centering
+\hspace{15mm}
+\includegraphics[width=0.9\textwidth]{GeaneFlow}
+\label{fig:GeaneFlow}
+\end{figure}
+
+
+    The primary code for the Geane fitting are the GeaneReco\_module.cc and GeaneFitter.cc files. Detailed information regarding all of these files is given below, but here is provided a shorter summary. Track candidates drop into the GeaneReco file which initially sets up both the Geant4 world and the error\_propagation routines (once), creates a GEANEArtRecord, and fills relevant track fitting objects. GeaneReco then tracks particles along their average trajectories in the Geant4 world, producing the matrix objects necessary as described in the Formalism section. All of these objects are stored within the GEANEArtRecord, which is then passed to the GeaneFitter class, which contains all the methods and math needed for fitting the track again described in the Formalism section, after which a fix to the track is provided along with higher level track objects. GeaneReco and GeaneFitter then loop until the track fitting either succeeds or fails, after which GeaneReco produces TrackArtRecords and TrackStateArtRecords, as well as a final updated GEANEArtRecord for the track. These TrackArtRecords can then pass to the extrapolation stage or go into some refinement stage (which has not been developed yet). The produced GEANEArtRecords can then be passed through filters and analyzers depending on what the user is investigating or looking at (again detailed below).
+
+
+  \subsection{fcl File Specifics} 
+
+    Again, reconstruction is performed using RunGeane.fcl in gm2tracker on the events generated from somewhere higher in the chain. It is important to explain some fcl parameters necessary for the reconstruction. First, there is a fcl parameter useSD to turn off the straw sensitive detectors so that in the reconstruction phase hits are not regenerated. If this is not included, it will default to true and cause crashes in the reconstruction. Secondly, the RunGeane.fcl file loads all 3 trackers necessary for symbol and name definitions, but such that tracker 0 is rotated such that the tracking planes are parallel to the global geant X axis (using the rotateArcTracker fcl parameter for the ArcService). This is done to avoid the issue of error propagation instability close to the Z axis, as detailed in \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567} while at the same time still observing the correct azimuthally symmetric 2D field for the tracks. Track hits are rotated from their separate trackers to this one tracker frame with the geaneWorld0, geaneWorld12, and geaneWorld18 transforms defined at the bottom of StrawTrackerCadMesh\_service.cc, as detailed in the Coordinate Systems section. (In the future, if fields or geometries are not identical between trackers, the details here will have to be improved.) As a reminder there are material fcl parameters for the straws and straw trackers which should be the same as were used in the event generation. The RunGeane.fcl file also includes some analyzer and filter modules by default, which are detailed below.
+
+
+    go into digitalizer/smearing fcl parameters (use true t0 and stuff) here to really describe this RunGeane.fcl file, try and not leave anything out that's important - track candidates, circle fitter, etc. - temp aside before Joe's stuff is done
+
+    then detail the geaneFitParams.fcl file for the geane fitting specific parameters - create an itemized list or table possibly about these parameters - while referencing the fact that some of these parameters might disappear or change - The reconstruction code links to geaneFitParams.fcl in gm2tracker which has many variables for changing momentum spreads, straw measurement errors, random seeds, toggling truth info, etc. Things get more complicated here so ask me before trying to play with this stuff.
+
+
+
+
+
+
+
+
+
+
+
+
+
+  \subsection{GEANE TrackFitting - change this title}
+
+    update this - The GEANE track fitting routines consists of a couple of main files within gm2tracker. Track candidates from upstream in the reconstruction chain are the input to this code. A single GEANEArtRecord is produced for each event or track, and is passed from one method to another, constantly being updated as the track fitting iterates along. See below for a quick summary of the method flow, and a table for the data objects within GEANEArtRecord. 
 
     \begin{enumerate}
 
       \item{\bf{GeaneReco\_module.cc}} \\
-      This file consists of the main code which sets up the GEANE track fitting, pulls in upstream data products, interfaces with both Geant4 and the gm2 art framework, and outputs TrackStateArtRecords and TrackArtRecords for use downstream. It's methods consists of:
+      This file consists of the main code which sets up the GEANE track fitting, pulls in upstream data products, interfaces with both Geant4 and the gm2 art framework, and outputs TrackStateArtRecords and TrackArtRecords for use downstream. 
+
+    The methods errorPropagation, angleCorrection, and TrackCorrelation (in GEANEFitter) are called iteratively within a loop until track fitting succeeds or fails ... update this 
+
+      It's methods consists of:
 
         \begin{itemize}
 
@@ -145,130 +205,12 @@
     \end{enumerate}
 
 
-    Quick summary of the track reconstruction method flow: The main file StrawTrackLeftRightGEANE\_module is called and sets up both the Geant4 world and the GEANE routines. Produce is called per event, a GEANEArtRecord is created, and upstream track candidates are pulled in and the relevant parameters are converted to necessary track fitting objects within the method trackFitting. The methods errorPropagation, angleCorrection, and TrackCorrelation (in GEANEFitter) are called iteratively within a loop until track fitting succeeds or fails. The relevant parameters of the updated GEANEArtRecord are then converted to TrackArtRecords and TrackStateArtRecords for downstream use, and the analyzer/plotter modules are called for output checking.
 
     Note: Ignore copious LR ambiguity solving code for now. When last checked it was working pretty well but not perfectly, and it needs to be studied more. Many changes have been made to other code which will probably break the interfaces to the LR code as well. Also all of this LR stuff might be pulled out and placed into other tracking code modules before and after the GEANE code, but that is unclear.
 
 
-\begin{longtable}{|p{16cm}|}
-% \scriptsize
-\caption{GeaneArtRecord.hh active variables. This is subject to change. GeaneArtRecord contains vectors of variables on planes, as well as larger objects containing information about the whole track. improve comments here and in the code - don't forget to update this if/when I change things in the code} 
-% \begin{tabular}{|p{16cm}|}
+\input{GEANEArtRecord.tex}
 
-  \\ \hline
-% Variable \\
-%   \hline
-
-art::Ptr \textless{} gm2strawtracker::TrackCandidateArtRecord \textgreater{} candidate \\
-\textit{One track corresponding to one candidate corresponding to one GEANEArtRecord for the whole track.} \\ \hline
-
-std::vector\textless{} art::Ptr\textless{} gm2truth::GhostDetectorArtRecord \textgreater{} \textgreater{} dummyPlaneHits \\
-\textit{Associated dummy plane hits on planes aligned with straw wires, vector consists of hit dummy planes corresponding to hit wire planes (if a straw plane was skipped but that dummy plane was hit, it is not included in this vector. Vector has size N = num hits in straws that form the track.)} \\ \hline
-
-int failureMode \\ 
-\textit{Different failure modes for failed track reconstruction, 0 means it passed.} \\ \hline
-
-double chi2 \\ 
-\textit{Chi2 for whole track.} \\ \hline
-
-std::vector\textless{}double\textgreater{} chi2Iterations \\
-\textit{Chi2s for whole track for different iterations.} \\ \hline
-
-std::vector\textless{}double\textgreater{} chi2Planes \\
-\textit{Individual chi2s on each plane which add up to total chi2, vector consists of hit planes with size N.} \\ \hline
-
-int numIterations \\
-\textit{Number of iterations to converge.} \\ \hline
-
-unsigned int dof \\
-\textit{DoF of track = number of hit planes - 5 track parameters.} \\ \hline
-
-double chi2DoF \\
-\textit{chi2/dof} \\ \hline
-
-double pValue \\
-\textit{Fit pValue for whole track.} \\ \hline
-
-double energyDiff \\
-\textit{energy loss between first and last hit in track - from truth, for material characterizing} \\ \hline
-
-std::vector\textless{}G4double\textgreater{} startingTrackParameters \\
-\textit{Starting parameters for track: size 6, 3 position then 3 momentum, x y z px py pz, best starting parameters updated after each iteration, starting parameters x position defined before first hit.} \\ \hline
-
-std::vector\textless{}G4double\textgreater{} startingTrackGuessOffsets \\
-\textit{Size 10, x y z px py pz p 1/p pu/px pv/px offsets in different starting track parameters for plotting purposes.} \\ \hline
-
-int trackNumPlanesHit \\ 
-\textit{Total number of planes hit.} \\ \hline
-
-int trackFirstPlaneHit \\ \hline
-
-int trackLastPlaneHit \\ \hline
-
-std::vector\textless{}int\textgreater{} trackPlanesHitList \\
-\textit{List of hit planes, with missed planes excluded from the vector. Ex. 1 2 4 5 8 9} \\ \hline
-
-\textit{Sequence information excluded from this table for now.} \\ \hline
-        % int trueUSequencePosition; ignore sequence information for now
-        % int pseudomeasuredUSequencePosition; ignore sequence information for now
-        % int trueVSequencePosition; ignore sequence information for now
-        % int pseudomeasuredVSequencePosition; ignore sequence information for now
-        % int trueFullSequencePosition; ignore sequence information for now
-        % int pseudoMeasuredFullSequencePosition; ignore sequence information for now
-        % double trueChi2Difference;
-        % double pseudoMeasuredChi2Difference;
-
-std::vector\textless{}std::vector\textless{}G4double\textgreater{} \textgreater{} wireUVPositions \\
-\textit{Wire center U and V postions, first vector is track param vector size 5 (0 1 2 unfilled, 3 is U, 4 is V), second vector is planenumber from 0 - 32  (formatted this way to align with other similar vectors - can probably be reduced.)} \\ \hline
-
-std::vector\textless{}G4double\textgreater{} measuredDCAs \\
-\textit{Vector of measured DCAs for hit planes, with size 33. Mainly to hold on to smearing values for now.} \\ \hline
-
-std::vector\textless{}G4double\textgreater{} UVerrors \\
-\textit{Vector of UV measurement errors for planes 0-32. Built in order to accomadate varying errors in the future.} \\ \hline
-
-std::vector\textless{}G4double\textgreater{} planeXPositions \\
-\textit{Vector of X postions of hit wire planes with size 33 (0 - 32), 0 plane being in front of the first module that was hit.} \\ \hline
-
-std::vector\textless{}std::vector\textless{}G4double\textgreater{} \textgreater{} geaneMeasuredParameters \\
-\textit{Measured GEANE parameters, first vector is param num 0 - 4, second vector is plane number 0 - 32, units are MeV mm. 1/P, Pu/Pz, Pv/Pz, U, V - only U or V is filled at the start of the GEANE fitting module.} \\ \hline
-
-std::vector\textless{}std::vector\textless{}G4double\textgreater{} \textgreater{} geanePredictedParameters \\ 
-\textit{Predicted GEANE parameters, first vector is param num 0 - 4, second vector is plane number 0 - 32, units are MeV mm. 1/P, Py/Px, Pz/Px, Y, Z - all params filled in tracing stage of GEANE fitting module - coord system has to be orthogonal - converted to UV locally in the fitting module.} \\ \hline
-
-std::vector\textless{}Eigen::MatrixXd\textgreater{} geaneTransportMatrices \\
-\textit{Units of GeV cm - transport matrices between planes tracked to in GEANE fitting module, 5x5 objects. Vector has size 33.} \\ \hline
-
-std::vector\textless{}Eigen::MatrixXd\textgreater{} geaneErrorMatrices \\ 
-\textit{Error matrices on tracked to planes, units GeV cm, size 33.} \\ \hline
-
-std::vector\textless{}Eigen::VectorXd\textgreater{} extendedParamPredictedInUVEigen \\ 
-\textit{Predicted parameters in UV space as an eigen object (converted from geanePredictedParameters above) for calculation convenience and some LR information storage. Order of vectors is switched here, first is planenum, second is paramnum, units are MeV mm.} \\ \hline
-
-\textit{Objects below here are full track objects with larger sizes, mostly held on to for fast sequence checking, with some used in other parts of the code. Units GeV cm.} \\ \hline
-
-std::vector\textless{}Eigen::MatrixXd\textgreater{} extendedTransportMatrixBegToEnd \\
-\textit{Accumulated/combined transport matrices from starting plane to all following planes.} \\ \hline
-
-Eigen::MatrixXd extendedCombinedTransportMatricesTranspose \\
-\textit{Transpose of larger eigen object composed of above begtoend transport matrices.} \\ \hline
-
-Eigen::MatrixXd extendedCovarianceTotal \\
-\textit{5x5 total covariance matrix for track, except \textbf{INVERTED}.} \\ \hline
-
-Eigen::MatrixXd extendedReducedMatrix \\ 
-\textit{Total error correlation matrix, reduced to size NxN (N = num planes hit).} \\ \hline
-
-Eigen::MatrixXd extendedReducedMatrixInverseLargeErrors \\ 
-\textit{Inverse of above but with larger errors from initial wire fitting, for LR checking.} \\ \hline
-
-Eigen::MatrixXd extendedModifiedReducedMatrix \\ 
-\textit{Reduced matrix from above that's going to be modified into a hybrid error matrix separately for U and V fits but that needs to be held onto for all sequences.} \\ \hline
-
-  \hline
-
-% \end{tabular}
-\end{longtable}
 
 \subsection{Code details}
 
@@ -282,9 +224,9 @@ Notes on loop indices, start points and such
 
 \subsection{Angular correction}
 
-Because our straws don't in fact measure U and V coordinates directly, but instead distance of closest approach radii deriving from measured hit times, in order to utilize the minimization procedure on measured track parameters these radii must first be converted to U and V parameters. (And similarly for the U and V errors.) (Note that the future Kalman filter will not be subject to this disadvantage.) This is done in the angularCorrection method at the bottom of the GeaneReco module. The wires that are hit as well as the initial raw measured errors are stored indefinitely, and it is upon these objects that corrections are made. These corrections will be dependent on the angle of the track, so it's imporant to note that during each successive iteration, the ``measured'' parameters are adjusted by the latest ``predicted'' momenta. It was found that for the error correction, a simple straight line correction was sufficient for ideal results. For the position correction, it was found that a constant field correction for curved tracks was sufficient.
+  Because our straws don't in fact measure U and V coordinates directly, but instead distance of closest approach radii deriving from measured hit times, in order to utilize the minimization procedure on measured track parameters these radii must first be converted to U and V parameters. (And similarly for the U and V errors.) (Note that the future Kalman filter will not be subject to this disadvantage.) This is done in the angularCorrection method at the bottom of the GeaneReco module. The wires that are hit as well as the initial raw measured errors are stored indefinitely, and it is upon these objects that corrections are made. These corrections will be dependent on the angle of the track, so it's imporant to note that during each successive iteration, the ``measured'' parameters are adjusted by the latest ``predicted'' momenta. It was found that for the error correction, a simple straight line correction was sufficient for ideal results. For the position correction, it was found that a constant field correction for curved tracks was sufficient.
 
-To calculate these corrections, first the momentum perpendicular to the straw measurement axis can be ignored. Because the positron tracks curve in only one direction through the tracker, one needs to calculate the correction depending on whether the track went to the left or right side of the wire. See Figure \ref{fig:angularCorrection} for a pictorial representation of the problem. The calculation of the right side correction follows, with the left side correction being calculated in a similar manner.
+  To calculate these corrections, first the momentum perpendicular to the straw measurement axis can be ignored. Because the positron tracks curve in only one direction through the tracker, one needs to calculate the correction depending on whether the track went to the left or right side of the wire. See Figure \ref{fig:angularCorrection} for a pictorial representation of the problem. The calculation of the right side correction follows, with the left side correction being calculated in a similar manner.
 
 \begin{figure}[h]
 \caption{Shown here is a positron passing through a straw. The desire is to convert the measured parameter d into a U or V position, which can be done by approximating the particle trajectory as a circle in a constant magnetic field over the course of the straw and using trigonometry. Sizes and angles are exaggerated.}
@@ -320,9 +262,9 @@ accessing the field in a specific way
 See many docdbs by Nick Kinnaird on geane updates for more info if wanted. Summary of stuff here.
 
 
-There is a folder under artg4/gm2Geane, where slightly (but importantly) modified geant/geane code that the geane track fitting uses is located. Most importantly is that the reconstruction was taking too much energy away from the particle during propagation due to bremsstrahlung, so that has been removed. (Thanks James for help with this.) (Probably explain flow of file - extrapolator tables etc.).
+  There is a folder under artg4/gm2Geane, where slightly (but importantly) modified geant/geane code that the geane track fitting uses is located. Most importantly is that the reconstruction was taking too much energy away from the particle during propagation due to bremsstrahlung, so that has been removed. (Thanks James for help with this.) (Probably explain flow of file - extrapolator tables etc.).
 
-Besides those associated files, all files from the geant folder ``error\_propagation'' have been copied into this directory as well, with the only non-name changes lying in gm2GeaneFreeTrajState.cc. (Many files had to be copied due to naming/linking - some could probably have been omitted but I decided to copy the whole folder.) Ionization and multiple scattering errors have been modified according to Lavezzi thesis (explain more) - with no improvement in results unfortunately. (Probably turn defaults back to original code (still gm2Geane) with the option to turn things on somehow if desired - at least leave them in for future tuning.)
+  Besides those associated files, all files from the geant folder ``error\_propagation'' have been copied into this directory as well, with the only non-name changes lying in gm2GeaneFreeTrajState.cc. (Many files had to be copied due to naming/linking - some could probably have been omitted but I decided to copy the whole folder.) Ionization and multiple scattering errors have been modified according to Lavezzi thesis (explain more) - with no improvement in results unfortunately. (Probably turn defaults back to original code (still gm2Geane) with the option to turn things on somehow if desired - at least leave them in for future tuning.)
 
 Should I go more in depth about the error\_propagation/gm2Geane source code? Probably - at least for certain main files.
 
@@ -344,31 +286,10 @@ Add many plots and pictures of things - pulls, single events, tracks, etc etc.
 \end{figure}
 
 
-\section{notes and other}
+% /////////////////////////////////////////////////////////////////////////////////////
+\section{Coordinate Systems}
 
-  starting error matrix
-
-  linking equations to code variables
-
-  initial errors into tracing/error propagation?
-
-  mention that it's possible to make a Kalman filter which uses the geane matrix objects? and that I didn't do so because we wanted two separate methods for the tracking originally and someone else was working on the kalman filter? (and the chi2 minimization was used in the last experiment)
-
-  make a subsection on the left-right ambiguity work 
-
-
-\section{Formalism - Appendix? Or near intro?}
-
-% $$ on both sides to separate into single line equations, $ on each side for in-text
-
-The purpose of this section is to give a full account of the GEANE formalism used in the tracking code in one place, in a way that makes the most sense to me, as well as it's unique adaptations. For the original source of this material see first the GEANE manual (cite here) and then the Innocente paper (cite), Strandlie paper (cite), and Lavezzi thesis GEANE section (cite). 
-
-It is also important to note that there is a sort of linquistic defficiency in that GEANE refers to both the error propagation code (Geant4 source routines), as well as the general $\chi^{2}$ minimization algorithm, depending on the reference. Locally, I will try and distinguish clearly between the two.
-
-
-\subsection{Coordinate Systems}
-
-The only material not covered here in full detail is the mathematical explanation of reference frames, for which one should see the reference papers. It suffices to summarize as follows: GEANE objects (matrices and parameter vectors) are defined and calculated in the Geant4 source code in the free particle system. Then there is an intermediate surface system defined in XYZ, as the Geant4 surface trajectory system must be defined in an orthogonal coordinate system, before which parameter objects are converted to the most natural detector system of XUV. (Important note - be very careful with coordinate system variables, letters are reused between different papers and code bases with different configurations and meanings constantly.)
+  The only material not covered here in full detail is the mathematical explanation of reference frames, for which one should see the reference papers. It suffices to summarize as follows: GEANE objects (matrices and parameter vectors) are defined and calculated in the Geant4 source code in the free particle system. Then there is an intermediate surface system defined in XYZ, as the Geant4 surface trajectory system must be defined in an orthogonal coordinate system, before which parameter objects are converted to the most natural detector system of XUV. (Important note - be very careful with coordinate system variables, letters are reused between different papers and code bases with different configurations and meanings constantly.)
 
 
 \begin{figure}[h]
@@ -408,124 +329,38 @@ $, yz to uv matrix, where $\theta$ is $7.5\degree$, the 5x5 transformation is ju
 $1/p, pu/px, pv/px, u, v$, uv system
 
 % /////////////////////////////////////////////////////////////////////////////////////
-\subsection{Matrix Stuff (Basically Geane manual summary - don't plagiarize! - but maybe reference that they should read the paper first?)}
-
-The author recommends reading the references \cite{geanemanual}, \cite{trajfit}, and \cite{Lavezzi} in order to best understand the fitting algorithm. However, due to the at times confusing notation, ommitted equations or concepts, and differences between papers, I have attempted here to summarize the different sources and present the material in a more understandable and readable format, while at the same time drawing connections to the implemented code.
-
-One can define a $\chi^{2}$ for a track in the normal way by dividing the residuals of measured and predicted track parameters by their errors,
-
-\begin{align} \label{eq:chi2}
-\chi^2 = (\vec{p}-\vec{x})^{T} (\sigma)^{-1} (\vec{p}-\vec{x}),
-\end{align}
-
-where $\vec{p}$ are predicted track parameters from a fit to the measured track parameters $\vec{x}$, and $\sigma$ is a matrix of errors on the fitted parameters.
-
-The Geant4 error\_propagation routines can be used to determine these predicted parameters and error matrices by propagating track parameters from some initial guesses. By minimizing this $\chi^{2}$ with respect to the track parameters one can then fit and improve the track. The Geant4 routines propagate particles along their average trajectories neglecting the effects of discrete processes, using a helix equation along small enough steps where the change in the magnetic field is small. The parameters are then a function of path length, 
-
-\begin{align} \label{eq:pp}
-p_{l} = F_{l,l_{0}}(p_{0}),
-\end{align}
-
-where the coordinate system transforms described above can be used to determine parameters at specific X values, or detector planes. (From here on the dependence on path length or X position will be neglected, in favor of using plane indices.) In tandem, error matrices describing the expected distribution in true parameters about those predicted parameters due to said discrete process are also calculated:
-
-\begin{align} \label{eq:sigma}
-\sigma^{ij} = <p^{i}p^{j}> - <p^{i}> \cdot <p^{j}>,
-\end{align} 
-
-where i and j are track parameter indices.
-
-The propagation of these parameters and error matrices are done using transport matrices, which express the infinitesimal changes in parameters at some plane (or path length) with respect to the parameters at some previous plane (or previous path length):
-
-\begin{align} \label{eq:transport}
-\delta p_{N} = T_{N,N-1} \delta p_{N-1}, \\
-\sigma_{N} = T_{N,N-1} \sigma_{N-1} T_{N,N-1}^{T}.
-\end{align}
- 
-Said transport and error matrices are 5x5 objects since the parameter vectors are 5x1 objects as described above. With parameters defined on such planes, one can define the $\chi^{2}$ as: 
-
-\begin{align} \label{eq:chi2sum}
-\chi^2 = \sum_{i=1}^{N} [(p_{i}(p)-x_{i})^{T}(\sigma_{i})^{-1}(p_{i}(p)-x_{i})],
-\end{align}
-
-where $p_{i}$ are the average predicted parameters from some general starting parameters $p$. At first order one can only include the measurement error on parameters, which fill in the diagonals of $\sigma_{i}$, if random processes can be neglected. It is important to note that unmeasured parameters should have measurement errors of ininity (or some large value) along the diagonals in the code, which save the fact that residuals for unmeasured parameters do not exist. When the error matrix is inverted all rows and columns of the matrix with these large numbers will fall to 0 in the $\chi^{2}$. 
-
-In order to get the best fit track, the $\chi^{2}$ should be minimized with respect to the initial track parameters p, and evaluated at some chosen parameters:
-
-\begin{align} \label{eq:minimize}
-\frac{\partial \chi^{2}}{\partial p}|_{p=p'_{0}} = 0,
-\end{align}
-
-resulting in
-
-\begin{align}
-0 = \sum_{i=1}^{N}[ (\frac{\partial p_{i}(p)}{\partial p}|_{p=p'_{0}})^{T} (\sigma_{i})^{-1} (p_{i}(p'_{0})-x_{i}) \\ 
-+ (p_{i}(p'_{0})-x_{i})^{T} \frac{\partial(\sigma_{i})^{-1}}{\partial p}|_{p=p'_{0}} (p_{i}(p'_{0})-x_{i}) \\ 
-+  (p_{i}(p'_{0})-x_{i})^{T} (\sigma_{i})^{-1} (\frac{\partial p_{i}(p)}{\partial p}|_{p=p'_{0}})]
-\end{align}
-
-where the 1st and 3rd terms are identical, and the 2nd term is small if one assumes that error matrix doesn't change much with respect to the starting parameters. (Fair since most of the error comes from measurement, and as long as the initial guess is decent enough such that the path length through material doesn't change much from one iteration to the next.)
-
-This simplifies to: 
-
-\begin{align} \label{eq:solve}
-\sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(p_{i}(p'_{0})-x_{i}) = 0.
-\end{align}
-
-To solve this simply make the substitution 
-
-\begin{align} \label{eq:psub}
-p_{i}(p'_{0}) = p_{i}(p_{0}) + \frac{\partial p_{i}(p_{0})}{\partial p} \Delta p_{0} = p_{i}(p_{0}) + T_{i0} \Delta p_{0},
-\end{align}
-
-where $p'_{0}$ are the improved starting parameters for the next iteration calculated from the previous starting parameters $p_{0}$, and $\Delta p_{0}$ are the changes in the starting parameters to improve the track. This equation can be plugged into the above if one makes the assumption that $\frac{\partial p_{i}(p)}{\partial p} = T_{i0}$ does not change much from one iteration the next, which follows from the inherent nature of making small adjustments to the track in order to improve it.
-
-Thus one arrives at 
-
-\begin{align} \label{eq:deltap}
-\Delta p_{0} = \sigma_{p_{0}} \sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(x_{i} - p_{i}(p_{0})),
-\end{align}
-
-where
-
-\begin{align} \label{eq:cov}
-\sigma_{p_{0}} = [\sum_{i=1}^{N} T^{T}_{i0} (\sigma_{i})^{-1}) T_{i0} ]^{-1},
-\end{align}
-
-is the 5x5 covariance matrix of fitted parameters on the starting plane, whose diagonals describe the errors in the 5 track parameters on that plane and in the region close to it. (The fit does not directly return fit errors for track parameters on other planes.) 
-
-However, since random processes should not be neglected for optimal tracking results, it makes more sense to return to the original $\chi^2$ in equation \ref{eq:chi2}, only now the included matrix and vector objects are combined into one large linear algebra equation. Instead of a sum over N 5x1 objects multiplying 5x5 error matrices, the vectors are combined into a single 5Nx1 vector multiplying a single 5Nx5N matrix. The 5x5 diagonals of this large error matrix should now include the effects due to material processes as calculated in Geant from equation \ref{eq:sigma} as well as the measurement errors. 
-
-Because now parameters at one plane are no longer independent of the parameters at other planes, due to correlations from these random processes, it's necessary to add off-diagonal elements into the large error matrix. These 5x5 blocks come from 
-
-\begin{align} \label{eq:corr}
-\sigma_{MN} = T_{MN} \sigma_{N}, 
-\end{align}
-
-for the top diagonals, and the transpose for the bottom diagaonals, 
-where M and N are two separate planes within the detector. ($\sigma_{N}$ is the error matrix on plane N calculated from the starting plane.) This follows from equation \ref{eq:sigma} evaluated at plane M with respect to a path length from plane N, which is equivalent to \ref{eq:corr}. 
-
-You can then minimize the $\chi^{2}$ in the same way, only again with the matrix objects being aggregates of the per plane objects:
-
-\begin{align} \label{eq:deltafull}
-\Delta \vec{p}_{0} = \sigma_{p_{0}} \tau^{T}(\sigma)^{-1}(\vec{p_{0}}-\vec{x}),
-\end{align}
-
-\begin{align} \label{eq:covfull}
-\sigma_{p_{0}} = [\tau^{T} (\sigma)^{-1}) \tau ]^{-1},
-\end{align}
-
-where $\tau$ is the combined transport matrices from the individual 5x5 matrices, a 5Nx5 object.
-
-The unmeasured parameter errors of infinity still come into play in the final calculation in the same was as before. Because however these matrix objects are very large, and the tracking must have a certain amount of speed in order to keep up with data, it is useful to reduce the size of these matrices. (It also makes things easier programming wise. Note that there are other some other ways to speed things up, specifically the banded inversion method as detailed in reference blah. This method was not used in favor of getting the code working in the simpler form in the first place, but it is a possiblity in the future to use this technique to speed things up even more.) It suffices to simply remove all rows and columns where said infinity values exist in the error matrix. This is mathematically equivalent to inverting the error matrix with the infinities included, which make all rows and columns where they exist go to zero. The associated unmeasured parameter rows in the residual vector and transport matrices must similarly be removed. This results in an Nx1 residual vector, NxN error matrix, 5xN combined transport matrix transpose, which multiply against the 5x5 covariance out front to still result in a 5x1 fix to the starting parameters, and a scalar $\chi^2$ value. (Note that these element removals should be done just before the final calculation, and not higher up in the algrebra, otherwise plane correlations are not properly calculated.)
 
 
-By calculating the last two equations one can fit the track, acquire a $\chi^{2}$ describing the degree of the fit, determine how the track parameters can be improved at the starting point, and calculate errors on those starting parameters. This algorithm can be iterated a number of times to get a best fit track until successive iterations produce no improvement, where usually 3 or 4 iterations is enough. Note that there is remarkable robustness with respect to the initial starting parameters in fitting the track. Of course if the initial starting paramaters are too poor, then the fit will not converge.
 
 
 % it seems I have to cite the references in order for them to be added to the paper - some weird build issue, just do it here until I cite them naturally in the paper
 \cite{jacob}, \cite{energyloss}
 
 \printbibliography
+
+
+\section{notes and other}
+
+ Due to the CBO of the beam, 1 tracker accounts for ~90\% of the physics, and a second tracker accounts for much of the remaining. (Find/learn sources for this to explain a bit better..)
+
+  starting error matrix
+
+  linking equations to code variables
+
+  initial errors into tracing/error propagation?
+
+  mention that it's possible to make a Kalman filter which uses the geane matrix objects? and that I didn't do so because we wanted two separate methods for the tracking originally and someone else was working on the kalman filter? (and the chi2 minimization was used in the last experiment)
+
+  make a subsection on the left-right ambiguity work 
+
+  negative chi2 stuff
+
+  note on older branches for development at all?
+
+  \subsection{Kalman Filter}
+
+    There is some precedent for using the error propagation matrix objects within a Kalman filter as detailed in the Lavezzi thesis \cite{Lavezzi}, but due to the circumstances following the creation of this code that technique was not followed. At the beginning of development, a Kalman filter was being started in tandem by others, which has since fallen by the wayside. In order to have two separate methods for fitting however, the least squares global minimization was chosen. The simpler method was also chosen as the author was unfamiliar with track fitting and coding in general when beginning development.
+
 
 
 \section{Acknowledgements}

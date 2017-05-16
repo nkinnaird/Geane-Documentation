@@ -1,0 +1,12 @@
+PWD /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc
+INPUT /usr/local/texlive/2015/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANEArtRecord.tex
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANEArtRecord.log
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANEArtRecord.pdf
+INPUT /usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map

@@ -7,8 +7,11 @@
 % \begin{tabular}{|p{16cm}|}
 
   \\ \hline
-% Variable \\
-%   \hline
+
+enum GeaneHitSide \\ 
+\texitit{An enum for which side of the wire the track hit is guessed or calculated to have passed. Options are gLeft, gRight, gCenter, gNA_side, and gUnknown. The first three are self explanatory, gNA_side simply means there wasn't a hit, and gUnknown is used within the LR sequence checking part of the fitting code where any hits with said value or looped over to try and find the best choice.} 
+
+  \\ \hline
 
 art::Ptr \textless{} gm2strawtracker::TrackCandidateArtRecord \textgreater{} candidate \\
 \textit{One track corresponding to one candidate corresponding to one GEANEArtRecord for the whole track.} \\ \hline
@@ -59,15 +62,6 @@ int trackLastPlaneHit \\ \hline
 std::vector\textless{}int\textgreater{} trackPlanesHitList \\
 \textit{List of hit planes, with missed planes excluded from the vector. Ex. 1 2 4 5 8 9} \\ \hline
 
-\textit{Sequence information excluded from this table for now.} \\ \hline
-        % int trueUSequencePosition; ignore sequence information for now
-        % int pseudomeasuredUSequencePosition; ignore sequence information for now
-        % int trueVSequencePosition; ignore sequence information for now
-        % int pseudomeasuredVSequencePosition; ignore sequence information for now
-        % int trueFullSequencePosition; ignore sequence information for now
-        % int pseudoMeasuredFullSequencePosition; ignore sequence information for now
-        % double trueChi2Difference;
-        % double pseudoMeasuredChi2Difference;
 
 std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} wireUVPositions \\
 \textit{Wire center U and V postions, first vector is track param vector size 5 (0 1 2 unfilled, 3 is U, 4 is V), second vector is planenumber from 0 - 32  (formatted this way to align with other similar vectors - can probably be reduced.)} \\ \hline
@@ -87,8 +81,9 @@ std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} 
 std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geanePredictedParameters \\ 
 \textit{Predicted GEANE parameters, first vector is param num 0 - 4, second vector is plane number 0 - 32, units are MeV mm. 1/P, Py/Px, Pz/Px, Y, Z - all params filled in tracing stage of GEANE fitting module - coord system has to be orthogonal - converted to UV locally in the fitting module.} \\ \hline
 
-
-
+std::vector\textless{}GeaneHitSide>\textgreater{} geaneHitSides \\
+\textit{Vector of GeaneHitSide enums with size 33 describing the sides of the wires that each hit of the track passed.}
+ 
 
 std::vector\textless{}Eigen::MatrixXd\textgreater{} geaneTransportMatrices \\
 std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geaneTransportMatricesData \\ 
@@ -127,6 +122,12 @@ std::vector\textless{}double\textgreater{} extendedReducedMatrixInverseData \\
 Eigen::MatrixXd extendedModifiedReducedMatrix \\ 
 std::vector\textless{}double\textgreater{} extendedModifiedReducedMatrixData \\
 \textit{Reduced matrix from above that's going to be modified into a hybrid error matrix separately for U and V fits but that needs to be held onto for all sequences.} \\ \hline
+
+
+
+std::vector\textless{}int\textgreater{} hitSidesCorrect \\
+\textit{Vector of ints as to whether the sides that the track fitting guessed/calculated were correct or not - only available when truth is available. 1 for correct, 0 for no hit, and -1 for incorrect. Almost certainly temporary.} \\ \hline
+
 
   \hline
 

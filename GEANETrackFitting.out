@@ -7,13 +7,14 @@
 \BOOKMARK [2][-]{subsection.3.4}{geaneFitParams.fcl}{section.3}% 7
 \BOOKMARK [2][-]{subsection.3.5}{cc Files}{section.3}% 8
 \BOOKMARK [2][-]{subsection.3.6}{Other useful fcl files}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.7}{Code details}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.8}{Code peculiarities / notes}{section.3}% 11
-\BOOKMARK [1][-]{section.4}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 12
-\BOOKMARK [1][-]{section.5}{Coordinate Systems}{}% 13
-\BOOKMARK [1][-]{section.6}{notes and other}{}% 14
-\BOOKMARK [2][-]{subsection.6.1}{Kalman Filter}{section.6}% 15
-\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 16
-\BOOKMARK [1][-]{section.8}{Appendix}{}% 17
-\BOOKMARK [2][-]{subsection.8.1}{Angular correction}{section.8}% 18
-\BOOKMARK [1][-]{section.9}{Plots}{}% 19
+\BOOKMARK [2][-]{subsection.3.7}{fullSeqFit}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.8}{Code details}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.9}{Code peculiarities / notes}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 13
+\BOOKMARK [1][-]{section.5}{Coordinate Systems}{}% 14
+\BOOKMARK [1][-]{section.6}{notes and other}{}% 15
+\BOOKMARK [2][-]{subsection.6.1}{Kalman Filter}{section.6}% 16
+\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 17
+\BOOKMARK [1][-]{section.8}{Appendix}{}% 18
+\BOOKMARK [2][-]{subsection.8.1}{Angular correction}{section.8}% 19
+\BOOKMARK [1][-]{section.9}{Plots}{}% 20

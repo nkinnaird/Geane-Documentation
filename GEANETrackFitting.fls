@@ -1,9 +1,9 @@
-PWD /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc
+PWD /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation
 INPUT /usr/local/texlive/2015/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.tex
-OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.log
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.tex
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.log
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/size10.clo
@@ -99,9 +99,9 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/biblatex.cfg
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
-OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.aux
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.aux
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.aux
 INPUT /usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 INPUT /usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
@@ -118,18 +118,18 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bcf
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bbl
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bbl
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.bbl
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.pdf
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.bcf
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.bbl
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.bbl
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.bbl
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
@@ -166,60 +166,62 @@ INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/Tracker.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/Tracker.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/Tracker.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/trackerStation.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/trackerStation.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/trackerStation.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Field/operaBy.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Field/operaBy.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Field/operaBy.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Field/operaBx.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Field/operaBx.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Field/operaBx.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Formalism.tex
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Formalism.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackerPics/Tracker.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackerPics/Tracker.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackerPics/Tracker.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackerPics/trackerStation.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackerPics/trackerStation.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackerPics/trackerStation.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/Field/operaBy.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/Field/operaBy.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/Field/operaBy.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/Field/operaBx.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/Field/operaBx.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/Field/operaBx.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Formalism.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Formalism.tex
 INPUT /usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackingFlow/TrackInfrastructure.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackingFlow/TrackInfrastructure.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackingFlow/TrackInfrastructure.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackingFlow/GeaneFlow.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackingFlow/GeaneFlow.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackingFlow/GeaneFlow.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackingFlow/TrackInfrastructure.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackingFlow/TrackInfrastructure.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackingFlow/TrackInfrastructure.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackingFlow/GeaneFlow.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackingFlow/GeaneFlow.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/TrackingFlow/GeaneFlow.png
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/LeftRight.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/LeftRight.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/WorldCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/WorldCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/WorldCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/GeaneCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/GeaneCoordSys.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/GeaneCoordSys.png
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Appendix.tex
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Appendix.tex
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCorrection.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANEArtRecord.tex
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANEArtRecord.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Appendix.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Appendix.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/angularCorrection.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/angularCorrection.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Images/CoordSys/angularCorrection.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANEArtRecord.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANEArtRecord.tex
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Plots.tex
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Plots.tex
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.aux
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.out
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.run.xml
-OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/GEANETrackFitting.run.xml
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Plots.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/Plots.tex
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.aux
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.out
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.run.xml
+OUTPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/Geane-Documentation/GEANETrackFitting.run.xml
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb

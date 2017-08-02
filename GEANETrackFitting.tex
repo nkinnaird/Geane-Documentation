@@ -83,18 +83,18 @@
 
 \section{In the gm2 Framework}
 
-  At the time of writing, the user should check out the artg4, gm2dataproducts, gm2geom, gm2ringsim, gm2tracker, and gm2utils packages of the gm2 repository, and be on the feature/trackDevelop branch in all instances. Every so often these branches are merged with the main develop branches, where the tracking code will work but might not have the latest code changes. In the future when the track reconstruction code is in a more final state, I imagine that the main g-2 analyses will all be based on particular versions of the develop branches.
+  Depending on the level to which a user wants to utilize or develop the tracking code, they may choose which branches of the gm2 framework to checkout. If just fitting tracks and viewing plots, then just gm2tracker on the develop branch may be checked out. If doing further development, it can be a good idea to checkout the artg4, gm2dataproducts, gm2geom, gm2ringsim, gm2tracker, and gm2utils packages of the gm2 repository, and be on the feature/trackDevelop branch in all instances. Every so often these branches are merged with the main develop branches, where the tracking code will work but might not have the latest code changes. 
 
   \subsection{Event Generation, Geometry, and Material}
 
-    While not a direct part of the reconstruction and fitting code, there is relevant information with respect to event generation in the simulation upon which the reconstruction acts. Event generation before fitting is done using the mdc fcl files in gm2ringsim using the main simulation, where one should also include the tracker dummy plane geometry for truth comparison with the Geane fitting. These are built in the TrackerDummyPlane\_service and associated geometry files. At time of writing there are some modified mdc\#-geane fcl files which can readily be used. Only the necessary straw geometry and associated mother volumes, as well as the parallel world dummy planes are necessary to fit tracks, though including other geometry can of course change particle behaviour. All 3 main trackers are included in their original positions.
+    While not a direct part of the reconstruction and fitting code, there is relevant information with respect to event generation in the simulation upon which the reconstruction acts. Event generation before fitting is done using the mdc fcl files in gm2ringsim using the main simulation, where one can also include the tracker dummy plane geometry for truth comparison with the Geane fitting if so desired. These are built in the TrackerDummyPlane\_service and associated geometry files, and are included in the common mdc fcl files. If one wishes there are also a couple of modified mdc\#-geane fcl files available for use with reduced geometry. For stats reasons it is usually a good idea to include all 3 trackers when generating events.
 
-    Fcl parameters exist for the StrawTrackerCadMesh\_service and Straws\_service in order to turn material on or off at will, ``materialTracker'' and ``strawMaterial'' respectively. The rest of the geometry has to be manually changed and rebuilt in order to remove material if one wishes. These include VacuumChamberCadMesh and the World, as well as the ``buildSupportPost'' option in strawtracker.fcl, ``buildTrolly'' in vac.fcl (where the associated material is hardcoded in), and ``trolleySupportMaterial,'' also in vac.fcl. One should make sure to perform reconstruction with the same material parameters as were used in the event generation for proper results. (These options are primarily for debugging the tracking. Close to perfect results have been shown for tracking within a vacuum world, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4876}{DocDB 4876} and \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4894}{DocDB 4894}.)
+    Fcl parameters exist for the StrawTrackerCadMesh\_service and Straws\_service in order to turn material on or off at will, ``materialTracker'' and ``strawMaterial'' respectively. The rest of the geometry has to be manually changed and rebuilt in order to remove material if one wishes. These include VacuumChamberCadMesh and the World, as well as the ``buildSupportPost'' option in strawtracker.fcl, ``buildTrolly'' in vac.fcl (where the associated material is hardcoded in), and ``trolleySupportMaterial,'' also in vac.fcl. One should make sure to perform reconstruction with the same material parameters as were used in the event generation for proper results. (These options are primarily for debugging the tracking. Near perfect results have been shown for tracking within a vacuum world, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4876}{DocDB 4876} and \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4894}{DocDB 4894}.)
 
 
-    \subsection{Reconstruction Flow}
+  \subsection{Reconstruction Flow}
 
-    The overall tracking infrastructure and reconstruction flow can be seen in Figure \ref{fig:Infrastructure}. Data coming from simulation or the real experiment, are turned into art objects upon which the gm2 framework acts, and are grouped based on their positions in space and time. The RunGeane.fcl file (detailed more below) performs the entire chain within the blue box in Figure \ref{fig:Infrastructure}, excepting the track extrapolation stage. Within the reconstruction flow objects called Track Candidates are produced, which are the input to the Geane fitting code. The Geane fitting specific flow can be seen in Figure \ref{fig:GeaneFlow}. 
+    The overall tracking infrastructure and reconstruction flow can be seen in Figure \ref{fig:Infrastructure}. Data coming from simulation or the real experiment, are turned into art objects upon which the tracking framework acts. The RunGeane.fcl file (detailed more below) performs the entire chain within the blue box in Figure \ref{fig:Infrastructure}, excepting the track extrapolation stage. Within the reconstruction flow objects called Track Candidates are produced, which are the input to the Geane fitting code.
 
 
 \begin{figure}[]
@@ -105,30 +105,34 @@
 \end{figure}
 
 \begin{figure}[]
-\caption{Shown is the Geane fitting code flow. See the text for a thorough explanation of this flow, and the specifics of each box.}
+\caption{Shown is the Geane fitting code flow. See the text for a thorough explanation of this flow, and the specifics of each box. GEANEArtRecords are created in the GeaneReco producer module, and are passed by pointer and reference to the different utils files which then updates them for the different fitting modes and with the fitting results.}
 \centering
 \hspace{15mm}
-\includegraphics[width=0.9\textwidth]{GeaneFlow}
-\label{fig:GeaneFlow}
+\includegraphics[width=0.9\textwidth]{NewGeaneFlow}
+\label{fig:NewGeaneFlow}
 \end{figure}
 
 
-    The primary code for the Geane fitting are the GeaneReco\_module.cc and GeaneFitter.cc files. Detailed information regarding all of these files is given below, but here is provided a shorter summary. Track candidates drop into the GeaneReco file which initially sets up both the Geant4 world and the error\_propagation routines (once for all events), creates a GEANEArtRecord, and fills relevant track fitting objects. GeaneReco then tracks particles along their average trajectories in the Geant4 world, producing the matrix objects necessary for fitting as described in the Formalism section. All of these objects are stored within the GEANEArtRecord, which is then passed to the GeaneFitter class, which contains the methods and math needed for fitting the track again described in the Formalism section, after which a fit to the track is provided along with higher level track objects. GeaneFitter also provides an improvement to the track. GeaneReco and GeaneFitter then loop until the track fitting either succeeds or fails based on some metric, after which GeaneReco produces TrackArtRecords and TrackStateArtRecords, as well as a final updated GEANEArtRecord for the track. (Note that after a single iteration, one pass through GeaneReco and one pass through GeaneFitter, a $\chi^{2}$ and a fix for the track will be produced, but the track predicted parameters and objects will be based on the starting position and momentum guess before it has been updated, and so do not correspond to the fitted track. It's necessary to perform at least a second iteration for this reason, and is why no track converges under the strict criteria in under 3 iterations.) These TrackArtRecords can then pass to the extrapolation stage or go into some refinement stage (which has not been developed yet). The produced GEANEArtRecords can then be passed through filters and analyzers depending on what the user is investigating or looking at (again detailed below).
+    The Geane fitting specific flow can be seen in Figure \ref{fig:NewGeaneFlow}. There is a number of files involved in the production of fitted tracks. Detailed information regarding all of these files is given below, but here is provided a shorter summary. Track candidates from upstream are used as the input to the producer module GeaneReco, which produces TrackArtRecords and TrackStateArtRecords, which are then passed to the extrapolation or refinement stage. GeaneReco also produces GEANEArtRecords, which is the data product that is used and updated throughout the fitting process until the track converges or fails, and may be passed through filters or to analyzers at the end of the fitting. There are a number of utils files that the Geane fitting utilizes. GeaneReco directly links to the GeaneFittingUtils which contains a number of methods for the different fitting modes, as well as the general fitting loop which links to the GeaneFitter class, and iterates until the track fitting succeeds or fails. GeaneFitter provides a $\chi^{2}$ and improvement to the track as described in the Formalism section. GeaneFittingUtils links to GeaneParamUtils and GeaneLRUtils. GeaneParamUtils deals with any code that modifies parameters regarding the fit, both setting up the initial fit parameters, and calculating the predicted parameters of the fit within Geant4 using the error\_propagation routines. GeaneLRUtils deals with any code regarding the left and right information of the track for fitting.
+    
+    Note that after a single iteration, one pass through GeaneFitter and one pass through the relevant fitting utils, a $\chi^{2}$ and an improvement for the track will be produced, but the track predicted parameters and objects will be based on the previous starting position and momentum guess before it has been updated, and so do not correspond to the fitted track. It's necessary to perform at least a second iteration for this reason, and is why no track converges under the strict criteria in under 3 iterations.
+
+    Also worth mentioning is that the GEANEArtRecords are passed by reference or pointer throughout the various fitting files, allowing them to be updated along the way in a natural manner. At the same time, many methods within the fitting code return ints describing whether the track fitting has failed at different stages to various reasons, where a value of 0 signifies success at that stage. A returned int with a non-zero value might for example signify that too many digits were included in the initial track candidate, or that Geant is having tracking issues, etc.
 
 
   \subsection{fcl File Specifics - RunGeane.fcl} 
 
-    Again, reconstruction is performed using RunGeane.fcl in gm2tracker on the events generated from somewhere higher in the chain. It is important to explain some fcl parameters necessary for the reconstruction. First, there is a fcl parameter ``useSD'' for the Straws geometry service to turn off the straw sensitive detectors so that in the reconstruction phase hits are not regenerated. If this is not included, it will default to true and cause crashes in the reconstruction. Secondly, the RunGeane.fcl file loads all 3 trackers necessary for symbol and name definitions, but such that tracker 0 (or 18) is rotated such that the tracking planes are parallel to the global geant X axis (using the rotateArcTracker fcl parameter for the Arc service). This is done to avoid the issue of error propagation instability close to the Z axis, as detailed in \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567}, while at the same time still observing the correct azimuthally symmetric 2D field for the tracks. Track hits are rotated from their separate tracker frames to this one reconstruction frame with the GeaneWorldTracker[0], GeaneWorldTracker[12], and GeaneWorldTracker[18] transforms defined at the bottom of StrawTrackerCadMesh\_service.cc, and as detailed in the Coordinate Systems section. (In the future, if fields or geometries are not identical between trackers, the details here will have to be improved after changes have been made.) As a reminder there are material fcl parameters for the straws and straw trackers which should be the same as were used in the event generation. The RunGeane.fcl file also includes some analyzer and filter modules by default, which are detailed further below, and can be turned on and off at will.
+    Reconstruction is performed using RunGeane.fcl in gm2tracker on the events generated from somewhere higher in the chain. (There is also a RunGeane-midasdata.fcl file which is more tuned to running on real data, with certain fcl parameters set appropriately and some modules left out of the chain.) It is important to explain some fcl parameters necessary for the reconstruction. First, there is a fcl parameter ``useSD'' for the Straws geometry service to turn off the straw sensitive detectors so that in the reconstruction phase hits are not regenerated. If this is not included, it will default to true and cause crashes in the reconstruction. Secondly, the RunGeane.fcl file loads all 3 trackers necessary for symbol and name definitions, but such that tracker 0 (or 18) is rotated such that the tracking planes are parallel to the global geant X axis (using the rotateArcTracker fcl parameter for the Arc service). This is done to avoid the issue of error propagation instability close to the Z axis, as detailed in \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567}, while at the same time still observing the correct azimuthally symmetric 2D field for the tracks. Track hits are rotated from their separate tracker frames to this one reconstruction frame with the GeaneWorldTracker[0], GeaneWorldTracker[12], and GeaneWorldTracker[18] transforms defined at the bottom of StrawTrackerCadMesh\_service.cc, and as detailed in the Coordinate Systems section. (In the future, if fields or geometries are not identical between trackers, the details here will have to be improved after changes have been made.) As a reminder there are material fcl parameters for the straws and straw trackers which should be the same as were used in the event generation. The RunGeane.fcl file also includes some analyzer and filter modules by default, which are detailed further below, and can be turned on and off at will.
 
-    While the pieces of the chain before the track fitting (digitalizing, seeding, clustering, t0 finder, and track finding) are distinct and separate from the material detailed in this document, it is important to understand at some level those stages and the different options which will affect the tracking results. See a collaboration talk by Tammy, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=5601}{DocDB 5601}, for a general overview on this. Here is a short summary, not all method or file calls are detailed. Most of these files and parameters should be left unchanged unless one is familiar with the subject matter. 
+    While the pieces of the chain before the track fitting (digitalizing, seeding, clustering, t0 finder, and track finding) are distinct and separate from the material detailed in this document, it is important to understand at some level those stages and the different options which will affect the tracking results. See a collaboration talk by Tammy, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=5601}{DocDB 5601}, for a general overview on this. Here is a short summary, not all method or file calls are detailed. Most of these files and parameters should be left unchanged unless one is familiar with the subject matter.
 
     \begin{enumerate}
 
           \item{\bf{Digitalizer\_module.cc}} \\
-          This module creates StrawDigits which will ultimately be combined to form the Track Candidates that the fitting will act over. It is the variables in this art record that are updated and correspond to real data, which straw was hit, the time of the hit, and the dca of the hit. The StrawDigits also contain a pointer to a struct of Monte-Carlo truth data, StrawMCDigit, which can also be accessed for track information. The Digitalizer module has several fcl parameters to change things like the gas drift time, drift model, allowing recorded negative times, and some particle cuts. By default it uses a Gaussian drift model which is called when the Digitalizer calls the DriftTimeModels.cc file, where it will gaussian smear the hit time from the MC digit time. These fcl parameters are located in digitalizerParams.fcl. The smearedDriftTimeSeed parameter should be set to 0 if one wants random results from run to run, which is necessary for grid jobs. The drift time model can also be set to the Garfield version, which will produce more realistic measurement parameters. If this is used the drift time calculator in the DriftDistanceCal module should also be set to the Garfield version. These more realistic hit data result in reconstructed tracks that haven't been fully examined yet.
+          This module creates StrawDigits which will ultimately be combined to form the Track Candidates that the fitting will act over. It is the variables in this art record that are updated and correspond to real data, which straw was hit, the time of the hit, and the dca of the hit. The StrawDigits also contain a pointer to a struct of Monte-Carlo truth data, StrawMCDigit, which can also be accessed for track information. The Digitalizer module has several fcl parameters to change things like the gas drift time, drift model, allowing recorded negative times, and some particle cuts. By default it uses a Gaussian drift model which is called when the Digitalizer calls the DriftTimeModels.cc file, where it will gaussian smear the hit time from the MC digit time. These fcl parameters are located in digitalizerParams.fcl. The smearedDriftTimeSeed parameter should be set to 0 if one wants random results from run to run, which is necessary for grid jobs. The drift time model can also be set to the Garfield version, which will produce more realistic measurement parameters. If this is used the drift time calculator in the DriftDistanceCal module should also be set to the Garfield version. These more realistic hit data result in reconstructed tracks that haven't been fully analyzed yet, with a non-uniform p value distribution.
 
           \item{\bf{TimeIsland\_module.cc}} \\
-          Groups the digits from the Digitalizer in time. Has some options for changing the time window width. fcl parameters are located in recoIslandParams.fcl. There is some major ongoing work in relation to this module for dealing with real data, where there is a much increased number of hits closer in time. The short summary here does not reflect the difficult and important task that this module has.
+          Groups the digits from the Digitalizer in time. Has some options for changing the time window width. fcl parameters are located in recoIslandParams.fcl. There is ongoing work in relation to this module for dealing with real data, where there is a much increased number of hits closer in time. The short summary here does not reflect the difficult and important task that this module has.
 
           \item{\bf{ClusterFormation\_module.cc}} \\
           Groups neighboring digits in the same view to form clusters. fcl parameters are located in recoClusterParams.fcl.
@@ -137,16 +141,16 @@
           Calculates a t0 for the track. Has an option for which model to use for calculating said t0. The default is using truthData if one is running the tracking over simulated hits. If one is looking at real data there are other options. It's important to note that the t0 for a track can be difficult to calculate, and the current goal is to combine information from the calorimeter to get this number. fcl parameters are located in recoT0FindingParams.fcl.
 
           \item{\bf{DriftDistanceCal\_module.cc}} \\
-          Calculates the drift times and distances within the straws based on the calculated t0 from the previous module. Has options for different drift calculators and parameters, including a ``useTrueModuleT0'' parameter for using mc truth information. The drift time is calculated from the digit hit time (calculated in the Digitalizer) minus the module t0. If true t0 is not used, then the dca smearing will not be perfectly gaussian. fcl parameters are located in recoClusterParams.fcl.
+          Calculates the drift times and distances within the straws based on the calculated t0 from the previous module. Has options for different drift calculators and parameters, including a ``useTrueDigitT0'' parameter for using mc truth information. The drift time is calculated from the digit hit time (calculated in the Digitalizer) minus the digit t0. If true t0 is not used, then the dca smearing will not be perfectly gaussian. fcl parameters are located in recoClusterParams.fcl.
 
           \item{\bf{SeedFormation\_module.cc}} \\
           Groups neighboring clusters in the same module to form seeds. There are two fcl parameters for this module. The first is ``reconstructPosition'' which will fill seed nodes which form the seed, and essentially correspond to indidual digits - but which contain some left-right (LR) ambiguity information important for track fitting. The second is ``useGeometryLR'' which uses the straw geometry information to make an initial guess at the left-right choices for doublets within the track. fcl parameters are located in recoSeedParams.fcl.
 
-          \item{bf{Aside}}
-          It's important to note that there is another iteration of the time island and clustering modules which are improved now that better drift times and distances have been calculated from the previous modules, using the same fcl paramters. This will almost certainly change in the future as the tracking code becomes more developed.
+          \item{\bf{Aside}}
+          It's important to note that there is another iteration of the clustering module which is improved now that better drift times and distances have been calculated from the previous modules, using the same fcl paramters. This will almost certainly change in the future as the tracking code becomes more developed.
 
           \item{\bf{TrackFinding\_module.cc}} \\
-          Groups time islands and digits based on their positions in space. There are two finders available for use, fcl parameter trackFinderName, the Simple Track Finder (SimpleTrackFindingUtils.cc) and the Long Track Finder (LongTrackFindingUtils.cc). The former just runs off the generated time islands, and is more applicable to truth monte carlo data. If you use this, then the second clustering module and seed formation module can be left out of the reconstruction chain. The latter, Long Track Finder, forms track candidates based on combining seeds and is the default used. It also has stricter fcl conditions, such as a default cut of 6 or more planes hit for the track. Both finders make use of the SimpleCircleFitter.cc class which fits a circle to the U and V digit positions to calculate a starting position and momentum guess for the track, which is currently necessary for the Geane fitting. The Long Track Finder also has a least squares minimizer which is unimportant for the Geane fitting. There is also some functionality to make multiple track candidates from the same digits, which will be more useful once real data is coming in. fcl parameters are located in recoFindingParams.fcl, which then also links to some other fcl files depending on the finder used.
+          Groups time islands and digits based on their positions in space. There are two finders available for use, fcl parameter trackFinderName, the Simple Track Finder (SimpleTrackFindingUtils.cc) and the Long Track Finder (LongTrackFindingUtils.cc). The former just runs off the generated time islands. If you use this, then the second clustering module and seed formation module can be left out of the reconstruction chain. The latter, Long Track Finder, forms track candidates based on combining seeds and is the default used. It also has stricter fcl conditions, such as a default cut of 6 or more planes hit for the track. Both finders make use of the SimpleCircleFitter.cc class which fits a circle to the U and V digit positions to calculate a starting position and momentum guess for the track, which is currently necessary for the Geane fitting. The Long Track Finder also has a least squares minimizer which is unimportant for the Geane fitting. fcl parameters are located in recoFindingParams.fcl, which then also links to some other fcl files depending on the finder used.
 
 
     \end{enumerate}
@@ -161,7 +165,7 @@
       The ordinary art producer parameter which tells art which cc file to run, this is always set to GeaneReco unless the filename changes.
 
       \item{\bf{G4EVERBOSE}} \\
-      This parameter corresponds to the iverbose level present in the Geant4 error\_propagation files and can be manually set here, from 0 to 5. It is for the debugging of deeper level Geane fitting code. Note that unless Geant is compiled with the flag by the same name setting this verbose level will do nothing. Since currently we utilize our own slightly modified error\_propagation files copied into the artg4/gm2Geane directory, it would be possible to remove the dependencies on this Geant4 build flag. Since however this will slow down the tracking it is the current choice to leave them in. 
+      This parameter corresponds to the iverbose level present in the Geant4 error\_propagation files and can be manually set here, from 0 to 5. It is for the debugging of deeper level Geane fitting code. Note that unless Geant is compiled with the flag by the same name setting this verbose level will do nothing. Since currently we utilize our own slightly modified error\_propagation files copied into the gm2tracker/gm2Geane directory, it would be possible to remove the dependencies on this Geant4 build flag. Since however this will slow down the tracking it is the current choice to leave them in. 
 
       \item{\bf{trackingVerbose}} \\
       Geant4 tracking verbose level, from 0 to 5. This is always available but should only be used for debugging.
@@ -169,20 +173,26 @@
       \item{\bf{matrixDebug}} \\
       This boolean paramater turns on and off the copious matrix debugging output, used for deep level debugging. Note that these outputs are included in the log file and the log file threshold needs to be set to ``DEBUG''. In the future it might be beneficial for speed reasons to remove completely these debugging outputs. This parameter should always be turned off if looking at a large number of events.
 
-      \item{\bf{numPassesWireFit, numPassesMainFit}} \\
-      These are parameters used for the Left-Right sequence checking routines for a full fit. numPassesWireFit is the number of passes that the track should be fit to the wire centers, before which the best sequences were passed to the main fit code which would iterate a number of times equal to numPassesMainFit. It was observed in the past that 2 or 3 passes for each of these was sufficient for good tracking results. 
+      \item{\bf{numPassesWireFit, numPassesSeqFit}} \\
+      These are parameters used for the Left-Right sequence checking routines for a full fit. numPassesWireFit is the number of passes that the track should be fit to the wire centers, before which the best sequences were passed to the main fit code which would iterate a number of times equal to numPassesSeqFit. It was observed in the past that 3 passes for each of these was sufficient for good tracking results. 
 
       \item{\bf{convergenceCriteria}} \\
-      This is a scalar convergence criteria telling whether the track fitting has been successful or not, with a default value of .1. As long as the current iteration $\chi^{2}$ minus the previous iteration $\chi^{2}$ is less than this value, the track is considered to have converged, otherwise it continues iterating until it succeeds, fails, or is manually cut off at a larger number of iterations, depending on the fit mode used.
+      This is a scalar convergence criteria telling whether the track fitting has been successful or not, with a default value of .1. As long as the current iteration $\chi^{2}$ minus the previous iteration $\chi^{2}$ is less than this value, the track is considered to have converged, otherwise it continues iterating until it succeeds, fails, or is manually cut off at 10 iterations.
 
       \item{\bf{useCircleGuess}} \\
       This boolean parameter tells the code whether to use the circle fitter results for the track starting guess or not, called in the track finding part of the chain. It's default should remain true unless one wants to return to the uniform starting parameter smearing for debugging purposes.
 
       \item{\bf{lockLowDCAs}} \\
-      This is a temporary fcl parameter which will take measured hits with small values (currently hardcoded to 300 um) and change them to the wire center positions, at the same time locking the LR choices to the center. This will be necessary when fitting data due to the large measurement uncertainty of hits close to the wire, and at the same time speeds up the code with one less LR choice to iterate over.
+      This is a temporary fcl parameter which will take measured hits with small dcas and set the measured positions to the wire centers, at the same time locking the LR choices to the center. This will be necessary when fitting data due to the large measurement uncertainty of hits close to the wire, and at the same time speeds up the code with less LR choices to iterate over. It's default value of 0 corresponds to turning this functionality off, while a positive number corresponds to the radius in mm that dcas less than will be locked.
+
+      \item{\bf{useNodes}} \\
+      This boolean parameter sets whether to use the left-right information from the seed nodes, if activated. The recoSeedParams fcl parameter ``reconstructPosition'' needs to be set to true for this to work, and the parameter ``useGeometryLR'' should also be set to true, being that it is the only upstream left-right code currently implemented.
 
       \item{\bf{fitMode}} \\
-      This is the most important fcl parameter for the Geane fitting. It defines what type of fitting mode you'd like to use for fitting the incoming track candidates. There are currently 4 separate fitting modes. ``truthLRFit'' only works with simulated data and will fit to the unambiguous LR UV values from the digits. ``wireFit'' will fit a track to the wire centers of the incoming digits, with a corresponding uniform error equal to the gas diameter. ``mainFit'' will first do a wire fit to the track in order to make an initial guess at the LR choices for each hit, and will then fit to those LR choices. (At the time of writing this it actually does a second wire fit in the middle where it locks LR choices for doublets where the LR choice is guaranteed to be known.) Finally there is the ``fullSeqFit'' which will first do the wire fit, and will then go about checking all LR sequences before doing full fits on the set of best sequences. (This LR procedure is detailed lower in the code somewhere.)
+      This is the most important fcl parameter for the Geane fitting. It defines what type of fitting mode you'd like to use for fitting the incoming track candidates. There are currently 4 separate fitting modes. ``truthLRFit'' only works with simulated data and will fit to the unambiguous LR UV values from the digits. ``wireFit'' will fit a track to the wire centers of the incoming digits, with a corresponding uniform error proportional to the gas diameter. ``mainFit'' will first do a wire fit to the track in order to make an initial guess at the LR choices for each hit, and will then fit to those LR choices. (The default main fit actually does a second wire fit in the middle where it first locks LR choices for doublets where the LR choice is guaranteed to be known, which improves the tracking results slightly.) Finally there is the ``fullSeqFit'' which will first do the wire fit, and will then go about checking all LR sequences before doing full fits on the set of best sequences. (There is also some code to lock the left-right sides based on the doublets.) This LR procedure is detailed lower in this document.
+
+      \item{\bf{useTangentLR}} \\
+      This fcl parameter links to code which does a slightly more advanced locking of the doublet left-right geometry include track tangent information, defaulted to false, and written by Joe Price.
 
       \item{\bf{rseed, yPosChange, zPosChange, xMomChange, yMomChange, zMomChange}} \\
       These are the uniform smearing bounds for the starting position and momentum of the track from truth, units of mm and MeV. These are largely unused now since the circle fitter provides a level of smearing automatically when it's used, but should be kept for future debugging purposes. The rseed parameter is the number seed for the random number generator. The default should be 0 for the root TRandoms unless one wants to reproduce results.
@@ -190,28 +200,140 @@
     \end{enumerate}
 
 
-  \subsection{cc Files}
+  \subsection{Reconstruction Files}
 
-    Here will be given a summary of the different cc files used in the Geane track fitting as shown in Figure \ref{fig:GeaneFlow} and explained up above, as well as extensive detail where necessary. 
+    Here will be given a summary of the different core files used in the Geane track fitting as shown in Figure \ref{fig:NewGeaneFlow} and explained up above, as well as extensive detail where necessary. 
 
 
     \begin{enumerate}
 
       \item{\bf{GeaneReco\_module.cc}} \\
-      This file consists of the main code which sets up the GEANE track fitting, pulls in upstream data products, interfaces with both Geant4 and the gm2 art framework, outputs TrackStateArtRecords and TrackArtRecords for use downstream, as well as GEANEArtRecords to analyze. 
+      This file is the producer module for the track fitting reconstruction. It pulls in upstream data products, TrackCandidateArtRecords, and produces TrackArtRecords, TrackStateArtRecords, and GEANEArtRecords. The GEANEArtRecords are what's passed through the various fitting utils files until the track fitting succeeds or fails, and from which the TrackArtRecords and TrackStateArtRecords are derived from. GeaneReco directly links to GeaneFittingUtils where the track fitting is actually done.
 
-      It's methods consists of:
+      \underline{Methods}
 
         \begin{itemize}
 
           \item{produce} \\
           General overriden produce method. Calls main track fitting code on an event by event basis. Produces data products for downstream use.
 
+          \item{trackFitting} \\ 
+          Short method which first calls down through GeaneFittingUtils into GeaneParamUtils to set up the initial parameters for fitting, and then calls the method corresponding to the particular fit mode specified in the fcl file. Also has a method call for checking some failure modes after fitting.
+
+        \end{itemize}
+
+/////////////////////////////////////////////////////////////////////////////////////
+      \item{\bf{GeaneFittingUtils.cc}} \\
+
+      \underline{Methods}
+
+        \begin{itemize}
+
+          \item{setXPositions} \\
+          \item{truthLRFit} \\ 
+          \item{wireFit} \\ 
+          \item{mainFit} \\
+          \item{fullSeqFit} \\
+          \item{fittingLoop} \\ 
+          \item{checkExtraneousFailureModes} \\ 
+
+        \end{itemize}
+/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+      \item{\bf{GeaneFitter.cc}} \\
+      This file consists of the main track fitting chi2 algorithm. It multiplies measured parameters, predicted parameters, error matrices, and transport matrices together to produce a chi2 for the track and an improvement to the starting paramters. It also reads in the measured hits errors in order to properly fit the track. See the Formalism section for a detailed description of what this class really does. There is a fcl parameter matrixDebug which can be used to turn on or off the many large matrix cout debugging statements.
+
+        \begin{itemize}
+
+          \item{TrackCorrelation} \\
+          The main matrix multiplication routines.
+
+          \item{makeHybridErrMat} \\
+          A method in order to create a hybrid wire / U or V error matrix for L/R sequence checking. Only called once per event.
+
+          \item{sequenceChecking} \\ 
+          The main L/R sequence checking method for an individual event. This method is called up to thousands of times as each U or V sequence is checked. See the Left-Right section further below for more detail on what this method does.
+
+          \item{convertToGeVcm, convertToMeVmm} \\
+          Methods for converting Eigen 5 parameter vectors from GeV cm to MeV mm and vice versa.
+
+        \end{itemize}
+/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+      \item{\bf{GeaneParamUtils.cc}} \\
+      only file that links to geant
+GeaneReco then tracks particles along their average trajectories in the Geant4 world, producing the matrix objects necessary for fitting as described in the Formalism section. 
+
+      \underline{Methods}
+
+        \begin{itemize}
+
+          \item{setXPositions, setCoordMap} \\
+          \item{setupParams} \\ 
+          \item{errorProp} \\ 
+          \item{calcMeasuredParams} \\ 
+
+
+        \end{itemize}
+/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+      \item{\bf{GeaneDummyUtils.cc}} \\
+
+      \underline{Methods}
+
+        \begin{itemize}
+
+          \item{fillDummyHits} \\
+
+          \item{getTrackDummyHits} \\ 
+          \item{fillCS, fillStationStr} \\ 
+          \item{fillDummyHitInfo} \\ 
+          \item{fillDigitHitInfo} \\ 
+          \item{fillTruthParams} \\ 
+          \item{createStartGuess} \\ 
+          \item{fillLRFromTruth} \\ 
+          \item{checkLRAgainstTruth} \\ 
+
+
+        \end{itemize}
+/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+      \item{\bf{GeaneLRUtils.cc}} \\
+
+      \underline{Methods}
+
+        \begin{itemize}
+
+          \item{lockSmallDCAErrors} \\
+
+          \item{lockSmallDCACenters} \\ 
+          \item{fillLRFromFit} \\ 
+          \item{fillLRFromGeom} \\ 
+          \item{setUnknownSides} \\ 
+          \item{fillLRFromNodes} \\ 
+          \item{getUVUnkowns} \\ 
+          \item{getTopSequences} \\ 
+          \item{modifyMeasuredParams} \\ 
+          \item{getSequenceSides} \\ 
+
+        \end{itemize}
+/////////////////////////////////////////////////////////////////////////////////////
+
+      \item{\bf{GeaneTrackUtils.cc}} \\
+      This utils file contains a number of useful methods for getting track information on wire planes, checking whether a plane is a U or V plane, and a couple of Eigen variables used in converting from an XYZ frame (with planes staggered parallel in the X direction) to the Geane XUV frame.
+
+      \item{\bf{GeaneEigenStorageUtils.cc}} \\
+      Art data products cannot permanently store eigen objects. This utils file converts Eigen objects to c++ vectors when storing said objects into the art record, and vice versa when reading from the art record. Written by James Mott.
+
+
+move/change these methods to the correct area
+
           \item{InitializeGEANE} \\
           Geant4 GEANE (error\_propagation) initialization method called by the constructor, once per run.
-
-          \item{trackFitting} \\ 
-          Sets up variables and objects for track fitting after reading in upstream data products (track candidates and dummy planes). Contains calls to track fitting iteration loops. Also contains LR sequence checking routines.
 
           \item{modifyMeasuredParams} \\ 
           Short method for LR sequence checking, modifies measured parameters based on particular sequence.
@@ -229,31 +351,12 @@
           Method to iteratively correct measured parameters from a radial DCA value to a U or V value based on the momentum of the track and approximating a constant field within the straw. Also corrects the errors using a simple straight line approximation which is good enough. See appendix section for more details on how this works.
 
 
-go into detail somewhere about what this method is doing and where??
 
 
 
 
-        \end{itemize}
+  \subsection{Analyzers and Filters}
 
-      \item{\bf{GeaneFitter.cc}} \\
-      This file consists of the main track fitting chi2 algorithm. It multiplies measured parameters, predicted parameters, error matrices, and transport matrices together to produce a chi2 for the track and an improvement to the starting paramters. It also reads in the measured hits errors in order to properly fit the track. There is a fcl parameter matrixDebug which can be used to turn on or off the many large matrix cout debugging statements.
-
-        \begin{itemize}
-
-          \item{TrackCorrelation} \\
-          The main matrix multiplication routines.
-
-          \item{preSequenceChecking} \\
-          A method in order to create a hybrid wire / U or V error matrix for L/R sequence checking. Only called once per event.
-
-          \item{sequenceChecking} \\ 
-          The main L/R sequence checking method for an individual event. This method is called many thousands of times as each U or V sequence is checked. Ignore for now.
-
-          \item{convertTo} \\
-          Some methods for converting Eigen 5 vectors from GeV cm to MeV mm and vice versa.
-
-        \end{itemize}
 
       \item{\bf{GeanePlots\_module.cc}} \\
       The main analyzer/plotting module which runs on the output GEANEArtRecords produced upstream. This creates many plots including chi2 distributions, p value distributions, number of iterations, track parameter, residuals, pulls, etc. Truth information for these plots is currently necessary as written, but can be take out in the future for real data. There are some fcl paramters to make cuts on different parameters. There are also some other plotter modules which are similar but much reduced in scope. reference geanePlotsParams.fcl file here.
@@ -304,7 +407,6 @@ go into detail somewhere about what this method is doing and where??
 
 
 
-  \input{LeftRight.tex}
 
 
 \subsection{Code details}
@@ -325,6 +427,10 @@ Where to structure this in the file?
 Notes on coordinate systems I use - UV pointing outward vs XYZ, XUV x being forward, UVW in geante src, maybe IJK/TUV in one paper-prob not, GeaneTrackerWorld[0,12,18], rotateArcTracker (bit more specific), magnetic field access coordinates?, JacobianToUV
 
 accessing the field in a specific way
+
+
+
+\input{LeftRight.tex}
 
 
 

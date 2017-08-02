@@ -5,16 +5,17 @@
 \BOOKMARK [2][-]{subsection.3.2}{Reconstruction Flow}{section.3}% 5
 \BOOKMARK [2][-]{subsection.3.3}{fcl File Specifics - RunGeane.fcl}{section.3}% 6
 \BOOKMARK [2][-]{subsection.3.4}{geaneFitParams.fcl}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.5}{cc Files}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.6}{Other useful fcl files}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.7}{fullSeqFit}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.5}{Reconstruction Files}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.6}{Analyzers and Filters}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.7}{Other useful fcl files}{section.3}% 10
 \BOOKMARK [2][-]{subsection.3.8}{Code details}{section.3}% 11
 \BOOKMARK [2][-]{subsection.3.9}{Code peculiarities / notes}{section.3}% 12
-\BOOKMARK [1][-]{section.4}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 13
-\BOOKMARK [1][-]{section.5}{Coordinate Systems}{}% 14
-\BOOKMARK [1][-]{section.6}{notes and other}{}% 15
-\BOOKMARK [2][-]{subsection.6.1}{Kalman Filter}{section.6}% 16
-\BOOKMARK [1][-]{section.7}{Acknowledgements}{}% 17
-\BOOKMARK [1][-]{section.8}{Appendix}{}% 18
-\BOOKMARK [2][-]{subsection.8.1}{Angular correction}{section.8}% 19
-\BOOKMARK [1][-]{section.9}{Plots}{}% 20
+\BOOKMARK [1][-]{section.4}{fullSeqFit - Left Right Code}{}% 13
+\BOOKMARK [1][-]{section.5}{gm2Geane package in artg4 - eloss, brems, ionizations, msc}{}% 14
+\BOOKMARK [1][-]{section.6}{Coordinate Systems}{}% 15
+\BOOKMARK [1][-]{section.7}{notes and other}{}% 16
+\BOOKMARK [2][-]{subsection.7.1}{Kalman Filter}{section.7}% 17
+\BOOKMARK [1][-]{section.8}{Acknowledgements}{}% 18
+\BOOKMARK [1][-]{section.9}{Appendix}{}% 19
+\BOOKMARK [2][-]{subsection.9.1}{Angular correction}{section.9}% 20
+\BOOKMARK [1][-]{section.10}{Plots}{}% 21

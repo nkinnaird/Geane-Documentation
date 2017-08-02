@@ -1,6 +1,6 @@
 \begin{longtable}{|p{16cm}|}
 % \scriptsize
-\caption{GEANEArtRecord.hh active variables. This is subject to change. GEANEArtRecord contains vectors of variables on planes, as well as larger objects containing information about the whole track. Note that Eigen matrix objects cannot be stored into art data products. For this reason, and for minimal code changes, it was decided to add a data object for each Eigen member, made up of vectors with the word ``Data'' tagged at the end. The data objects are saved when creating GEANEArtRecords using a utils file. In analyzers accessing the GEANEArtRecords, these data objects are then swapped into the Eigen objects using the same utils file.}
+\caption{GEANEArtRecord.hh active variables. This is subject to change. GEANEArtRecord contains vectors of variables on planes, as well as larger objects containing information about the whole track. Note that Eigen matrix objects cannot be stored into art data products. For this reason, and for minimal code changes, it was decided to add a data object for each Eigen member, made up of vectors with the word ``Data'' tagged at the end. The data objects are saved when creating GEANEArtRecords using the GeaneEigenStorageUtils file. In analyzers accessing the GEANEArtRecords, these data objects are then swapped into the Eigen objects using the same utils file.}
  
 \label{tab:artRecord}
 
@@ -9,7 +9,7 @@
   \\ \hline
 
 enum GeaneHitSide \\ 
-\textit{An enum for which side of the wire the track hit is guessed or calculated to have passed. Options are gLeft, gRight, gCenter, gNA\_side, and gUnknown. The first three are self explanatory, gNA\_side simply means there wasn't a hit, and gUnknown is used within the LR sequence checking part of the fitting code where any hits with said value or looped over to try and find the best choice.} 
+\textit{An enum for which side of the wire the track hit is guessed or calculated to have passed. Options are gLeft, gRight, gCenter, gNA\_side, and gUnknown. The first three are self explanatory, gNA\_side simply means there wasn't a hit, and gUnknown is used within the LR sequence checking part of the fitting code where any hits with said value are looped over to try and find the best choice.}
 
   \\ \hline
 
@@ -25,11 +25,8 @@ int failureMode \\
 double chi2 \\ 
 \textit{Chi2 for whole track.} \\ \hline
 
-std::vector\textless{}double\textgreater{} chi2Iterations \\
-\textit{Chi2s for whole track for different iterations.} \\ \hline
-
 std::vector\textless{}double\textgreater{} chi2Planes \\
-\textit{Individual chi2s on each plane which add up to total chi2, vector consists of hit planes with size N.} \\ \hline
+\textit{Individual chi2s on each plane, vector consists of hit planes with size N. The sum of the chi2s on the planes do not add up to the total chi2, since they don't include the correlations, but get close and can still be used as a measure of goodness of fit at that plane.} \\ \hline
 
 int numIterations \\
 \textit{Number of iterations to converge.} \\ \hline
@@ -43,14 +40,8 @@ double chi2DoF \\
 double pValue \\
 \textit{Fit pValue for whole track.} \\ \hline
 
-double energyDiff \\
-\textit{energy loss between first and last hit in track - from truth, for material characterizing} \\ \hline
-
 std::vector\textless{}double\textgreater{} startingTrackParameters \\
 \textit{Starting parameters for track: size 6, 3 position then 3 momentum, x y z px py pz, best starting parameters updated after each iteration, starting parameters x position defined before first hit.} \\ \hline
-
-std::vector\textless{}double\textgreater{} startingTrackGuessOffsets \\
-\textit{Size 10, x y z px py pz p 1/p pu/px pv/px offsets in different starting track parameters for plotting purposes.} \\ \hline
 
 int trackNumPlanesHit \\ 
 \textit{Total number of planes hit.} \\ \hline
@@ -69,8 +60,20 @@ std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} 
 std::vector\textless{}double\textgreater{} measuredDCAs \\
 \textit{Vector of measured DCAs for hit planes, with size 33. Mainly to hold on to smearing values for now.} \\ \hline
 
+std::vector\textless{}double\textgreater{} uncorrErrors \\
+\textit{Size 33, errors filled with digit errors or straw diameter errors - uncorrected.} \\ \hline
+
 std::vector\textless{}double\textgreater{} UVerrors \\
-\textit{Vector of UV measurement errors for planes 0-32. Built in order to accomadate varying errors in the future.} \\ \hline
+\textit{Size 33, errors corrected each iteration with angular correction from dca/straw error to UV error - errors that are used in the fit.} \\ \hline
+
+std::vector\textless{}gm2strawtracker::GeaneHitSide\textgreater{} inputHitSides \\
+\textit{Size 33, LR sides coming from from upstream of the fitting code - and modified within the fitting code depending on the fit mode.}  \\ \hline
+
+std::vector\textless{}double\textgreater{} dcaErrors \\
+\textit{Size 33, dca errors directly copied from straw digit art record.} \\ \hline
+
+std::vector\textless{}double\textgreater{} strawDiamErrors \\
+\textit{Size 33, vector of straw diameter errors = strawdiameter/$\sqrt{12}$.} \\ \hline
 
 std::vector\textless{}double\textgreater{} planeXPositions \\
 \textit{Vector of X postions of hit wire planes with size 33 (0 - 32), 0 plane being in front of the first module that was hit.} \\ \hline
@@ -81,8 +84,8 @@ std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} 
 std::vector\textless{}std::vector\textless{}double\textgreater{} \textgreater{} geanePredictedParameters \\ 
 \textit{Predicted GEANE parameters, first vector is param num 0 - 4, second vector is plane number 0 - 32, units are MeV mm. 1/P, Py/Px, Pz/Px, Y, Z - all params filled in tracing stage of GEANE fitting module - coord system has to be orthogonal - converted to UV locally in the fitting module.} \\ \hline
 
-std::vector\textless{}GeaneHitSide>\textgreater{} geaneHitSides \\
-\textit{Vector of GeaneHitSide enums with size 33 describing the sides of the wires that each hit of the track passed.}
+std::vector\textless{}GeaneHitSide\textgreater{} geaneHitSides \\
+\textit{Vector of GeaneHitSide enums with size 33 describing the sides of the wires that each hit of the track passed.} \\ \hline
  
 
 std::vector\textless{}Eigen::MatrixXd\textgreater{} geaneTransportMatrices \\
@@ -122,11 +125,6 @@ std::vector\textless{}double\textgreater{} extendedReducedMatrixInverseData \\
 Eigen::MatrixXd extendedModifiedReducedMatrix \\ 
 std::vector\textless{}double\textgreater{} extendedModifiedReducedMatrixData \\
 \textit{Reduced matrix from above that's going to be modified into a hybrid error matrix separately for U and V fits but that needs to be held onto for all sequences.} \\ \hline
-
-
-
-std::vector\textless{}int\textgreater{} hitSidesCorrect \\
-\textit{Vector of ints as to whether the sides that the track fitting guessed/calculated were correct or not - only available when truth is available. 1 for correct, 0 for no hit, and -1 for incorrect. Almost certainly temporary.} \\ \hline
 
 
   \hline

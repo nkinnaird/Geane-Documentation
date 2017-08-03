@@ -2,6 +2,9 @@
 
 \usepackage{amssymb,amsmath,longtable, gensymb}
 
+\usepackage{enumitem}
+\setlist{parsep=0pt,listparindent=\parindent}
+
 \usepackage[pdftex]{graphicx}
 \graphicspath{ {Images/} {Images/eLoss/} {Images/CoordSys/} {Images/TrackerPics/} {Images/Field/} {Images/TrackingFlow/}}
 
@@ -214,111 +217,152 @@
 
         \begin{itemize}
 
-          \item{produce} \\
+          \item{\bf{produce}} \\
           General overriden produce method. Calls main track fitting code on an event by event basis. Produces data products for downstream use.
 
-          \item{trackFitting} \\ 
+          \item{\bf{trackFitting}} \\ 
           Short method which first calls down through GeaneFittingUtils into GeaneParamUtils to set up the initial parameters for fitting, and then calls the method corresponding to the particular fit mode specified in the fcl file. Also has a method call for checking some failure modes after fitting.
 
         \end{itemize}
 
-/////////////////////////////////////////////////////////////////////////////////////
       \item{\bf{GeaneFittingUtils.cc}} \\
+      This class contains several methods for fitting tracks with different fit modes. Each such method sets up the specifics of the fit, altering necessary parameters and calling various methods, and then calling the fittingLoop method which iterates and fits the track. mainFit and fullSeqFit do multiple fits, starting with a wire fit. 
 
       \underline{Methods}
 
         \begin{itemize}
 
-          \item{setXPositions} \\
-          \item{truthLRFit} \\ 
-          \item{wireFit} \\ 
-          \item{mainFit} \\
-          \item{fullSeqFit} \\
-          \item{fittingLoop} \\ 
-          \item{checkExtraneousFailureModes} \\ 
+          \item{\bf{truthLRFit}} \\
+          Fits a track to the U and V hits with the left-right sides known from the Monte Carlo simulation. Only works with simulation.
+
+          \item{\bf{wireFit}} \\
+          Fits a track to the wire centers of the hit straws, ignoring left-right information. This is the easiest fit to do on data since it ignores timing information, which affects dca values and errors.
+
+          \item{\bf{mainFit}} \\
+          First does a wire fit to the track in order to gain left-right information, then does a hybrid wire fit with some left-right choices set based on the doublet geometry and predicted parameters from the first wire fit. Finally fits a track to the dca values of the hits with the left-right sides set from the previous fit, updating each iteration.
+
+          \item{\bf{fullSeqFit}} \\
+          First does a wire fit to the track in order to gain information useful for solving for the left-right sides of the track. Then locks left-right sides based on used fcl parameters, and sets associated errors, leaving the remaining sides as ``unknown.'' Then does a fast check or approximate fit on all U and V unknowns separately in order to determine a set of best possible U and V left-right combinations. Finally takes the best U and V left-right combinations and combines them into full left-right sequences, which are then fitted as normal with the associated dcas and errors.
+
+          \item{\bf{fittingLoop}} \\ 
+          The general fitting iteration loop method. Takes in the GEANEArtRecord, the number of passes to fit over, and whether to update the left-right sides each iteration (for mainFit) as parameters. For each loop it will calculate the predicted parameters and propagate the errors of the fit by calling the errorProp method within GeaneParamUtils, then update the left-right sides from the previous iteration if desired, then calculate the angle-corrected measured parameters based on the left-right sides of the track to fit. Finally, with all parameters determined, it will calculate a $\chi^{2}$ and an improvement for the track by calling the TrackCorrelation method from the class GeaneFitter. The improvement to the track from GeaneFitter serves as the basis for calculating the next set of predicted parameters. Relevant GEANEArtRecord members are filled and then the track is checked to have converged, with fittingLoop iterating if it has not. 
+
+          \item{\bf{checkExtraneousFailureModes}} \\
+          A mostly defunct method with the purpose of checking to see whether the tracking has failed in some unseen way. In the past there were some failure modes which have since been removed such as a track reconstructed with overly high momentum. Currently the only failure mode check is to see whether the X positions of the reconstructed track don't match the wire positions, which should not be the case since the former directly comes from the other. Some coordinate code which may be the root cause of this is commented out due to framework coding constraints (which can probably be gotten around). This method has been left in for the future possibility of checking other potential failure modes.
 
         \end{itemize}
-/////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////////////
       \item{\bf{GeaneFitter.cc}} \\
-      This file consists of the main track fitting chi2 algorithm. It multiplies measured parameters, predicted parameters, error matrices, and transport matrices together to produce a chi2 for the track and an improvement to the starting paramters. It also reads in the measured hits errors in order to properly fit the track. See the Formalism section for a detailed description of what this class really does. There is a fcl parameter matrixDebug which can be used to turn on or off the many large matrix cout debugging statements.
+      This file consists of the main track fitting $\chi^{2}$ algorithm. It multiplies measured parameters, predicted parameters, error matrices, and transport matrices together to produce a chi2 for the track and an improvement to the starting paramters. It also reads in the measured hits errors in order to properly fit the track. See the Formalism section for a detailed description of what this class really does. There is a fcl parameter matrixDebug which can be used to turn on or off the many large matrix cout debugging statements.
 
         \begin{itemize}
 
-          \item{TrackCorrelation} \\
+          \item{\bf{TrackCorrelation}} \\
           The main matrix multiplication routines.
 
-          \item{makeHybridErrMat} \\
+          \item{\bf{makeHybridErrMat}} \\
           A method in order to create a hybrid wire / U or V error matrix for L/R sequence checking. Only called once per event.
 
-          \item{sequenceChecking} \\ 
+          \item{\bf{sequenceChecking}} \\ 
           The main L/R sequence checking method for an individual event. This method is called up to thousands of times as each U or V sequence is checked. See the Left-Right section further below for more detail on what this method does.
 
-          \item{convertToGeVcm, convertToMeVmm} \\
+          \item{\bf{convertToGeVcm, convertToMeVmm}} \\
           Methods for converting Eigen 5 parameter vectors from GeV cm to MeV mm and vice versa.
 
         \end{itemize}
-/////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////////////
       \item{\bf{GeaneParamUtils.cc}} \\
-      only file that links to geant
-GeaneReco then tracks particles along their average trajectories in the Geant4 world, producing the matrix objects necessary for fitting as described in the Formalism section. 
+      This file consists of the main methods which modify various parameters for the track fitting. The setupParams method does its namesake, setting up the initial parameters per track before attempting to fit. The errorProp method deals with calculating predicted parameters and associated track matrices within Geant4. Finally, the calcMeasuredParams method deals with setting and correcting the measured paramaters of the fit from the incoming dca values and errors of the track hits. Note that this is the only class in the Geane reconstruction framework which links to and uses Geant4. It is in the constructor of this method that the Geant4 world is constructed once per job, the proper magnetic field is associated with the transportation manager, and the error propagation routines are initialized. (The necessary Geant4, art service, and gm2geom header files are included here.)
 
       \underline{Methods}
 
         \begin{itemize}
 
-          \item{setXPositions, setCoordMap} \\
-          \item{setupParams} \\ 
-          \item{errorProp} \\ 
-          \item{calcMeasuredParams} \\ 
+          \item{\bf{setXPositions, setCoordMap}} \\
+          Hacked in methods to grab needed coordinate system information and the X positions of the wire planes (from the art run object) while improving speed of the tracking.
 
+          \item{\bf{setupParams}} \\
+          This method sets up the parameters at the beginning of each track fit. It is here that the TrackCandidateArtRecord and StrawDigitArtRecord information is copied or converted into relevant GEANEArtRecord members. Other members are filled with default or empty values to start. Members include dcas, dca errors, wire positions, hit sides, etc. This method links to the GeaneDummyUtils file, which allows one to acquire the truth information of the track and use for fitting if desired. The starting guess for the position and momentum of the track can be pulled from the track candidate (calculated using a simple circle fitter to the hit digits) or truth. There are a couple of variables in the GEANEArtRecord which are filled with the same information in this method, as the initial setup is for doing a wire fit to the track. If doing a different kind of fit, the variable changes and method calls in GeaneFittingUtils handles altering the relevant parameters of the fit. There are also a couple of checks in this method to make sure that we're trying to fit a reasonable track, and not one that for instance has more than one hit on a measurement plane.
+
+          \item{\bf{errorProp}} \\ 
+          This method tracks particles along their average trajectories through the region of the tracker detector using the Geant4 error propagation routines with the correct geometry and field. It builds transport matrices, error matrices, and predicted parameters which are the objects used for fitting the track, as described in the Formalism section. It tracks on a plane by plane and step by step basis. These error propagation routines can be used to track particles forwards and backwards, where the forwards tracking is used in the code. (It will be non-trivial to change the code to be able to back-track.) 
+
+          To be a little more explicit, it creates Geane free trajectory states which are the objects that are propageted from target plane to target plane, where the target planes are defined to be parallel in X. (As our wire planes are.) Surface trajectory states are then created on those planes, where the orthonormal vectors defining those planes are in the Y and Z directions. These vectors have to be orthornormal in Geant in order for predicted parameters and errors to be calculated correctly. It is later in the fitting code that these track objects are converted to the UV basis that our detector is naturally defined in. 
+            
+          While the predicted parameters and errors can be grabbed directly from the surface trajectory state on each plane, the transport matrix cannot be. It is on a step by step basis that the transport matrices are generated, with the previous step transport matrix being dropped with the next step. It is for this reason that the transport matrices must be accumulated and multiplied together from each step in order to form the transport matrix describing the change in parameters from one measurement plane to the next. (There is some code in the Geant source code which appears that might do this automatically, but it is commented out and unclear if it works.) These transport matrices are also only defined in the free state coordinate system, and so need to be converted to the surface system that our fitting uses. When creating surface trajectory states on the target planes, the Jacobian transformation matrices from the free to the surface system are generated and can be saved. It is then a simple matter of multiplying these matrices together to get the transport matrices in the surface system. (Once again these are defined in XYZ, but are converted later in the code to be in XUV.)
+
+          Transport matrices are accumulated as
+              \begin{align} %\label{eq:nolabel}
+                T_{mn} = T_{mk}T_{kn},
+              \end{align}
+          where the indices can stand for either plane numbers or step numbers, and converted by 
+              \begin{align} %\label{eq:nolabel}
+                T_{mn,s} = A_{n} T_{mn,f} A_{n}^{-1},
+              \end{align}     
+          where the indices s and f stand for the surface and free trajectory states respectively, and A is the Jacobian transformation from the free state to the surface state. See reference \cite{jacob} for the calculation of these Jacobians. The error matrices in the surface state can be grabbed directly from the Geant code unlike the transport matrices, or if necessary can be converted as
+              \begin{align} %\label{eq:nolabel}
+                \sigma_{m,s} = A_{m} \sigma_{m,f} A_{m}^{-1}.
+              \end{align}   
+
+          It's also worth mentioning that within this method there are a number of checks to see whether the tracking has failed due to Geant stepping or Geane propagation issues.
+
+          \item{\bf{calcMeasuredParams}} \\ 
+          Method to correct measured parameters from a radial DCA value to a U or V value based on the momentum of the track at the hit from the previous fit and approximating a constant field within the straw. Also corrects the dca errors using a simple straight line approximation in a similar vein. See the Appendix section for more details on how this works. Note that this method also fills the measured parameter objects within the fit in the first place, so if this method is not called then the fit won't have any measured hits to fit to.
 
         \end{itemize}
-/////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////////////
       \item{\bf{GeaneDummyUtils.cc}} \\
+      This class deals with truth track information, stored in GhostDetectorArtRecords generated by the TrackerDummyPlane service. These GhostDetectorArtRecords store position and momentum in the world coordinate system, and so need to be converted to the Geane coordinate system(s) when comparing the fitted track against truth or inputting any truth parameters into the fit. Called by GeaneParamUtils and some analyzers.
 
       \underline{Methods}
 
         \begin{itemize}
 
-          \item{fillDummyHits} \\
+          \item{\bf{fillDummyHits}} \\
+          Fills a local variable with the dummy hits from the art data handle, done once so that the utils file has access to the data products.
 
-          \item{getTrackDummyHits} \\ 
-          \item{fillCS, fillStationStr} \\ 
-          \item{fillDummyHitInfo} \\ 
-          \item{fillDigitHitInfo} \\ 
-          \item{fillTruthParams} \\ 
-          \item{createStartGuess} \\ 
-          \item{fillLRFromTruth} \\ 
-          \item{checkLRAgainstTruth} \\ 
+          \item{\bf{getTrackDummyHits}} \\
+          Method to fill the GEANEArtRecord dummy hits member variable, dummyPlaneHits, with the ordered dummy hits corresponding to the hit measurement planes.
+
+          \item{\bf{fillCS, fillStationStr}} \\
+          Passes some needed coordinate system information to the utils file, and the station that the track was in for coordinate transforms to the correct frame.
+
+          \item{\bf{fillDummyHitInfo, fillDigitHitInfo}} \\
+          Fills some commonly used variables throughout different methods in the class.
+
+          \item{\bf{fillTruthParams}} \\
+          Brute force searches through the GhostDetectorArtRecords to find the hits corresponding to the digits in the track, and sorting them before calling the getTrackDummyHits method. This is kind of an awkward method because the GhostDetectorArtRecord can't store any sort of plane or module identifiers, except for the volume string. These volume names have the form TRACKERDUMMYPLANEPV[a][b][c], with a the scallop number {0, 12, 18}, b the module number {0, 7}, and c the plane number {0, 3}. There are also ``0'' planes in front of each module for recording the ``starting'' positions of the tracks, defined as being 10 mm (by fcl parameter) in front of the first wire plane of each module. For these 0 planes, c equals 5. It is then a matter of looping through the GhostDetectorArtRecords until the indices and particle ID match the straw digit that was hit and storing those hits into a sorted member variable. There is associated logic to check all of these conditions, and it's not optimized.
+
+          \item{\bf{createStartGuess}} \\
+          If desired, this method can be called to create an intial start guess for the momentum and position from the truth information directly. This guess can be smeared variably with the associated fcl parameters if one wishes.
+
+          \item{\bf{fillLRFromTruth}} \\
+          This method calculates the true hit sides of the tracks using the GhostDetectorArtRecord positions and the wire information. These true hit sides can then be grabbed by GeaneParamUtils if one wishes to fit to truth, or the final left-right sides can be compared to the truth at the analyzer stage.
+
+          \item{\bf{checkLRAgainstTruth}} \\
+          This method checks to see how well the fitting fared when calculating the left-right sides of the track.
 
 
         \end{itemize}
-/////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////////////
       \item{\bf{GeaneLRUtils.cc}} \\
 
+
       \underline{Methods}
 
         \begin{itemize}
 
-          \item{lockSmallDCAErrors} \\
+          \item{\bf{lockSmallDCAErrors, lockSmallDCACenters}} \\
+          For hits with small dcas below some threshold, sets the fit errors accordingly, and the hit sides to the wire centers. The lockSmallDCACenters method takes as input the inputHitSides GEANEArtRecord member variable which is important to remember when using and modifying this code.
 
-          \item{lockSmallDCACenters} \\ 
-          \item{fillLRFromFit} \\ 
-          \item{fillLRFromGeom} \\ 
-          \item{setUnknownSides} \\ 
-          \item{fillLRFromNodes} \\ 
-          \item{getUVUnkowns} \\ 
-          \item{getTopSequences} \\ 
-          \item{modifyMeasuredParams} \\ 
-          \item{getSequenceSides} \\ 
+          \item{\bf{fillLRFromFit}} \\ 
+          \item{\bf{fillLRFromGeom}} \\ 
+          \item{\bf{setUnknownSides}} \\ 
+          \item{\bf{fillLRFromNodes}} \\ 
+          \item{\bf{getUVUnkowns}} \\ 
+          \item{\bf{getTopSequences}} \\ 
+          \item{\bf{modifyMeasuredParams}} \\ 
+          \item{\bf{getSequenceSides}} \\ 
 
         \end{itemize}
 /////////////////////////////////////////////////////////////////////////////////////
@@ -328,30 +372,6 @@ GeaneReco then tracks particles along their average trajectories in the Geant4 w
 
       \item{\bf{GeaneEigenStorageUtils.cc}} \\
       Art data products cannot permanently store eigen objects. This utils file converts Eigen objects to c++ vectors when storing said objects into the art record, and vice versa when reading from the art record. Written by James Mott.
-
-
-move/change these methods to the correct area
-
-          \item{InitializeGEANE} \\
-          Geant4 GEANE (error\_propagation) initialization method called by the constructor, once per run.
-
-          \item{modifyMeasuredParams} \\ 
-          Short method for LR sequence checking, modifies measured parameters based on particular sequence.
-
-          \item{fittingLoop} \\ 
-          Method which contains the fitting loop code which successively calls errorPropagation in the same file and the GeaneFitter for fitting the track. The angleCorrection method is called each iteration to update the UV measured positions and errors depending on the track momentum. (Before it is called the errors are reset so that they are not double corrected.) There is also a method parameter for updating the LR choices based on the fit at each iteration, which is only used when doing a ``mainFit'', which improves the final tracking results. This method will loop inside itself until convergence is achieved or the max number of iterations is reached (or fitting fails).
-
-          \item{checkExtraneousFailureModes} \\
-          This is a short method used for checking if track results might be off because of other extraneous reasons.
-
-          \item{errorPropagation} \\ 
-          This method tracks particles through the detector using Geant4 error propagation routines with the correct geometry and field. It builds transport matrices, error matrices, and predicted parameters which are the objects used for fitting the track. It tracks on a plane by plane and step by step basis. These routines can be used to track particles forwards and backwards, where the forwards tracking is used in the code. Changing to backwards tracking would be very non-trivial. Add more detail here later..
-
-          \item{angleCorrection} \\
-          Method to iteratively correct measured parameters from a radial DCA value to a U or V value based on the momentum of the track and approximating a constant field within the straw. Also corrects the errors using a simple straight line approximation which is good enough. See appendix section for more details on how this works.
-
-
-
 
 
 

@@ -26,6 +26,8 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/was/gensymb.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/was/gensymb.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty

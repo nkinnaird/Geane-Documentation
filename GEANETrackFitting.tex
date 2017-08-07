@@ -6,7 +6,7 @@
 \setlist{parsep=0pt,listparindent=\parindent}
 
 \usepackage[pdftex]{graphicx}
-\graphicspath{ {Images/} {Images/eLoss/} {Images/CoordSys/} {Images/TrackerPics/} {Images/Field/} {Images/TrackingFlow/}}
+\graphicspath{ {Images/} {Images/eLoss/} {Images/CoordSys/} {Images/TrackerPics/} {Images/Field/} {Images/TrackingFlow/} {Images/LeftRight/}}
 
 \usepackage[margin=1in]{geometry}
 
@@ -33,7 +33,7 @@
 % \renewcommand{\abstractname}{Assigned Problem}
 \begin{abstract}
 
-    In this document I will detail the concepts and mathematics of GEANE track fitting, as well as it's implementation in the gm2 simulation framework for the Muon g-2 Experiment at Fermilab. I will also detail the pecularities and intricacies of the code. This is done both for documentation purposes as well as a precursor to sections of my future thesis. This document assumes some familiarity with art on part of the reader, though such knowledge is not necessary for many sections. Note that the tracking code and framework is in constant development, so the details contained here within may be outdated at time of reading. 
+    In this document I will detail the concepts and mathematics of GEANE track fitting, as well as it's implementation in the gm2 simulation framework for the Muon g-2 Experiment at Fermilab. I will also detail the pecularities and intricacies of the code. This is done both for documentation purposes as well as a precursor to sections of my future thesis. This document assumes some familiarity with art on part of the reader, though such knowledge is not necessary for many sections. Note that the tracking code and framework is in constant development, so the details contained here within may be outdated at time of reading. I've tried to be thorough in my descriptions, but it is possible that some finer points have been left out of this document.
 
 \end{abstract}
 
@@ -77,7 +77,7 @@
 \label{fig:operaBx}
 \end{figure}
 
-  The Geane fitting routines originated in Fortran with the EMC collaboration, and was used in the precursor E821 experiment as well as the PANDA experiment with some success. (cite stuff here?) (There might be some other instances of its use as well.) The core error propagation routines were at some point added to Geant4 under the error\_propagation directory which is included in all default installs. The tracking code strengths lie with its direct implementation and access to the Geant4 geometry and field, and its ability to handle the field inhomogeneties. The Geane algorithm code which makes use of the Geant4 error\_propagation routines follows the structure of \cite{geanemanual} and is detailed in the Formalism section in this paper. It is a relatively straight forward least squares global $\chi^{2}$ minimization algorithm. 
+  The Geane fitting routines originated in Fortran with the EMC collaboration, and was used in the precursor E821 experiment as well as the PANDA experiment with some success. (cite stuff here?) (There might be some other instances of its use as well.) The core error propagation routines were at some point added to Geant4 under the error\_propagation directory which is included in all default installs. The tracking code strengths lie with its direct implementation and access to the Geant4 geometry and field, and its ability to handle the field inhomogeneties. The Geane algorithm code which makes use of the Geant4 error\_propagation routines follows the structure of \cite{geanemanual} and is detailed in the \hyperref[sec:Formalism]{Formalism} section in this paper. It is a relatively straight forward least squares global $\chi^{2}$ minimization algorithm. 
 
 
 
@@ -116,7 +116,7 @@
 \end{figure}
 
 
-    The Geane fitting specific flow can be seen in Figure \ref{fig:NewGeaneFlow}. There is a number of files involved in the production of fitted tracks. Detailed information regarding all of these files is given below, but here is provided a shorter summary. Track candidates from upstream are used as the input to the producer module GeaneReco, which produces TrackArtRecords and TrackStateArtRecords, which are then passed to the extrapolation or refinement stage. GeaneReco also produces GEANEArtRecords, which is the data product that is used and updated throughout the fitting process until the track converges or fails, and may be passed through filters or to analyzers at the end of the fitting. There are a number of utils files that the Geane fitting utilizes. GeaneReco directly links to the GeaneFittingUtils which contains a number of methods for the different fitting modes, as well as the general fitting loop which links to the GeaneFitter class, and iterates until the track fitting succeeds or fails. GeaneFitter provides a $\chi^{2}$ and improvement to the track as described in the Formalism section. GeaneFittingUtils links to GeaneParamUtils and GeaneLRUtils. GeaneParamUtils deals with any code that modifies parameters regarding the fit, both setting up the initial fit parameters, and calculating the predicted parameters of the fit within Geant4 using the error\_propagation routines. GeaneLRUtils deals with any code regarding the left and right information of the track for fitting.
+    The Geane fitting specific flow can be seen in Figure \ref{fig:NewGeaneFlow}. There is a number of files involved in the production of fitted tracks. Detailed information regarding all of these files is given below, but here is provided a shorter summary. Track candidates from upstream are used as the input to the producer module GeaneReco, which produces TrackArtRecords and TrackStateArtRecords, which are then passed to the extrapolation or refinement stage. GeaneReco also produces GEANEArtRecords, which is the data product that is used and updated throughout the fitting process until the track converges or fails, and may be passed through filters or to analyzers at the end of the fitting. There are a number of utils files that the Geane fitting utilizes. GeaneReco directly links to the GeaneFittingUtils which contains a number of methods for the different fitting modes, as well as the general fitting loop which links to the GeaneFitter class, and iterates until the track fitting succeeds or fails. GeaneFitter provides a $\chi^{2}$ and improvement to the track as described in the \hyperref[sec:Formalism]{Formalism} section. GeaneFittingUtils links to GeaneParamUtils and GeaneLRUtils. GeaneParamUtils deals with any code that modifies parameters regarding the fit, both setting up the initial fit parameters, and calculating the predicted parameters of the fit within Geant4 using the error\_propagation routines. GeaneLRUtils deals with any code regarding the left and right information of the track for fitting.
     
     Note that after a single iteration, one pass through GeaneFitter and one pass through the relevant fitting utils, a $\chi^{2}$ and an improvement for the track will be produced, but the track predicted parameters and objects will be based on the previous starting position and momentum guess before it has been updated, and so do not correspond to the fitted track. It's necessary to perform at least a second iteration for this reason, and is why no track converges under the strict criteria in under 3 iterations.
 
@@ -125,7 +125,7 @@
 
   \subsection{fcl File Specifics - RunGeane.fcl} 
 
-    Reconstruction is performed using RunGeane.fcl in gm2tracker on the events generated from somewhere higher in the chain. (There is also a RunGeane-midasdata.fcl file which is more tuned to running on real data, with certain fcl parameters set appropriately and some modules left out of the chain.) It is important to explain some fcl parameters necessary for the reconstruction. First, there is a fcl parameter ``useSD'' for the Straws geometry service to turn off the straw sensitive detectors so that in the reconstruction phase hits are not regenerated. If this is not included, it will default to true and cause crashes in the reconstruction. Secondly, the RunGeane.fcl file loads all 3 trackers necessary for symbol and name definitions, but such that tracker 0 (or 18) is rotated such that the tracking planes are parallel to the global geant X axis (using the rotateArcTracker fcl parameter for the Arc service). This is done to avoid the issue of error propagation instability close to the Z axis, as detailed in \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567}, while at the same time still observing the correct azimuthally symmetric 2D field for the tracks. Track hits are rotated from their separate tracker frames to this one reconstruction frame with the GeaneWorldTracker[0], GeaneWorldTracker[12], and GeaneWorldTracker[18] transforms defined at the bottom of StrawTrackerCadMesh\_service.cc, and as detailed in the Coordinate Systems section. (In the future, if fields or geometries are not identical between trackers, the details here will have to be improved after changes have been made.) As a reminder there are material fcl parameters for the straws and straw trackers which should be the same as were used in the event generation. The RunGeane.fcl file also includes some analyzer and filter modules by default, which are detailed further below, and can be turned on and off at will.
+    Reconstruction is performed using RunGeane.fcl in gm2tracker on the events generated from somewhere higher in the chain. (There is also a RunGeane-midasdata.fcl file which is more tuned to running on real data, with certain fcl parameters set appropriately and some modules left out of the chain.) It is important to explain some fcl parameters necessary for the reconstruction. First, there is a fcl parameter ``useSD'' for the Straws geometry service to turn off the straw sensitive detectors so that in the reconstruction phase hits are not regenerated. If this is not included, it will default to true and cause crashes in the reconstruction. Secondly, the RunGeane.fcl file loads all 3 trackers necessary for symbol and name definitions, but such that tracker 0 (or 18) is rotated such that the tracking planes are parallel to the global geant X axis (using the rotateArcTracker fcl parameter for the Arc service). This is done to avoid the issue of error propagation instability close to the Z axis, as detailed in \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567}, while at the same time still observing the correct azimuthally symmetric 2D field for the tracks. Track hits are rotated from their separate tracker frames to this one reconstruction frame with the GeaneWorldTracker[0], GeaneWorldTracker[12], and GeaneWorldTracker[18] transforms defined at the bottom of StrawTrackerCadMesh\_service.cc, and as detailed in the \hyperref[sec:Coord]{Coordinate Systems} section. (In the future, if fields or geometries are not identical between trackers, the details here will have to be improved after changes have been made.) As a reminder there are material fcl parameters for the straws and straw trackers which should be the same as were used in the event generation. The RunGeane.fcl file also includes some analyzer and filter modules by default, which are detailed further below, and can be turned on and off at will.
 
     While the pieces of the chain before the track fitting (digitalizing, seeding, clustering, t0 finder, and track finding) are distinct and separate from the material detailed in this document, it is important to understand at some level those stages and the different options which will affect the tracking results. See a collaboration talk by Tammy, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=5601}{DocDB 5601}, for a general overview on this. Here is a short summary, not all method or file calls are detailed. Most of these files and parameters should be left unchanged unless one is familiar with the subject matter.
 
@@ -226,6 +226,7 @@
         \end{itemize}
 
       \item{\bf{GeaneFittingUtils.cc}} \\
+      \label{sec:GeaneFittingUtils}
       This class contains several methods for fitting tracks with different fit modes. Each such method sets up the specifics of the fit, altering necessary parameters and calling various methods, and then calling the fittingLoop method which iterates and fits the track. mainFit and fullSeqFit do multiple fits, starting with a wire fit. 
 
       \underline{Methods}
@@ -242,7 +243,7 @@
           First does a wire fit to the track in order to gain left-right information, then does a hybrid wire fit with some left-right choices set based on the doublet geometry and predicted parameters from the first wire fit. Finally fits a track to the dca values of the hits with the left-right sides set from the previous fit, updating each iteration.
 
           \item{\bf{fullSeqFit}} \\
-          First does a wire fit to the track in order to gain information useful for solving for the left-right sides of the track. Then locks left-right sides based on used fcl parameters, and sets associated errors, leaving the remaining sides as ``unknown.'' Then does a fast check or approximate fit on all U and V unknowns separately in order to determine a set of best possible U and V left-right combinations. Finally takes the best U and V left-right combinations and combines them into full left-right sequences, which are then fitted as normal with the associated dcas and errors.
+          First does a wire fit to the track in order to gain information useful for solving for the left-right sides of the track. Then locks left-right sides based on used fcl parameters, and sets associated errors, leaving the remaining sides as ``unknown.'' Then does a fast check or approximate fit on all U and V unknowns separately in order to determine a set of best possible U and V left-right combinations. Finally takes the best U and V left-right combinations and combines them into full left-right sequences, which are then fitted as normal with the associated dcas and errors. See the \hyperref[sec:LR]{Left-Right} section for more detail on this.
 
           \item{\bf{fittingLoop}} \\ 
           The general fitting iteration loop method. Takes in the GEANEArtRecord, the number of passes to fit over, and whether to update the left-right sides each iteration (for mainFit) as parameters. For each loop it will calculate the predicted parameters and propagate the errors of the fit by calling the errorProp method within GeaneParamUtils, then update the left-right sides from the previous iteration if desired, then calculate the angle-corrected measured parameters based on the left-right sides of the track to fit. Finally, with all parameters determined, it will calculate a $\chi^{2}$ and an improvement for the track by calling the TrackCorrelation method from the class GeaneFitter. The improvement to the track from GeaneFitter serves as the basis for calculating the next set of predicted parameters. Relevant GEANEArtRecord members are filled and then the track is checked to have converged, with fittingLoop iterating if it has not. 
@@ -253,18 +254,20 @@
         \end{itemize}
 
       \item{\bf{GeaneFitter.cc}} \\
-      This file consists of the main track fitting $\chi^{2}$ algorithm. It multiplies measured parameters, predicted parameters, error matrices, and transport matrices together to produce a chi2 for the track and an improvement to the starting paramters. It also reads in the measured hits errors in order to properly fit the track. See the Formalism section for a detailed description of what this class really does. There is a fcl parameter matrixDebug which can be used to turn on or off the many large matrix cout debugging statements.
+      This file consists of the main track fitting $\chi^{2}$ algorithm. It multiplies measured parameters, predicted parameters, error matrices, and transport matrices together to produce a chi2 for the track and an improvement to the starting paramters. It also reads in the measured hits errors in order to properly fit the track. See the \hyperref[sec:Formalism]{Formalism} section for a detailed description of what this class really does. There is a fcl parameter matrixDebug which can be used to turn on or off the many large matrix cout debugging statements.
 
         \begin{itemize}
 
           \item{\bf{TrackCorrelation}} \\
-          The main matrix multiplication routines.
+          The main matrix multiplication routines, essentially the math from reference \cite{geanemanual}. In order to fit the track properly with the correct errors, the matrix multiplication must be done in the XUV space. Since the transport matrices and predicted parameters are generated in the XYZ space as described in the errorProp method of the \hyperref[sec:GeaneParamUtils]{GeaneParamUtils} section, they must be converted using the Jacobian transformation between the two bases. This Jacobian is described in the \hyperref[sec:Coord]{Coordinate Systems} section, and the variable itself is saved as a member in the GeaneTrackUtils.cc class. 
+
+          One other point of note regarding this method is that depending on the matrix multiplications being done, the various loops within the code might either loop over the maximum number of planes (33, a 0 plane plus the 32 measurement planes), or they might loop over the planes that were hit. The code should be relatively clear, but if any indices or loop iterators are messed up in any way, then the track fitting will utterly fail, sometimes with only very subtle hints as to where exactly the problem lies. (At one point I spent a week hunting down an off-by-one index error believing it to be a memory problem, due to how the Eigen matrices work.) At some point it might be beneficial to standardize this code, but it has been left alone per the reason stated before.
 
           \item{\bf{makeHybridErrMat}} \\
-          A method in order to create a hybrid wire / U or V error matrix for L/R sequence checking. Only called once per event.
+          A method in order to create a hybrid wire / U or V error matrix for the left-right sequence checking. Only called once per track for the U and V sequences.
 
           \item{\bf{sequenceChecking}} \\ 
-          The main L/R sequence checking method for an individual event. This method is called up to thousands of times as each U or V sequence is checked. See the Left-Right section further below for more detail on what this method does.
+          The main left-right sequence checking method for an individual event. This method is called up to thousands of times as each U or V sequence is checked. See the \hyperref[sec:GeaneLRUtils]{GeaneLRUtils.cc} and \hyperref[sec:LR]{Left-Right} sections further below for more detail on what this method does.
 
           \item{\bf{convertToGeVcm, convertToMeVmm}} \\
           Methods for converting Eigen 5 parameter vectors from GeV cm to MeV mm and vice versa.
@@ -272,6 +275,7 @@
         \end{itemize}
 
       \item{\bf{GeaneParamUtils.cc}} \\
+      \label{sec:GeaneParamUtils}
       This file consists of the main methods which modify various parameters for the track fitting. The setupParams method does its namesake, setting up the initial parameters per track before attempting to fit. The errorProp method deals with calculating predicted parameters and associated track matrices within Geant4. Finally, the calcMeasuredParams method deals with setting and correcting the measured paramaters of the fit from the incoming dca values and errors of the track hits. Note that this is the only class in the Geane reconstruction framework which links to and uses Geant4. It is in the constructor of this method that the Geant4 world is constructed once per job, the proper magnetic field is associated with the transportation manager, and the error propagation routines are initialized. (The necessary Geant4, art service, and gm2geom header files are included here.)
 
       \underline{Methods}
@@ -285,7 +289,7 @@
           This method sets up the parameters at the beginning of each track fit. It is here that the TrackCandidateArtRecord and StrawDigitArtRecord information is copied or converted into relevant GEANEArtRecord members. Other members are filled with default or empty values to start. Members include dcas, dca errors, wire positions, hit sides, etc. This method links to the GeaneDummyUtils file, which allows one to acquire the truth information of the track and use for fitting if desired. The starting guess for the position and momentum of the track can be pulled from the track candidate (calculated using a simple circle fitter to the hit digits) or truth. There are a couple of variables in the GEANEArtRecord which are filled with the same information in this method, as the initial setup is for doing a wire fit to the track. If doing a different kind of fit, the variable changes and method calls in GeaneFittingUtils handles altering the relevant parameters of the fit. There are also a couple of checks in this method to make sure that we're trying to fit a reasonable track, and not one that for instance has more than one hit on a measurement plane.
 
           \item{\bf{errorProp}} \\ 
-          This method tracks particles along their average trajectories through the region of the tracker detector using the Geant4 error propagation routines with the correct geometry and field. It builds transport matrices, error matrices, and predicted parameters which are the objects used for fitting the track, as described in the Formalism section. It tracks on a plane by plane and step by step basis. These error propagation routines can be used to track particles forwards and backwards, where the forwards tracking is used in the code. (It will be non-trivial to change the code to be able to back-track.) 
+          This method tracks particles along their average trajectories through the region of the tracker detector using the Geant4 error propagation routines with the correct geometry and field. It builds transport matrices, error matrices, and predicted parameters which are the objects used for fitting the track, as described in the \hyperref[sec:Formalism]{Formalism} section. It tracks on a plane by plane and step by step basis. These error propagation routines can be used to track particles forwards and backwards, where the forwards tracking is used in the code. (It will be non-trivial to change the code to be able to back-track.) 
 
           To be a little more explicit, it creates Geane free trajectory states which are the objects that are propageted from target plane to target plane, where the target planes are defined to be parallel in X. (As our wire planes are.) Surface trajectory states are then created on those planes, where the orthonormal vectors defining those planes are in the Y and Z directions. These vectors have to be orthornormal in Geant in order for predicted parameters and errors to be calculated correctly. It is later in the fitting code that these track objects are converted to the UV basis that our detector is naturally defined in. 
             
@@ -307,7 +311,7 @@
           It's also worth mentioning that within this method there are a number of checks to see whether the tracking has failed due to Geant stepping or Geane propagation issues.
 
           \item{\bf{calcMeasuredParams}} \\ 
-          Method to correct measured parameters from a radial DCA value to a U or V value based on the momentum of the track at the hit from the previous fit and approximating a constant field within the straw. Also corrects the dca errors using a simple straight line approximation in a similar vein. See the Appendix section for more details on how this works. Note that this method also fills the measured parameter objects within the fit in the first place, so if this method is not called then the fit won't have any measured hits to fit to.
+          Method to correct measured parameters from a radial DCA value to a U or V value based on the momentum of the track at the hit from the previous fit and approximating a constant field within the straw. Also corrects the dca errors using a simple straight line approximation in a similar vein. See the \hyperref[sec:Appendix]{Appendix} section for more details on how this works. Note that this method also fills the measured parameter objects within the fit in the first place, so if this method is not called then the fit won't have any measured hits to fit to.
 
         \end{itemize}
 
@@ -346,7 +350,8 @@
         \end{itemize}
 
       \item{\bf{GeaneLRUtils.cc}} \\
-
+      \label{sec:GeaneLRUtils}
+      This class deals with the left-right aspects of the Geane fitting. It has a couple of methods for functionality regarding hits with small dcas where the error on the hit is large, filling the left-right sides from upstream, the geometry, or the previous fit iteration, and finally a number of methods for different fitting steps within the full sequence checking left-right fit, fullSeqFit. See the fullSeqFit paragraph in the \hyperref[sec:GeaneFittingUtils]{GeaneFittingUtils} section for a quick description of how it works, and the \hyperref[sec:LR]{Left-Right} section for a more detailed description on how fullSeqFit works.
 
       \underline{Methods}
 
@@ -356,16 +361,30 @@
           For hits with small dcas below some threshold, sets the fit errors accordingly, and the hit sides to the wire centers. The lockSmallDCACenters method takes as input the inputHitSides GEANEArtRecord member variable which is important to remember when using and modifying this code.
 
           \item{\bf{fillLRFromFit}} \\ 
-          \item{\bf{fillLRFromGeom}} \\ 
+          Compares the predicted UV parameters to the wire centers, setting the left-right sides to whichever side the predicted track went. Used in the mainFit fit mode, called each iteration, and helps to increase the number of well fit tracks. This occurs because even if the previous left-right side was incorrect, sometimes the overall fitted track will pick out the correct left-right sides, though this is not always the case.
+
+          \item{\bf{fillLRFromGeom}} \\
+          Checks the hit doublets in the track, and if the perpendicular angle of the track (from a previous wire fit) is small or straight enough, then it is known that the track went between the two wires of the doublet, and sets the left-right sides accordingly. See \href{https://gm2-docdb.fnal.gov/cgi-bin/private/ShowDocument?docid=6947}{DocDB 6947} for a more detailed description of this.
+
           \item{\bf{setUnknownSides}} \\ 
+          Default method to set left-right sides to the gUnknown value in preparation for doing a fullSeqFit.
+
           \item{\bf{fillLRFromNodes}} \\ 
-          \item{\bf{getUVUnkowns}} \\ 
-          \item{\bf{getTopSequences}} \\ 
-          \item{\bf{modifyMeasuredParams}} \\ 
-          \item{\bf{getSequenceSides}} \\ 
+          Fills the left-right sides from the seed nodes. For this to work the seeds.reconstructPosition fcl variable needs to be set to true, and the left-right information of the nodes needs to be filled upstream somehow. The only fcl paramater that currently does that is the seeds.useGeometryLR fcl variable which sets the sides based on hit doublets, setting the left-right sides as going between the two wires. It does this regardless of angle, and so is incorrect sometimes, unlike the fillLRFromGeom method above, but has the benefit of not having to do a wire fit beforehand. The seeds.threeDimPositionModel parameter also needs to be set, the default value of ``UseDriftCircleEstimator'' is fine.
+
+          \item{\bf{getUVUnkowns}} \\
+          Creates separate vectors of the U and V plane numbers where the left-right sides are unknown, which are useful for the fullSeqFit.
+
+          \item{\bf{getTopSequences}} \\
+          Determines the set of best U and V left-right sequences (separately) before full fitting the U and V left-right sequences together. It does this by doing an approximate fit to the $2^{Nu,Nv}$ different combinations of U and V unknown sides, calculating an approximate $\chi^{2}$, and storing the best 10 sequences. (Takes the $2^{N}$ value as an int, turns it into a bitset where the 0 and 1 values stand for left and right respectively, then loops through the bitset trying all combinations until the best are found. At the end this method stores the ints representing the combinations at the end.) This method and the methods it calls within GeaneFitter can take quite a bit a time, and are a good place to look to speed things up. See the \hyperref[sec:LR]{Left-Right} section for a more detailed description of the math behind the approximate fitter called here.
+
+          \item{\bf{modifyMeasuredParams}} \\
+          Called from the method getTopSequences, this sets the measured parameters of the fit to the left or right sides of the wires according the left-right combination being tested in the approximate fitter.
+
+          \item{\bf{getSequenceSides}} \\
+          Takes the stored ints representing the best left-right combinations from getTopSequences as input, and sets the sides of the GEANEArtRecord accordingly in preparation for doing the full fit to the combined U and V sequences.
 
         \end{itemize}
-/////////////////////////////////////////////////////////////////////////////////////
 
       \item{\bf{GeaneTrackUtils.cc}} \\
       This utils file contains a number of useful methods for getting track information on wire planes, checking whether a plane is a U or V plane, and a couple of Eigen variables used in converting from an XYZ frame (with planes staggered parallel in the X direction) to the Geane XUV frame.
@@ -377,24 +396,47 @@
 
   \subsection{Analyzers and Filters}
 
+  There are a number of analyzers and filters which are useful for dealing with the tracks after they have been fitted.
 
       \item{\bf{GeanePlots\_module.cc}} \\
-      The main analyzer/plotting module which runs on the output GEANEArtRecords produced upstream. This creates many plots including chi2 distributions, p value distributions, number of iterations, track parameter, residuals, pulls, etc. Truth information for these plots is currently necessary as written, but can be take out in the future for real data. There are some fcl paramters to make cuts on different parameters. There are also some other plotter modules which are similar but much reduced in scope. reference geanePlotsParams.fcl file here.
+      The main analyzer/plotting module which runs on the output GEANEArtRecords produced from GeaneReco. This creates many plots including $\chi^{2}$ distributions, p value distributions, number of iterations, track parameter histograms, residuals, pulls, etc. There are some fcl paramters to make cuts on different parameters, such as a p value cut. Specifically there is a fcl variable energyLossCut, which will only plot tracks with a true energy loss of less than the given value, useful for cutting out tracks which lose too much energy (either from actual interaction with material, or the bugged loss in energy even in vacuum - see \href{https://gm2-docdb.fnal.gov/cgi-bin/private/ShowDocument?docid=6183}{DocDB 6183} for a quick slide on this unsolved issue.) The default fcl file for this is geanePlotsParams.fcl. See the \hyperref[sec:Plots]{Plots} section for many of the plots that this module produces.
 
       \item{\bf{GEANESingleEventViewer\_module.cc}} \\
-      include a plot or two of what the single event viewer can show, how to use it (specify events or not)
+      An analyzer module for looking at the specifics of a fit for single events. Makes parameter plots (measured, predicted, true, X Y Z U V, etc.), error plots, dcas, etc. This is a good analyzer for debugging purposes, to see where the tracking might be having issues. This module is not so good for vizualization purposes though it can do some of that. It will either produces single event plots for all events passed in, or it can produce plots for only a selected set of events using the ``eventNum : [\#,\#,...]'' fcl parameter. Note that this does not currently work with more than one track per event.
 
       \item{\bf{GEANEProcessSelection\_module.cc}} \\
-      mention how this insn't fully devloped yet
+      This filter module has some functionality for separting out tracks which experienced different physical processes, grabbed from the truth TrajectoryArtRecord data products. Since basically all tracks experience some level of ionization or bremmstrahlung within the straw walls or gas with varying energy deposition, this module doesn't work too great as a filter. Possibly it can be upgraded or improved in some way, but it needs more development before being very useful.
 
       \item{\bf{GeaneFailedPlots\_module.cc}} \\
-      explain failed plots mode, included plot
+      A separate analyzer for looking at events which failed the track fitting. Currently there's only one plot it makes which is a histogram of the various fitting failure modes, gotten from the failureMode member of the GEANEArtRecord. See the \hyperref[sec:Plots]{Plots} section for this plot. The different failure modes have changed over time, so there are some empty bins within the histogram as bugs have been fixed or found, or some bin names have been changed. There are some failure modes which can probably be gotten around, but have been left in to try and keep the sample of fitted tracks as clean as possible. A list of the current failure modes is given here, with a number of them being Geant errors:
+
+        \begin{itemize}
+
+          \item{0 - worked} - The track fitting worked. (This bin is not actually filled when making the plot.)
+          \item{1 - neg or nan Chi2} - The track fitting resulted in a negative or nan $\chi^{2}$. These are the most important failed tracks since it's not clear exactly what caused these failures.
+          \item{2 - Chi2 diverging} - Triggered when the $\chi^{2}$ of the current iteration is 10 or more greater than the previous iteration, such that the track fitting is not converging. This is most likely due to a poor initial guess for the track fitting.
+          \item{3 - dummy plane hit \textgreater{} 1} - A dummy plane was hit more than once by the same particle, leading to an ambiguity in what the true parameters of the track should be. This most likely comes from those events where a track somehow kinks or curves back into the same dummy plane.
+          \item{4 - digit hit \textgreater{} 1} - The track candidate included more than one hit digit on a single measurement plane, which the track fitting cannot handle. This comes from some problem in the upstream track finding stages.
+          \item{5 - start pos \textgreater{} target} - Geant error - The Geane error propagation start position somehow started after the target (even by a tiny amount), so the tracking will continue indefinitely as it will not reach the target.
+          \item{6 - geant4e source error} - Geant error - The Geane error propagation source code can fail in a number of ways given in G4ErrorFreeTrajState.cc (or the corresponding gm2GeaneFreeTrajState.cc) in the PropagateError method, such as propagation being too close to the Z direction.
+          \item{7 - step length 0} - Geant error - A step of length 0 was taken. Geant will continue trying to step to the target, sometimes working after a number of trys and sometimes never working.
+          \item{8 - step length 1000} - Geant error - A step of length 1000 was taken, the max step length. This should never occur as steps should be limited by geometry boundaries at the minimum.
+          \item{9 - circle fit nan} - Removed, bug since fixed.
+          \item{10 - fullSeqFit none converged} - If doing a fullSeqFit, no combinations converged when doing the full fit (either diverging or failing elsewise). Since the fullSeqFit ignores some failure modes (bad combinations might not converge but that's okay since it's a bad combination, and it can be dropped), this bin is needed if all the combinations fail somehow.
+          \item{11 - non primary mchit} - Geantish error - Occasionally StrawArtRecord data can come from released photons or ions from the passing particle, and not the actual particle itself, leading to incorrect dcas. Only applicable to truth, and not exactly a bug, but it's nice to be able to remove these poor events.
+          \item{12 - tracking in air} - The track fitting is trying to take some steps in air somewhere, which shouldn't happen as the tracker is within the vacuum. Must be coming from some poor initial guess outside the vacuum chamber. These events are just dropped outright, though it might be possible to improve after the first iteration even with some steps in air and salvage some events.
+          \item{13 - x residual non-zero} - X residuals for all planes should be exactly equal to 0, but some were seen to be non-zero (though small.) In the interest of cleaning up the sample of fitted tracks they are listed as having failed, but this can probably be removed. 
+
+        \end{itemize}
 
       \item{\bf{GeanePoorEvent\_module.cc}} \\
-      selection on bad events and why
+      A filter to separate out poor tracks, defined as having a pull value (in any of the 5 parameters on plane 0) of greater than 5 (or less than -5). If the track fitting is working correctly, then the pull distribution lies between -5 and 5 (occasionaly a single event can be just outside that range). For more reaslistic data however, particles will lose energy after interaction with material, which the track fitting doesn't perfectly account for (since it handles averages), and these events can be designated as ``poor'' though they are real. The more important tracks are the ones which have no energy loss but are still ``poor'' - these tracks are bugged in some way.
 
-      \item{\bf{geane plots macro}} \\
-      I think also include some notes about this guy
+      \item{\bf{geanePlotsMacro.C}} \\
+      A little macro I wrote to combine various plots produced with the GeanePlots analyzer. Useful for looking at things like pull distributions as a function of plane or track length.
+
+      \item{\bf{haddGEANE.sh}} \\
+      This isn't an analyzer, but I figured I'd put a note here on this script which is hadds (Root macro) the output files from the GeanePlots analyzer. It is currently deprecated, having been hardcoded to hadd 1000 files (skipping missing files) with delineaters {NAME}{0..999}, where the latest updates to the grid and produced file names don't necessarily follow this pattern. However it might be useful to revive this file at some point in the future.
 
     \end{enumerate}
 
@@ -405,38 +447,31 @@
 
     \begin{enumerate}
 
+      \item{\bf{RunGeane-midasdata.fcl}} \\
+      A simplified fcl file for performing the Geane fitting reconstruction on actual or fake midas data, with fcl parameters set or removed accordingly.
+
       \item{\bf{RefitGeane.fcl}} \\
       This file simply refits a previously produced set of track candidates, typically used for refitting failed or bad events from a previous attempt at fitting. One can make changes to the fitting code, refit, and compare to previous results.
 
       \item{\bf{makeGEANEPlots.fcl}} \\
-      This file will call the main GeanePlots analyzer module for producing plots about the GEANEArtRecords, useful for when one wants to add or remove plots after tracks have already been produced.
+      This file will call the main GeanePlots analyzer module for producing plots about the GEANEArtRecords, useful for making plots after tracks have already been produced. (Plots may be added or removed as well.) Note that with the grid updates, it's now necessary to perform the reconstruction and analyzer stages separately, so this fcl file is convenient in that it only includes the latter.
 
       \item{\bf{ProcessSelectionGeane.fcl}} \\
-      This file will call the filter on different physical processes that events have undergone within the tracker region, if one wishes to separate events based on this criteria.
+      This file will call the filter on different physical processes that events have undergone within the tracker region (ionization, multiple scattering, bremsstrahlung), if one wishes to separate events based on this criteria. (Note that the module that this fcl file calls is not fully finished, nor is it so clear how this filter should work exactly.)
 
       \item{\bf{makeGeaneSingleEvent.fcl}} \\
-      This file will take produced GEANEArtRecords and call the single event analyzer on the specified set of events. This is useful for analyzing single events to see where rare errors crop up, if tracks are kinking, for debugging purposes, etc. This should not be used for a large number of events.
+      This file will take produced GEANEArtRecords and call the single event analyzer on the passed in file(s) or a specified set of events. This is useful for analyzing single events to see where rare errors crop up, if tracks are kinking, for debugging purposes, etc. This should not be used for a large number of events.
 
       \item{\bf{filterTracks.fcl}} \\
-      This file will filter on whether art events successfully produced a GEANEArtRecord or not (succeeded or failed), which is useful for reducing the size of art files which contain many events that do not hit the tracker or don't hit enough planes.
+      This file will filter on whether art events successfully produced a GEANEArtRecord or not (succeeded or failed) through the TrackFilter\_module.cc, which is useful for reducing the size of art files which contain many events that do not hit the tracker or don't hit enough planes. There is also an option to filter on StrawArtRecords directly before attempting to fit.
 
       \item{\bf{fileMerge.fcl}} \\
-      This very general file will simply combine the set of art files that are passed to it, useful for reducing the number of files one has to deal with.
+      This file will simply combine the set of art files that are passed to it, useful for reducing the number of files one has to deal with.
 
     \end{enumerate}
 
 
 
-
-
-\subsection{Code details}
-
-Building and multipilying transport and SC2SD matrices
-Converting things to eigen objects
-
-JacobianToUV stuff - or combine with other coordinate transform stuff
-Matrix accumulation/reduction
-Notes on loop indices, start points and such
 
 
 
@@ -483,80 +518,37 @@ Add many plots and pictures of things - pulls, single events, tracks, etc etc.
 \end{figure}
 
 
-% /////////////////////////////////////////////////////////////////////////////////////
-\section{Coordinate Systems}
-
-  The only material not covered here in full detail is the mathematical explanation of reference frames, for which one should see the reference papers. It suffices to summarize as follows: GEANE objects (matrices and parameter vectors) are defined and calculated in the Geant4 source code in the free particle system. Then there is an intermediate surface system defined in XYZ, as the Geant4 surface trajectory system must be defined in an orthogonal coordinate system, before which parameter objects are converted to the most natural detector system of XUV. (Important note - be very careful with coordinate system variables, letters are reused between different papers and code bases with different configurations and meanings constantly.)
-
-
-\begin{figure}[]
-\caption{Shown here is a picture of the 3 trackers in the world geometry in their approximate positions. First note the world coordinate system shown in the bottom left of the plot, where the origin lives at the center of the ring. Tracks are then generated and read out from the trackers in their three world positions in red. Due to the reconstruction bug where tracks improperly reconstruct if their momenta is too aligned with the globabl Z axis, the reconstruction rotates the entire arc including tracker 0 to the blue position, where planes are parallel in X, and this problem is avoided. Track parameters from the 3 positions are then rotated to this reference frame by the amounts shown on the plots for the reconstruction stage, and at the end are rotated back.}
-\centering
-\includegraphics[width=1.0\textwidth]{WorldCoordSys}
-\label{fig:WorldCoordSys}
-\end{figure}
-
-\begin{figure}[]
-\caption{This picture shows the coordinate system in which the the Geane track reconstruction is performed, in relation to the world coordinate system. The origin remains at the center of the ring, with the tracking planes parallel in X in the reconstruction, going forward in number. Y is vertically up, and Z is horizontally to the right. U and V are defined such that they have greater values with higher radii and increasing straw number.}
-\centering
-\includegraphics[width=0.6\textwidth]{GeaneCoordSys}
-\label{fig:GeaneCoordSys}
-\end{figure}
-
-
-$1/p, \lambda, \phi, y_{\perp}, z_{\perp}$, free system
-
-$1/p, py/px, pz/px, y, z$, surface system
-
-$
-\begin{pmatrix}
-u \\
-v \\
-\end{pmatrix} =
-\begin{pmatrix}
--\sin{\theta} & -\cos{\theta} \\
-\sin{\theta} & -\cos{\theta} \\
-\end{pmatrix}
-\begin{pmatrix}
-y \\
-z \\
-\end{pmatrix}
-$, yz to uv matrix, where $\theta$ is $7.5\degree$, the 5x5 transformation is just a 1 in the top left corner, and then this matrix in the remaining 2 diagonal blocks
-
-$1/p, pu/px, pv/px, u, v$, uv system
-
-% /////////////////////////////////////////////////////////////////////////////////////
+\input{CoordSys.tex}
 
 
 
 
 % it seems I have to cite the references in order for them to be added to the paper - some weird build issue, just do it here until I cite them naturally in the paper
-\cite{jacob}, \cite{energyloss}
+\cite{energyloss}
 
 \printbibliography
 
 
 \section{notes and other}
 
- Due to the CBO of the beam, 1 tracker accounts for ~90\% of the physics, and a second tracker accounts for much of the remaining. (Find/learn sources for this to explain a bit better..)
+  \subsection{Initial Errors}
 
-  starting error matrix
+  When perfoming the Geane fitting and error propagation as described in the \hyperref[sec:GeaneParamUtils]{GeaneParamUtils} section, the error matrix from material is generated and grows as the tracked particle passes through more and more material. This error matrix can however be intialized with some values other than 0. It seems like it might make some sense and improve the fitting if this trajectory error was filled with values representing the error in the intial circle fit to the wire centers which serves as the first guess at track parameters. However perfect pull and p-value distributions were obtained in the vacuum case (and close to in the material case) without these errors, leading me to believe that they are not necessary. I'm including this note here to bring attention to future developers of this unclear fact.
 
-  linking equations to code variables
 
-  initial errors into tracing/error propagation?
-
-  mention that it's possible to make a Kalman filter which uses the geane matrix objects? and that I didn't do so because we wanted two separate methods for the tracking originally and someone else was working on the kalman filter? (and the chi2 minimization was used in the last experiment)
-
-  make a subsection on the left-right ambiguity work 
-
-  negative chi2 stuff
 
   note on older branches for development at all?
 
+
+
   \subsection{Kalman Filter}
 
-    There is some precedent for using the error propagation matrix objects within a Kalman filter as detailed in the Lavezzi thesis \cite{Lavezzi}, but due to the circumstances following the creation of this code that technique was not followed. At the beginning of development, a Kalman filter was being started in tandem by others, which has since fallen by the wayside. In order to have two separate methods for fitting however, the least squares global minimization was chosen. The simpler method was also chosen as the author was unfamiliar with track fitting and coding in general when beginning development.
+    There is some precedent for using the error propagation matrix objects within a Kalman filter as detailed in the Lavezzi thesis \cite{Lavezzi}, but due to the circumstances following the creation of this code that technique was not followed. At the beginning of development, a Kalman filter was being started in tandem by others, which has since fallen by the wayside. One of reasons for choosing the least squares global minimization was in order to have two separate methods for fitting. The simpler method was also chosen as I was unfamiliar with track fitting and coding in general when beginning development. (The primary reason was the introduction by Rob Carey, who worked on the traceback in the E821 experiment.)
+
+
+\section{Future To Do}
+
+  section here on what needs to be done in the future
 
 
 

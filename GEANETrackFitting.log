@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  3 AUG 2017 14:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  7 AUG 2017 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -606,7 +606,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 48.
 
-<Images/TrackerPics/Tracker.png, id=90, 373.8768pt x 189.8292pt>
+<Images/TrackerPics/Tracker.png, id=94, 373.8768pt x 189.8292pt>
 File: Images/TrackerPics/Tracker.png Graphic file (type png)
 <use Images/TrackerPics/Tracker.png>
 Package pdftex.def Info: Images/TrackerPics/Tracker.png used on input line 51.
@@ -615,7 +615,7 @@ Package pdftex.def Info: Images/TrackerPics/Tracker.png used on input line 51.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 55.
 
-<Images/TrackerPics/trackerStation.png, id=92, 302.0886pt x 175.857pt>
+<Images/TrackerPics/trackerStation.png, id=96, 302.0886pt x 175.857pt>
 File: Images/TrackerPics/trackerStation.png Graphic file (type png)
 <use Images/TrackerPics/trackerStation.png>
 Package pdftex.def Info: Images/TrackerPics/trackerStation.png used on input li
@@ -625,7 +625,7 @@ ne 58.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 66.
 
-<Images/Field/operaBy.png, id=95, 743.77875pt x 422.57875pt>
+<Images/Field/operaBy.png, id=99, 743.77875pt x 422.57875pt>
 File: Images/Field/operaBy.png Graphic file (type png)
 <use Images/Field/operaBy.png>
 Package pdftex.def Info: Images/Field/operaBy.png used on input line 69.
@@ -634,14 +634,12 @@ Package pdftex.def Info: Images/Field/operaBy.png used on input line 69.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 73.
 
-<Images/Field/operaBx.png, id=96, 741.77126pt x 421.575pt>
+<Images/Field/operaBx.png, id=100, 741.77126pt x 421.575pt>
 File: Images/Field/operaBx.png Graphic file (type png)
 <use Images/Field/operaBx.png>
 Package pdftex.def Info: Images/Field/operaBx.png used on input line 76.
 (pdftex.def)             Requested size: 422.77664pt x 240.28094pt.
-
-(/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
-/newGEANEDoc/Formalism.tex [1
+[1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2 </Us
 ers/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/new
@@ -650,13 +648,15 @@ lation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/TrackerPics/tracke
 rStation.png>] [3 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2
 GeaneDocumentation/newGEANEDoc/Images/Field/operaBy.png> </Users/NickPC/Documen
 ts/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Fi
-eld/operaBx.png>] [4] [5]) [6]
+eld/operaBx.png>]
+(/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
+/newGEANEDoc/Formalism.tex [4] [5]) [6]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 103.
 
 
-<Images/TrackingFlow/TrackInfrastructure.png, id=178, 1029.8475pt x 773.89125pt
+<Images/TrackingFlow/TrackInfrastructure.png, id=184, 1029.8475pt x 773.89125pt
 >
 File: Images/TrackingFlow/TrackInfrastructure.png Graphic file (type png)
 <use Images/TrackingFlow/TrackInfrastructure.png>
@@ -667,7 +667,7 @@ put line 106.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 110.
 
-<Images/TrackingFlow/NewGeaneFlow.pdf, id=179, 963.6pt x 542.025pt>
+<Images/TrackingFlow/NewGeaneFlow.pdf, id=185, 963.6pt x 542.025pt>
 File: Images/TrackingFlow/NewGeaneFlow.pdf Graphic file (type pdf)
 <use Images/TrackingFlow/NewGeaneFlow.pdf>
 Package pdftex.def Info: Images/TrackingFlow/NewGeaneFlow.pdf used on input lin
@@ -676,7 +676,7 @@ e 114.
 [7 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentat
 ion/newGEANEDoc/Images/TrackingFlow/TrackInfrastructure.png>] [8 </Users/NickPC
 /Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/I
-mages/TrackingFlow/NewGeaneFlow.pdf>] [9] [10]
+mages/TrackingFlow/NewGeaneFlow.pdf>] [9] [10] [11]
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 220.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
@@ -684,164 +684,138 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 220.
-[11] [12] [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 348--349
+[12] [13] [14] [15] [16] [17]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 418.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 354--355
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 356--357
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 357--358
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 358--359
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 359--360
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 360--361
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 362--363
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 363--364
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 364--365
-
- []
-
-[16]
-Overfull \hbox (7.96805pt too wide) in paragraph at lines 430--432
+(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 418.
+[18]
+Overfull \hbox (7.96805pt too wide) in paragraph at lines 453--455
 \OT1/cmr/m/n/10 This file will call the main Geane-Plots an-a-lyzer mod-ule for
  pro-duc-ing plots about the GEAN-EArtRecords,
  []
 
 
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
-/newGEANEDoc/LeftRight.tex) [17]
+/newGEANEDoc/LeftRight.tex [19]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 490.
+               Default added (so using `tbp') on input line 14.
 
-<Images/eLoss/eLoss.png, id=300, 918.43124pt x 539.01375pt>
+<Images/LeftRight/SeqCheckSteps.png, id=334, 922.44624pt x 639.38875pt>
+File: Images/LeftRight/SeqCheckSteps.png Graphic file (type png)
+<use Images/LeftRight/SeqCheckSteps.png>
+Package pdftex.def Info: Images/LeftRight/SeqCheckSteps.png used on input line 
+17.
+(pdftex.def)             Requested size: 375.80544pt x 260.48276pt.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 25.
+
+<Images/LeftRight/PositionOfBest.png, id=337, 545.53813pt x 285.56688pt>
+File: Images/LeftRight/PositionOfBest.png Graphic file (type png)
+<use Images/LeftRight/PositionOfBest.png>
+Package pdftex.def Info: Images/LeftRight/PositionOfBest.png used on input line
+ 28.
+(pdftex.def)             Requested size: 469.75502pt x 245.89645pt.
+[20] [21 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocu
+mentation/newGEANEDoc/Images/LeftRight/SeqCheckSteps.png>])
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 503.
+
+<Images/eLoss/eLoss.png, id=350, 918.43124pt x 539.01375pt>
 File: Images/eLoss/eLoss.png Graphic file (type png)
 <use Images/eLoss/eLoss.png>
-Package pdftex.def Info: Images/eLoss/eLoss.png used on input line 493.
+Package pdftex.def Info: Images/eLoss/eLoss.png used on input line 506.
 (pdftex.def)             Requested size: 469.75502pt x 275.69116pt.
+[22 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumenta
+tion/newGEANEDoc/Images/LeftRight/PositionOfBest.png>]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 497.
+               Default added (so using `tbp') on input line 510.
 
-<Images/eLoss/bremComparison.png, id=301, 1350.04375pt x 384.43625pt>
+<Images/eLoss/bremComparison.png, id=356, 1350.04375pt x 384.43625pt>
 File: Images/eLoss/bremComparison.png Graphic file (type png)
 <use Images/eLoss/bremComparison.png>
-Package pdftex.def Info: Images/eLoss/bremComparison.png used on input line 500
+Package pdftex.def Info: Images/eLoss/bremComparison.png used on input line 513
 .
 (pdftex.def)             Requested size: 469.75502pt x 133.76279pt.
-[18 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumenta
-tion/newGEANEDoc/Images/eLoss/eLoss.png>]
+
+(/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
+/newGEANEDoc/CoordSys.tex
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 511.
+               Default added (so using `tbp') on input line 7.
 
-<Images/CoordSys/WorldCoordSys.png, id=308, 1358.07375pt x 749.80125pt>
+<Images/CoordSys/WorldCoordSys.png, id=357, 1358.07375pt x 749.80125pt>
 File: Images/CoordSys/WorldCoordSys.png Graphic file (type png)
 <use Images/CoordSys/WorldCoordSys.png>
-Package pdftex.def Info: Images/CoordSys/WorldCoordSys.png used on input line 5
-14.
+Package pdftex.def Info: Images/CoordSys/WorldCoordSys.png used on input line 1
+0.
 (pdftex.def)             Requested size: 469.75502pt x 259.34529pt.
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 518.
+               Default added (so using `tbp') on input line 14.
 
-<Images/CoordSys/GeaneCoordSys.png, id=309, 440.64626pt x 290.08376pt>
+<Images/CoordSys/GeaneCoordSys.png, id=358, 440.64626pt x 290.08376pt>
 File: Images/CoordSys/GeaneCoordSys.png Graphic file (type png)
 <use Images/CoordSys/GeaneCoordSys.png>
-Package pdftex.def Info: Images/CoordSys/GeaneCoordSys.png used on input line 5
-21.
+Package pdftex.def Info: Images/CoordSys/GeaneCoordSys.png used on input line 1
+7.
 (pdftex.def)             Requested size: 281.85587pt x 185.55559pt.
-[19 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumenta
-tion/newGEANEDoc/Images/eLoss/bremComparison.png>] [20 </Users/NickPC/Documents
-/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/Coor
-dSys/WorldCoordSys.png> </Users/NickPC/Documents/Fermilab/Simulation and Tracki
-ng/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/GeaneCoordSys.png>]
+) [23 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumen
+tation/newGEANEDoc/Images/eLoss/eLoss.png>] [24 </Users/NickPC/Documents/Fermil
+ab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremC
+omparison.png> </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2Gea
+neDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png>] [25 </Users/Nic
+kPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDo
+c/Images/CoordSys/GeaneCoordSys.png>]
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/Appendix.tex
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 9.
+               Default added (so using `tbp') on input line 10.
 
-<Images/CoordSys/angularCorrection.png, id=338, 780.9175pt x 526.96875pt>
+<Images/CoordSys/angularCorrection.png, id=392, 780.9175pt x 526.96875pt>
 File: Images/CoordSys/angularCorrection.png Graphic file (type png)
 <use Images/CoordSys/angularCorrection.png>
 Package pdftex.def Info: Images/CoordSys/angularCorrection.png used on input li
-ne 12.
+ne 13.
 (pdftex.def)             Requested size: 469.75502pt x 316.9958pt.
-[21] [22 </Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocu
-mentation/newGEANEDoc/Images/CoordSys/angularCorrection.png>])
-(/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
-/newGEANEDoc/GEANEArtRecord.tex
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 16.
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 16.
-[23] [24])
+(/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
+/newGEANEDoc/GEANEArtRecord.tex [26] [27 </Users/NickPC/Documents/Fermilab/Simu
+lation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/angularCo
+rrection.png>] [28] [29])
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/Plots.tex)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 595.
-[25]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 595.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 562.
+[30]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 562.
 
 (/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation
 /newGEANEDoc/GEANETrackFitting.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 595.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 595.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 562.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 562.
 Package rerunfilecheck Info: File `GEANETrackFitting.out' has not changed.
-(rerunfilecheck)             Checksum: 2E03C99BF3E66AE62EBE1D8EE50E3EB1;1333.
+(rerunfilecheck)             Checksum: FBC00F36B18701616E764BE0CF8CDEF0;1370.
 Package logreq Info: Writing requests to 'GEANETrackFitting.run.xml'.
 \openout1 = `GEANETrackFitting.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 595.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 562.
  ) 
 Here is how much of TeX's memory you used:
- 12492 strings out of 493089
- 202344 string characters out of 6134842
- 662111 words of memory out of 5000000
- 15674 multiletter control sequences out of 15000+600000
+ 12522 strings out of 493089
+ 203146 string characters out of 6134842
+ 666693 words of memory out of 5000000
+ 15693 multiletter control sequences out of 15000+600000
  12456 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,10n,48p,2079b,980s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,9n,48p,2191b,1101s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></
@@ -860,11 +834,11 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2015/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 Output written on "/Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2
-GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf" (25 pages, 1511563 bytes)
+GeaneDocumentation/newGEANEDoc/GEANETrackFitting.pdf" (30 pages, 1627208 bytes)
 .
 PDF statistics:
- 447 PDF objects out of 1000 (max. 8388607)
- 375 compressed objects within 4 object streams
- 129 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 502 PDF objects out of 1000 (max. 8388607)
+ 419 compressed objects within 5 object streams
+ 134 named destinations out of 1000 (max. 500000)
+ 242 words of extra memory for PDF output out of 10000 (max. 10000000)
 

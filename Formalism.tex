@@ -1,10 +1,11 @@
 \section{Formalism}
+\label{sec:Formalism}
 
     The author recommends reading the references \cite{geanemanual}, \cite{trajfit}, and \cite{Lavezzi} in order to best understand the fitting algorithm. However, due to the at times confusing notation, ommitted equations or concepts, and differences between papers, I have attempted to summarize here the different sources and present the material in a more understandable and readable format, while at the same time drawing connections to the implemented code.
 
     One can define a $\chi^{2}$ for a track in the normal way by dividing the residuals of measured and predicted track parameters by their errors,
         \begin{align} \label{eq:chi2}
-            \chi^2 = (\vec{p}-\vec{x})^{T} (\sigma)^{-1} (\vec{p}-\vec{x}),
+            \chi^2 = (\vec{p}-\vec{x})^{T} (\sigma^{-1}) (\vec{p}-\vec{x}),
         \end{align}
     where $\vec{p}$ are predicted track parameters from a fit to the measured track parameters $\vec{x}$, and $\sigma$ is a matrix of errors on the fitted parameters.
 
@@ -26,7 +27,7 @@
  
     Said transport and error matrices are 5x5 objects since the parameter vectors are 5x1 objects as described above. With parameters defined on such planes, one can define the $\chi^{2}$ as: 
         \begin{align} \label{eq:chi2sum}
-            \chi^2 = \sum_{i=1}^{N} [(p_{i}(p)-x_{i})^{T}(\sigma_{i})^{-1}(p_{i}(p)-x_{i})],
+            \chi^2 = \sum_{i=1}^{N} [(p_{i}(p)-x_{i})^{T} (\sigma_{i}^{-1}) (p_{i}(p)-x_{i})],
         \end{align}
     where $p_{i}$ are the average predicted parameters from some general starting parameters $p$. At first order one can only include the measurement error on parameters, which fill in the diagonals of $\sigma_{i}$, if random processes can be neglected. It is important to note that unmeasured parameters should have measurement errors of ininity (or some large value) along the diagonals in the code, which save the fact that residuals for unmeasured parameters do not exist. When the error matrix is inverted all rows and columns of the matrix with these large numbers will fall to 0 in the $\chi^{2}$. 
 
@@ -36,15 +37,15 @@
         \end{align}
     resulting in
         \begin{align}
-            0 = \sum_{i=1}^{N}[ (\frac{\partial p_{i}(p)}{\partial p}|_{p=p'_{0}})^{T} (\sigma_{i})^{-1} (p_{i}(p'_{0})-x_{i}) \\ 
-            + (p_{i}(p'_{0})-x_{i})^{T} \frac{\partial(\sigma_{i})^{-1}}{\partial p}|_{p=p'_{0}} (p_{i}(p'_{0})-x_{i}) \\ 
-            +  (p_{i}(p'_{0})-x_{i})^{T} (\sigma_{i})^{-1} (\frac{\partial p_{i}(p)}{\partial p}|_{p=p'_{0}})]
+            0 = \sum_{i=1}^{N}[ (\frac{\partial p_{i}(p)}{\partial p}|_{p=p'_{0}})^{T} (\sigma_{i}^{-1}) (p_{i}(p'_{0})-x_{i}) \\ 
+            + (p_{i}(p'_{0})-x_{i})^{T} \frac{\partial(\sigma_{i}^{-1})}{\partial p}|_{p=p'_{0}} (p_{i}(p'_{0})-x_{i}) \\ 
+            +  (p_{i}(p'_{0})-x_{i})^{T} (\sigma_{i}^{-1}) (\frac{\partial p_{i}(p)}{\partial p}|_{p=p'_{0}})]
         \end{align}
     where the 1st and 3rd terms are identical, and the 2nd term is small if one assumes that error matrix doesn't change much with respect to the starting parameters. (Fair since most of the error comes from measurement, and as long as the initial guess is decent enough such that the path length through material doesn't change much from one iteration to the next.)
 
     This simplifies to: 
         \begin{align} \label{eq:solve}
-            \sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(p_{i}(p'_{0})-x_{i}) = 0.
+            \sum_{i=1}^{N} T^{T}_{i0} (\sigma_{i}^{-1}) (p_{i}(p'_{0})-x_{i}) = 0.
         \end{align}
     To solve this simply make the substitution 
         \begin{align} \label{eq:psub}
@@ -54,11 +55,11 @@
 
     Thus one arrives at 
         \begin{align} \label{eq:deltap}
-            \Delta p_{0} = \sigma_{p_{0}} \sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i})^{-1}(x_{i} - p_{i}(p_{0})),
+            \Delta p_{0} = \sigma_{p_{0}} \sum_{i=1}^{N} T^{T}_{i0}(\sigma_{i}^{-1})(x_{i} - p_{i}(p_{0})),
         \end{align}
     where
         \begin{align} \label{eq:cov}
-            \sigma_{p_{0}} = [\sum_{i=1}^{N} T^{T}_{i0} (\sigma_{i})^{-1}) T_{i0} ]^{-1},
+            \sigma_{p_{0}} = [\sum_{i=1}^{N} T^{T}_{i0} (\sigma_{i}^{-1}) T_{i0} ]^{-1},
         \end{align}
     is the 5x5 covariance matrix of fitted parameters on the starting plane, whose diagonals describe the errors in the 5 track parameters on that plane and in the region close to it. (The fit does not directly return fit errors for track parameters on other planes.) 
 
@@ -72,14 +73,14 @@
 
     You can then minimize the $\chi^{2}$ in the same way, only again with the matrix objects being aggregates of the per plane objects:
         \begin{align} \label{eq:deltafull}
-            \Delta \vec{p}_{0} = \sigma_{p_{0}} \tau^{T}(\sigma)^{-1}(\vec{p_{0}}-\vec{x}),
+            \Delta \vec{p}_{0} = \sigma_{p_{0}} \tau^{T}\sigma^{-1}(\vec{x}-\vec{p}),
         \end{align}
         %
         \begin{align} \label{eq:covfull}
-            \sigma_{p_{0}} = [\tau^{T} (\sigma)^{-1}) \tau ]^{-1},
+            \sigma_{p_{0}} = [\tau^{T} \sigma^{-1} \tau ]^{-1},
         \end{align}
     where $\tau$ is the combined transport matrices from the individual 5x5 matrices, a 5Nx5 object.
 
-    The unmeasured parameter errors of infinity still come into play in the final calculation in the same was as before. Because however these matrix objects are very large, and the tracking must have a certain amount of speed in order to keep up with data, it is useful to reduce the size of these matrices. (It also makes things easier programming wise. Note that there are other some other ways to speed things up, specifically the banded inversion method as detailed in reference blah. This method was not used in favor of getting the code working in the simpler form in the first place, but it is a possiblity in the future to use this technique to speed things up even more.) It suffices to simply remove all rows and columns where said infinity values exist in the error matrix. This is mathematically equivalent to inverting the error matrix with the infinities included, which make all rows and columns where they exist go to zero. The associated unmeasured parameter rows in the residual vector and transport matrices must similarly be removed. This results in an Nx1 residual vector, NxN error matrix, 5xN combined transport matrix transpose, which multiply against the 5x5 covariance out front to still result in a 5x1 fix to the starting parameters, and a scalar $\chi^2$ value. (Note that these element removals should be done just before the final calculation, and not higher up in the algrebra, otherwise plane correlations are not properly calculated.)
+    The unmeasured parameter errors of infinity still come into play in the final calculation in the same was as before. Because however these matrix objects are very large, and the tracking must have a certain amount of speed in order to keep up with data, it is useful to reduce the size of these matrices. (It also makes things easier programming wise. Note that there are other some other ways to speed things up, specifically the banded inversion method as described in reference \cite{trajfit}. This method was not used in favor of getting the code working in the simpler form in the first place, but it is a possiblity in the future to use this technique to speed things up even more.) It suffices to simply remove all rows and columns where said infinity values exist in the error matrix. This is mathematically equivalent to inverting the error matrix with the infinities included, which make all rows and columns where they exist go to zero. The associated unmeasured parameter rows in the residual vector and transport matrices must similarly be removed. This results in an Nx1 residual vector, NxN error matrix, 5xN combined transport matrix transpose, which multiply against the 5x5 covariance out front to still result in a 5x1 fix to the starting parameters, and a scalar $\chi^2$ value. (Note that these element removals should be done just before the final calculation, and not higher up in the algrebra, otherwise plane correlations are not properly calculated.)
 
     By calculating the last two equations one can fit the track, acquire a $\chi^{2}$ describing the degree of the fit, determine how the track parameters can be improved at the starting point, and calculate errors on those starting parameters. This algorithm can be iterated a number of times to get a best fit track until successive iterations produce no improvement, where usually 3 or 4 iterations is enough. Note that there is remarkable robustness with respect to the initial starting parameters in fitting the track. Of course if the initial starting paramaters are too poor, then the fit will not converge.

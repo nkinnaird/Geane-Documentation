@@ -2219,8 +2219,8 @@
     <bcf:citekey order="5">trajfit</bcf:citekey>
     <bcf:citekey order="6">geanemanual</bcf:citekey>
     <bcf:citekey order="7">jacob</bcf:citekey>
-    <bcf:citekey order="8">energyloss</bcf:citekey>
-    <bcf:citekey order="9">Lavezzi</bcf:citekey>
+    <bcf:citekey order="8">Lavezzi</bcf:citekey>
+    <bcf:citekey order="9">energyloss</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none" type="entry" sortscheme="none">
   <bcf:sorting>

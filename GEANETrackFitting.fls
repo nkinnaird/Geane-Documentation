@@ -199,6 +199,12 @@ INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
+INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/LeftRight.tex
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/LeftRight.tex
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/LeftRight/SeqCheckSteps.png
@@ -207,12 +213,6 @@ INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumenta
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/LeftRight/PositionOfBest.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/LeftRight/PositionOfBest.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/LeftRight/PositionOfBest.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/eLoss.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
-INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/eLoss/bremComparison.png
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/CoordSys.tex
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/CoordSys.tex
 INPUT /Users/NickPC/Documents/Fermilab/Simulation and Tracking/gm2GeaneDocumentation/newGEANEDoc/Images/CoordSys/WorldCoordSys.png

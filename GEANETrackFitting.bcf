@@ -2213,14 +2213,16 @@
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">geanemanual</bcf:citekey>
-    <bcf:citekey order="2">geanemanual</bcf:citekey>
-    <bcf:citekey order="3">trajfit</bcf:citekey>
-    <bcf:citekey order="4">Lavezzi</bcf:citekey>
+    <bcf:citekey order="2">Lavezzi</bcf:citekey>
+    <bcf:citekey order="3">geanemanual</bcf:citekey>
+    <bcf:citekey order="4">geanemanual</bcf:citekey>
     <bcf:citekey order="5">trajfit</bcf:citekey>
-    <bcf:citekey order="6">geanemanual</bcf:citekey>
-    <bcf:citekey order="7">jacob</bcf:citekey>
-    <bcf:citekey order="8">Lavezzi</bcf:citekey>
-    <bcf:citekey order="9">energyloss</bcf:citekey>
+    <bcf:citekey order="6">Lavezzi</bcf:citekey>
+    <bcf:citekey order="7">trajfit</bcf:citekey>
+    <bcf:citekey order="8">geanemanual</bcf:citekey>
+    <bcf:citekey order="9">jacob</bcf:citekey>
+    <bcf:citekey order="10">energyloss</bcf:citekey>
+    <bcf:citekey order="11">Lavezzi</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none" type="entry" sortscheme="none">
   <bcf:sorting>

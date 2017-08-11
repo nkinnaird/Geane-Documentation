@@ -46,59 +46,13 @@
 
 \input{LeftRight.tex}
 
-
-
-\subsection{Code peculiarities / notes}
-
-Where to structure this in the file?
-
-Notes on coordinate systems I use - UV pointing outward vs XYZ, XUV x being forward, UVW in geante src, maybe IJK/TUV in one paper-prob not, GeaneTrackerWorld[0,12,18], rotateArcTracker (bit more specific), magnetic field access coordinates?, JacobianToUV
-
-accessing the field in a specific way
-
-
-
-
-
-
-\section{gm2Geane package in artg4 - eloss, brems, ionizations, msc}
-
-See many docdbs by Nick Kinnaird on geane updates for more info if wanted. Summary of stuff here.
-
-
-  There is a folder under artg4/gm2Geane, where slightly (but importantly) modified geant/geane code that the geane track fitting uses is located. Most importantly is that the reconstruction was taking too much energy away from the particle during propagation due to bremsstrahlung, so that has been removed. (Thanks James for help with this.) (Probably explain flow of file - extrapolator tables etc.).
-
-  Besides those associated files, all files from the geant folder ``error\_propagation'' have been copied into this directory as well, with the only non-name changes lying in gm2GeaneFreeTrajState.cc. (Many files had to be copied due to naming/linking - some could probably have been omitted but I decided to copy the whole folder.) Ionization and multiple scattering errors have been modified according to Lavezzi thesis (explain more) - with no improvement in results unfortunately. (Probably turn defaults back to original code (still gm2Geane) with the option to turn things on somehow if desired - at least leave them in for future tuning.)
-
-Should I go more in depth about the error\_propagation/gm2Geane source code? Probably - at least for certain main files.
-
-
-\begin{figure}[]
-\caption{Shown here is the energy loss between the first and last hit in the tracker from simulation. (Momentum magnitude difference.) Sources of energy loss come from ionization and bremsstrahlung processes, which account for the long Landau tail running off to infinity. The distribution has a mean of approximately 220 keV and and peak centered at about 150 keV, which is reasonable for the material composition of our trackers and tracker gas. More than 50\% of the energy loss comes from the mylar walls of the straws as seen in the simulation.}
-\centering
-\includegraphics[width=1.0\textwidth]{eLoss}
-\label{fig:eLoss}
-\end{figure}
-
-\begin{figure}[]
-\caption{It was noticed during the course of debugging that the Geant4 error\_propagation routines were consistently removing too much energy on average from all tracks as they passed through the tracker during reconstruction. It was discovered that the Geant4 tables were taking out too much energy due to bremsstrahlung processes and it was decided to remove this effect. The left plot shows in a red the true particle momentum as a function of X distance through the tracker, and in black the reconstructed momentum before bremsstrahlung was taken out of the reconstruction for a single event. The differing slopes signify the problem. The right plot shows the same event but with bremsstrahlung taken out. Notice scale change, and that the reconstructed momentum aligns much more readily with the truth.}
-\centering
-\includegraphics[width=1.0\textwidth]{bremComparison}
-\label{fig:bremComparison}
-\end{figure}
-
-
 \input{CoordSys.tex}
 
 \input{NotesOther.tex}
 
 \input{ToDo.tex}
 
-% it seems I have to cite the references in order for them to be added to the paper - some weird build issue, just do it here until I cite them naturally in the paper
-\cite{energyloss}
-
 \printbibliography
-
 
 \section{Acknowledgements}
 
@@ -109,8 +63,6 @@ From a technical document perspective maybe not?
 \input{Appendix.tex}
 
 \input{GEANEArtRecord.tex}
-
-
 
 \input{Plots.tex}
 

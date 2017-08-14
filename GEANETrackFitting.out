@@ -14,10 +14,27 @@
 \BOOKMARK [2][-]{subsection.5.2}{fullSeqFit}{section.5}% 14
 \BOOKMARK [1][-]{section.6}{Coordinate Systems}{}% 15
 \BOOKMARK [1][-]{section.7}{notes and other}{}% 16
-\BOOKMARK [2][-]{subsection.7.1}{Initial Errors}{section.7}% 17
-\BOOKMARK [2][-]{subsection.7.2}{Kalman Filter}{section.7}% 18
-\BOOKMARK [1][-]{section.8}{Future To Do}{}% 19
-\BOOKMARK [1][-]{section.9}{Acknowledgements}{}% 20
-\BOOKMARK [1][-]{section.10}{Appendix}{}% 21
-\BOOKMARK [2][-]{subsection.10.1}{Angular correction}{section.10}% 22
-\BOOKMARK [1][-]{section.11}{Plots}{}% 23
+\BOOKMARK [2][-]{subsection.7.1}{Kalman Filter}{section.7}% 17
+\BOOKMARK [1][-]{section.8}{Future To Do}{}% 18
+\BOOKMARK [2][-]{subsection.8.1}{Non-Gaussian Garfield Errors}{section.8}% 19
+\BOOKMARK [2][-]{subsection.8.2}{Measurement pulls on all planes}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.3}{Material error tuning}{section.8}% 21
+\BOOKMARK [2][-]{subsection.8.4}{Starting error/covariance}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.5}{Initial fitter and effects on Geane fitting}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.6}{Bugs and failed tracks}{section.8}% 24
+\BOOKMARK [2][-]{subsection.8.7}{Physical processes and kinked tracks}{section.8}% 25
+\BOOKMARK [2][-]{subsection.8.8}{Tracker alignment geometry and magnetic fields}{section.8}% 26
+\BOOKMARK [2][-]{subsection.8.9}{Small dcas}{section.8}% 27
+\BOOKMARK [2][-]{subsection.8.10}{5x5 fitter}{section.8}% 28
+\BOOKMARK [2][-]{subsection.8.11}{Commissioning data}{section.8}% 29
+\BOOKMARK [2][-]{subsection.8.12}{Further left-right work}{section.8}% 30
+\BOOKMARK [2][-]{subsection.8.13}{Refinement}{section.8}% 31
+\BOOKMARK [2][-]{subsection.8.14}{Short track fitter}{section.8}% 32
+\BOOKMARK [2][-]{subsection.8.15}{Geane extrapolation}{section.8}% 33
+\BOOKMARK [2][-]{subsection.8.16}{Optimization}{section.8}% 34
+\BOOKMARK [2][-]{subsection.8.17}{Miscellaneous}{section.8}% 35
+\BOOKMARK [1][-]{section.9}{Acknowledgements}{}% 36
+\BOOKMARK [1][-]{section.10}{Appendix}{}% 37
+\BOOKMARK [2][-]{subsection.10.1}{Angular correction}{section.10}% 38
+\BOOKMARK [2][-]{subsection.10.2}{Matrix Transformation}{section.10}% 39
+\BOOKMARK [1][-]{section.11}{Plots}{}% 40

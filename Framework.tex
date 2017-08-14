@@ -207,20 +207,7 @@
 
           To be a little more explicit, it creates Geane free trajectory states which are the objects that are propageted from target plane to target plane, where the target planes are defined to be parallel in X. (As our wire planes are.) Surface trajectory states are then created on those planes, where the orthonormal vectors defining those planes are in the Y and Z directions. These vectors have to be orthornormal in Geant in order for predicted parameters and errors to be calculated correctly. It is later in the fitting code that these track objects are converted to the UV basis that our detector is naturally defined in. 
             
-          While the predicted parameters and errors can be grabbed directly from the surface trajectory state on each plane, the transport matrix cannot be. It is on a step by step basis that the transport matrices are generated, with the previous step transport matrix being dropped with the next step. It is for this reason that the transport matrices must be accumulated and multiplied together from each step in order to form the transport matrix describing the change in parameters from one measurement plane to the next. (There is some code in the Geant source code which appears that might do this automatically, but it is commented out and unclear if it works.) These transport matrices are also only defined in the free state coordinate system, and so need to be converted to the surface system that our fitting uses. When creating surface trajectory states on the target planes, the Jacobian transformation matrices from the free to the surface system are generated and can be saved. It is then a simple matter of multiplying these matrices together to get the transport matrices in the surface system. (Once again these are defined in XYZ, but are converted later in the code to be in XUV.)
-
-          Transport matrices are accumulated as
-              \begin{align} %\label{eq:nolabel}
-                T_{mn} = T_{mk}T_{kn},
-              \end{align}
-          where the indices can stand for either plane numbers or step numbers, and converted by 
-              \begin{align} %\label{eq:nolabel}
-                T_{mn,s} = A_{n} T_{mn,f} A_{n}^{-1},
-              \end{align}     
-          where the indices s and f stand for the surface and free trajectory states respectively, and A is the Jacobian transformation from the free state to the surface state. See reference \cite{jacob} for the calculation of these Jacobians. The error matrices in the surface state can be grabbed directly from the Geant code unlike the transport matrices, or if necessary can be converted as
-              \begin{align} %\label{eq:nolabel}
-                \sigma_{m,s} = A_{m} \sigma_{m,f} A_{m}^{-1}.
-              \end{align}   
+          While the predicted parameters and errors can be grabbed directly from the surface trajectory state on each plane, the transport matrix cannot be. It is on a step by step basis that the transport matrices are generated, with the previous step transport matrix being dropped with the next step. It is for this reason that the transport matrices must be accumulated and multiplied together from each step in order to form the transport matrix describing the change in parameters from one measurement plane to the next. (There is some code in the Geant source code which appears that might do this automatically, but it is commented out and unclear if it works.) These transport matrices are also only defined in the free state coordinate system, and so need to be converted to the surface system that our fitting uses. When creating surface trajectory states on the target planes, the Jacobian transformation matrices from the free to the surface system are generated and can be saved. It is then a simple matter of multiplying these matrices together to get the transport matrices in the surface system. (Once again these are defined in XYZ, but are converted later in the code to be in XUV.) See the \hyperref[sec:MatTransf]{Appendix} for details on these matrix transforms.
 
           It's also worth mentioning that within this method there are a number of checks to see whether the tracking has failed due to Geant stepping or Geane propagation issues.
 
@@ -309,6 +296,7 @@
 
 
   \subsection{Analyzers and Filters}
+  \label{sec:AnaFilt}
 
   There are a number of analyzers and filters which are useful for dealing with the tracks after they have been fitted.
 
@@ -322,7 +310,7 @@
       This filter module has some functionality for separting out tracks which experienced different physical processes, grabbed from the truth TrajectoryArtRecord data products. Since basically all tracks experience some level of ionization or bremmstrahlung within the straw walls or gas with varying energy deposition, this module doesn't work too great as a filter. Possibly it can be upgraded or improved in some way, but it needs more development before being very useful.
 
       \item{\bf{GeaneFailedPlots\_module.cc}} \\
-      A separate analyzer for looking at events which failed the track fitting. Currently there's only one plot it makes which is a histogram of the various fitting failure modes, gotten from the failureMode member of the GEANEArtRecord. See the \hyperref[sec:Plots]{Plots} section for this plot. The different failure modes have changed over time, so there are some empty bins within the histogram as bugs have been fixed or found, or some bin names have been changed. There are some failure modes which can probably be gotten around, but have been left in to try and keep the sample of fitted tracks as clean as possible. A list of the current failure modes is given here, with a number of them being Geant errors:
+      A separate analyzer for looking at events which failed the track fitting. Currently there's only one plot it makes which is a histogram of the various fitting failure modes, gotten from the failureMode member of the GEANEArtRecord. See Figure \ref{fig:failureModes}. The different failure modes have changed over time, so there are some empty bins within the histogram as bugs have been fixed or found, or some bin names have been changed. There are some failure modes which can probably be gotten around, but have been left in to try and keep the sample of fitted tracks as clean as possible. A list of the current failure modes is given here, with a number of them being Geant errors:
 
         \begin{itemize}
 
@@ -342,6 +330,13 @@
           \item{13 - x residual non-zero} - X residuals for all planes should be exactly equal to 0, but some were seen to be non-zero (though small.) In the interest of cleaning up the sample of fitted tracks they are listed as having failed, but this can probably be removed. 
 
         \end{itemize}
+
+        \begin{figure}[]
+          \caption{Shown is a failure modes plot for a random sample of about 200,000 fitted tracks. The number of different failure modes can be seen along the X axis, with varying bin heights. The 0 bin is left unfilled. The ``circle fit nan'' bin has since been removed, and the ``neg or nan Chi2'' bin has been reduced. The ``x residual non-zero'' bin is most likely empty now with code improvements. The sizes and labels of these bins have changed over time with the development of the code and will change going forward into the future.}
+          \centering
+          \includegraphics[width=1.0\textwidth]{FailureModesExample}
+          \label{fig:failureModes}
+        \end{figure}
 
       \item{\bf{GeanePoorEvent\_module.cc}} \\
       A filter to separate out poor tracks, defined as having a pull value (in any of the 5 parameters on plane 0) of greater than 5 (or less than -5). If the track fitting is working correctly, then the pull distribution lies between -5 and 5 (occasionaly a single event can be just outside that range). For more reaslistic data however, particles will lose energy after interaction with material, which the track fitting doesn't perfectly account for (since it handles averages), and these events can be designated as ``poor'' though they are real. The more important tracks are the ones which have no energy loss but are still ``poor'' - these tracks are bugged in some way.
@@ -387,6 +382,7 @@
 
 
 \section{gm2Geane package in artg4 - eloss, brems, ionizations, msc}
+\label{sec:gm2Geane}
 
 See many docdbs by Nick Kinnaird on geane updates for more info if wanted. Summary of stuff here.
 

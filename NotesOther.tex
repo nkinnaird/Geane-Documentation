@@ -1,9 +1,5 @@
 \section{notes and other}
 
-  \subsection{Initial Errors}
-
-  When perfoming the Geane fitting and error propagation as described in the \hyperref[sec:GeaneParamUtils]{GeaneParamUtils} section, the error matrix from material is generated and grows as the tracked particle passes through more and more material. This error matrix can however be intialized with some values other than 0. It seems like it might make some sense and improve the fitting if this trajectory error was filled with values representing the error in the intial circle fit to the wire centers which serves as the first guess at track parameters. However perfect pull and p-value distributions were obtained in the vacuum case (and close to in the material case) without these errors, leading me to believe that they are not necessary. I'm including this note here to bring attention to future developers of this unclear fact.
-
 
 
   note on older branches for development at all?

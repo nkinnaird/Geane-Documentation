@@ -2220,9 +2220,11 @@
     <bcf:citekey order="6">Lavezzi</bcf:citekey>
     <bcf:citekey order="7">trajfit</bcf:citekey>
     <bcf:citekey order="8">geanemanual</bcf:citekey>
-    <bcf:citekey order="9">jacob</bcf:citekey>
-    <bcf:citekey order="10">energyloss</bcf:citekey>
-    <bcf:citekey order="11">Lavezzi</bcf:citekey>
+    <bcf:citekey order="9">energyloss</bcf:citekey>
+    <bcf:citekey order="10">Lavezzi</bcf:citekey>
+    <bcf:citekey order="11">trajfit</bcf:citekey>
+    <bcf:citekey order="12">Lavezzi</bcf:citekey>
+    <bcf:citekey order="13">jacob</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="none" type="entry" sortscheme="none">
   <bcf:sorting>

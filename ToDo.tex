@@ -105,6 +105,10 @@
 
 		While mentioned in the intro to this section, I thought I'd quickly mention optimization. The Geane fitting code like all others needs to be optimized in pretty much all ways. Memory and speed can certainly be improved, maybe even by an order of magnitude or so. I have done very little work regarding this part of the code. Deepak Sathyan quickly and easily improved the track fitting speed by 5x, the first results of which are shown in \href{https://gm2-docdb.fnal.gov/cgi-bin/private/ShowDocument?docid=7094}{DocDB 7094}. More can and needs to be done.
 
+	\subsection{Kalman Filter}
+
+    	There is some precedent for using the error propagation matrix objects within a Kalman filter as detailed in the Lavezzi thesis \cite{Lavezzi}, but due to the circumstances following the creation of this code that technique was not followed. At the beginning of development, a (non-Geane) Kalman filter was being started by others, which fell by the wayside a while ago. Since multiple track fitting algorithms will need to be developed for the experiment, this is a good option. There is a lot of useful information in this documentation that would be useful for such an endeavor, though not all the details directly copy over from the least squares global minimization fitter.
+
 	\subsection{Miscellaneous}
 
 		I'll mention a couple smaller pieces of work here that shouldn't be forgotten.

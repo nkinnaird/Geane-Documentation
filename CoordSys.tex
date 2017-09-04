@@ -53,3 +53,6 @@
 
 	
 	Note that the coordinate system variables are switched or renamed among the different references and the Geant4 source code, so one needs to be very careful when trying to make sense of all of this. For instance, we use the XUV system when fitting, but the Geant4 source codes uses the variables UVW for a general surface system, and these variables are not equal. 
+
+	Side note: I will not go into this in any detail here, but it's worth putting a quick note in. Track fitting in a UV system (which is natural to our detector system) does in fact not introduce any geometric correlations between hits, whereas fitting in a YZ system would. Please see \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=3813}{DocDB 3813}, which is a fantastic summary of this (and some related information) completed by James Mott.
+

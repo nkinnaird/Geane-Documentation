@@ -92,6 +92,9 @@
       \item{\bf{matrixDebug}} \\
       This boolean paramater turns on and off the extensive matrix debugging output, used for higher level debugging. Note that these outputs are included in the log file and the log file threshold needs to be set to ``DEBUG'' as well. In the future it might be beneficial for speed reasons to completely remove these debugging outputs. This parameter should always be turned off if looking at a large number of events.
 
+      \item{\bf{onlyPrimaryPositrons}} \\
+      Boolean parameter for only running on primary positrons, or to include hits from other particles. Useful for running on proton simulation data. Only applicable to simulation and not real data.
+
       \item{\bf{numPassesWireFit, numPassesSeqFit}} \\
       These are parameters used for the left-right sequence checking routines for a fullSeqFit. numPassesWireFit is the number of passes that the track fits to the wire centers, before which the best sequences are passed to the full fit code which iterates a number of times equal to numPassesSeqFit. It was observed in the past that 3 passes for each of these was sufficient for good tracking results. See the \hyperref[sec:LR]{Left-Right} section.
  
@@ -328,7 +331,7 @@
           \item{8 - step length 1000} - Geant error - A step of length 1000 was taken, the max step length. This should never occur as steps should be limited by geometry boundaries at the minimum.
           \item{9 - circle fit nan} - Removed, bug since fixed.
           \item{10 - fullSeqFit none converged} - If doing a fullSeqFit, no combinations converged when doing the full fit (either diverging or failing elsewise). Since the fullSeqFit ignores some failure modes (bad combinations might not converge but that's okay since it's a bad combination, and it can be dropped), this bin is needed if all the combinations fail somehow.
-          \item{11 - non primary mchit} - Geantish error - Occasionally StrawArtRecord data can come from released photons or ions from the passing particle, and not the actual particle itself, leading to incorrect dcas. Only applicable to truth, and not exactly a bug, but it's nice to be able to remove these poor events.
+          \item{11 - non primary mchit} - Geantish error - Occasionally StrawArtRecord data can come from released photons or ions from the passing particle, and not the actual particle itself, leading to incorrect dcas. Only applicable to truth, and not exactly a bug, but it's nice to be able to remove these poor events. Turned off and on with the fcl parameter ``onlyPrimaryPositrons.'' (If running on protons this will not trigger.)
           \item{12 - tracking in air} - The track fitting is trying to take some steps in air somewhere, which shouldn't happen as the tracker is within the vacuum. Must be coming from some poor initial guess outside the vacuum chamber. These events are just dropped outright, though it might be possible to improve after the first iteration even with some steps in air and salvage some events.
           \item{13 - x residual non-zero} - X residuals for all planes should be exactly equal to 0, but some were seen to be non-zero (though small.) In the interest of cleaning up the sample of fitted tracks they are listed as having failed, but this can probably be removed. 
 

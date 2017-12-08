@@ -1,11 +1,47 @@
 \section{Coordinate Systems}
 \label{sec:Coord}
 
-	There are are number of different coordinate systems to be aware of and understand when dealing with the fitting, both in simulation and reconstruction. For obvious reasons, if the coordinate systems are not properly handled then the fitting will fail. I will summarize here the necessary information for the coordinate systems that are in use. (Other coordinate systems can be integrated and used if one wishes.)
+\subsection{Update - 12/8/17}
+
+	After James Mott fixed the issue regarding track fitting with Z being the forward direction (\href{https://gm2-docdb.fnal.gov/cgi-bin/private/ShowDocument?docid=9059}{DocDB 9059}), I went back and switched all relevant coordinate systems in the code. In this document there are many plots, variable names, and mentions with coordinate axes as defined before. I'm not going to update all of these (including the large section following this one) but will provide here a short summary of what has changed, with a few equations and pictures for ease of undersanding. (This information has been left in partially in case one wishes to utilize and understand older versions of the code.) In the old coordinate system, X was forward and Z was horizontally inward towards the center of the ring - as defined using the GeaneWorldTracker[0, 12, 18] coordinate systems. Those have now been scrapped in favor of the TrackerStation[0, 12, 18] coordinate systems, with Z being forward, and X radially outward. This amounts to a change of variables {X, Y, Z} to {Z, Y, -X} both in this document and effectively in the code (for the Geane coordinate system variables only, not the global ones). See the new coordinate systems in Figure \ref{fig:NewGeaneCoordSys} compared to Figure \ref{fig:GeaneCoordSys}. The new surface systems are 
+ 		\begin{align}
+			\frac{1}{p}, \frac{px}{pz}, \frac{py}{pz}, x, y,
+		\end{align}
+	and
+	 	\begin{align}
+			\frac{1}{p}, \frac{pu}{pz}, \frac{pv}{pz}, u, v,			
+		\end{align}
+	with the transformation to the new ZUV frame being 
+		\begin{align}
+			\begin{pmatrix}
+				u \\
+				v \\
+			\end{pmatrix} =
+			\begin{pmatrix}
+				\cos{\theta} & -\sin{\theta} \\
+				\cos{\theta} & \sin{\theta} \\
+			\end{pmatrix}
+			\begin{pmatrix}
+				x \\
+				y \\
+			\end{pmatrix}.
+		\end{align}
+
+		\begin{figure}[]
+			\caption{This picture shows the new coordinate system in which the the Geane track reconstruction is performed, in relation to the tracker coordinate system. The tracking planes are parallel in Z in the reconstruction, going forward in plane number. Y is vertically up, and X is horizontally to the left. U and V are defined such that they have greater values with higher radii and increasing straw number. These U and V measurement axes are perpendicular to the U and V wire directions.}
+		\centering
+		\includegraphics[width=0.4\textwidth]{NewGeaneCoordSys}
+		\label{fig:NewGeaneCoordSys}
+		\end{figure}
+
+
+\subsection{General Information}
+
+	(Some of this is out of date regarding the previous section, but not all of it.) There are are number of different coordinate systems to be aware of and understand when dealing with the fitting, both in simulation and reconstruction. For obvious reasons, if the coordinate systems are not properly handled then the fitting will fail. I will summarize here the necessary information for the coordinate systems that are in use. (Other coordinate systems can be integrated and used if one wishes.)
 
 	Before fitting, track information comes from the simulation geometry. See Figure \ref{fig:WorldCoordSys} for an overview of the simulation tracker geometry and some relevant coordinate system information. Some info from the figure caption is copied here. There is also some relevant information in the \hyperref[sec:RunGeane]{RunGeane} section. Three trackers live in the Geant4 world with Y vertical, where things like wire center coordinates are recorded as gm2geom::CoordSystem3Vectors which include a reference frame string as well as 3 coordinates. These CoordSystem3Vectors can be transformed from one to another using the transform(css, ``world'', true) function, where the first parameter is the coordinate system store, the second is the frame to be transformed to, and the third is a boolean value for whether momentum or position is being transformed. (Use ``true'' for momentum.)
 
-	There are 3 specific coordinate systems defined in StrawTrackerCadMesh\_service.cc, GeaneTrackerWorld[0,12,18], where these are simple rotations around the vertical Y axis from the three tracker positions to a coodinate system where the tracking planes are parallel in X. These are rotations of -105.52, 74.48, and -15.52 degrees respectively, where the numbers come from the geometric placement of the three trackers. (Note that the coordinate system with the tracking planes parallel in X is not actually centered at X = 0.) Only the first, GeaneTrackerWorld[0] is used when performing the error propagation stage of the fitting with the rotateArcTracker fcl parameter of the Arc service. All three are used however when transforming track information to be fitted, and when transforming the fitted track back to the world frame for the extrapolation. Again see Figure \ref{fig:WorldCoordSys} for more explanation on this. (There is also another general tracker frame with Z forward which is not in use because of the Z propagation bug.) 
+	There are 3 specific coordinate systems defined in StrawTrackerCadMesh\_service.cc, GeaneTrackerWorld[0, 12, 18], where these are simple rotations around the vertical Y axis from the three tracker positions to a coodinate system where the tracking planes are parallel in X. These are rotations of -105.52, 74.48, and -15.52 degrees respectively, where the numbers come from the geometric placement of the three trackers. (Note that the coordinate system with the tracking planes parallel in X is not actually centered at X = 0.) Only the first, GeaneTrackerWorld[0] is used when performing the error propagation stage of the fitting with the rotateArcTracker fcl parameter of the Arc service. All three are used however when transforming track information to be fitted, and when transforming the fitted track back to the world frame for the extrapolation. Again see Figure \ref{fig:WorldCoordSys} for more explanation on this. (There is also another general tracker frame with Z forward which is not in use because of the Z propagation bug.) 
 
 	\begin{figure}[]
 		\caption{Shown here is a picture of the 3 trackers in the world geometry in their approximate positions. First note the world coordinate system shown in the bottom left of the plot, where the origin lives at the center of the ring. Tracks are generated and read out from the trackers in their three world positions in the red boxes. Due to the reconstruction bug where tracks improperly reconstruct if their momenta is too aligned with the global Z axis, \href{http://gm2-docdb.fnal.gov:8080/cgi-bin/ShowDocument?docid=4567}{DocDB 4567}, the reconstruction rotates the entire arc including tracker 0 to the blue position, where planes are parallel in X, and the fitting is performed in this frame. Track parameters from the 3 separate positions are rotated to this reference frame by the amounts shown in the picture, fitted, and the fitted track at the end is rotated back. (For the parameters to fit, really just the wire center positions are rotated, since the hit dcas are frame independent. The whole Geant geometry needs to be rotated however to include the proper energy loss when using the error propagation routines, so that particles are actually passing through the proper material in the reconstruction.)}
